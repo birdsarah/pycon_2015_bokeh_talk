@@ -10,7 +10,7 @@ from bokeh.models import (
     LinearAxis,
 )
 from pandas import DataFrame
-from main.utils import BokehScriptComponents
+from main.utils import BokehScriptComponents, app_document_no_tag
 
 from stats.models import StatValue
 from .chart_constants import PLOT_FORMATS, AXIS_FORMATS, LINE_FORMATS
@@ -21,11 +21,39 @@ class ChartView(TemplateView):
     template_name = 'washmap/chart.html'
 
 
-class WashMapView(TemplateView):
+class WashMapServerView(TemplateView):
+    template_name = 'washmap/chart_server.html'
+
+    @app_document_no_tag('sliders', BOKEH_URL)
+    def make_app(self):
+        app = WaterAccessMap.create()
+        return app
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(WashMapServerView, self).get_context_data(*args, **kwargs)
+        applet = self.make_app()
+        applet_dict = {
+            'elementid': 'figure_1',
+            'root_url': applet._root_url,  # from the session
+            'docid': applet._docid,  # from the session
+            'modelid': applet._id,
+            'js_model': applet.js_model,
+            'modulename': applet.js_model,
+            'classname': applet.js_model,
+            'parentname': applet.parent_model,
+        }
+        context.update(
+            applet=applet_applet_dict,
+            title="Washmap"
+        )
+        return context
+
+
+class WashMapStaticView(TemplateView):
     template_name = 'washmap/chart.html'
 
     def get_context_data(self, *args, **kwargs):
-        context = super(WashMapView, self).get_context_data(*args, **kwargs)
+        context = super(WashMapStaticView, self).get_context_data(*args, **kwargs)
         water_map_static = BokehScriptComponents(
             plot_object=WaterAccessMap().construct_static(),
             elementid='water_map_static',
