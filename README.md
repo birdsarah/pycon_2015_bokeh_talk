@@ -19,11 +19,3 @@ In this talk I'll discuss using Bokeh with a web framework (in this case, Django
 * How to display your plot on the web and within your templates, including a number of pitfalls I have encountered.
 
 I will not be covering real-time or high-volume analytics, or any statistical processing. This is an introduction to Bokeh's core, focused on the needs of an average web developer.
-
-### Using this repo
-
-I use conda, pip would work just fine too, although pypi doesn't have the development build of bokeh.
-
-```bash
-$ conda install --file requirements.txt -c bokeh/channel/dev
-```

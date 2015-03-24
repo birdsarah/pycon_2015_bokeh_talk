@@ -1,0 +1,15 @@
+{% load i18n humanize abbreviate_long %}
+
+<span class="_stat_value">
+    {% if stat_value.visible == False %}
+        &nbsp;
+    {% elif stat_value.value == None %}
+        <span class="_not_available">{% trans "No data" %}</span>
+    {% elif abbr %}
+        {{ stat_value.value|abbrev }}
+    {% elif stat_value.value > 100 %}
+        {{ stat_value.value|intcomma }}
+    {% else %}
+        {{ stat_value.value|floatformat:-3 }}
+    {% endif %}
+</span>

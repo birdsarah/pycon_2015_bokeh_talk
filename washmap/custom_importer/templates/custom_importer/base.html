@@ -1,0 +1,25 @@
+{% extends "custom/base.html" %}
+{% load crispy_forms_tags i18n %}
+
+{% block content-wrapper %}
+<section class="content-wrapper _content_body container-fluid">
+{% crispy form %}
+  {% if result.has_errors %}
+    <h2>{% trans "Errors" %}</h2>
+    <ul>
+      {% for error in result.base_errors  %}
+      <li>{{ error.error }}</li>
+      {% endfor %}
+      {% for line, errors in result.row_errors %}
+        {% for error in errors %}
+          <li>
+            {% trans "Line number" %}: {{ line }} - {{ error.error }}
+            <div class="traceback">{{ error.traceback|linebreaks }}</div>
+          </li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  {% endif %}
+</section>
+{% endblock content-wrapper %}
+

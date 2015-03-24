@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
+    'django.contrib.admin.apps.SimpleAdminConfig',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -42,10 +42,16 @@ INSTALLED_APPS = (
     # Third party
     'hvad',
     'django_countries',
+    'import_export',
+    'adminsortable',
+    'adminplus',
+    'django_extensions',
 
     # Local
     'main',
     'washmap',
+    'country',
+    'stats',
 )
 
 MIDDLEWARE_CLASSES = (

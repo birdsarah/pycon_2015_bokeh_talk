@@ -1,0 +1,74 @@
+{% load l10n %} {# Not normally needed, but because we turn localization off for the json output, then we need the tag #}
+{% load i18n %}
+
+        {% for group in stats_groups %}
+            <div class="panel panel-default panel-country-summary _stats"> 
+                
+                <div class="panel-heading clearfix">
+                    <h3 class="_stats-group-heading">{{ group.description }}</h3>
+                    {% with urlname="country-summary-stats-group-embed" q=group.pk %}
+                        {% include "country_comparison/snippets/embed.html" %}
+                    {% endwith %}
+                </div>
+
+                <div class="panel-body">
+
+                        {% for description in stats_descriptions %}
+                        {% if description.group = group %}
+
+                            {% for s_description, data in stats.items %}
+                            {% if s_description == description %}
+                            <div class="panel-stats">
+                                {% localize off %}
+                                    <div class="data" 
+                                        id="data_{{ description.id }}"
+                                        data-maxY={{ data.maxY }} 
+                                        data-minY={{ data.minY }} 
+                                        data-label="{{ description.description }}" 
+                                        data="{{ data.statsValuesJSON }}">
+                                    </div>
+                                {% endlocalize %}
+                            {% with stat_values=data.stats_values hideGraph=data.hideGraph %}
+                                <div class="summary clearfix" data-target="#collapse_{{ description.id }}" data-toggle="collapse">
+                                    {% with stat_value=stat_values.0 %}
+                                    <div class="col col-1 title">
+                                        {{ description.description }} - {{ stat_value.year }}
+                                    </div>
+                                    <div class="col col-2 value">
+                                        {% include "stats/stat_value.html" %}
+                                    </div>
+                                    {% endwith %}
+                                    <div class="col col-3 sparkline {% if not hideGraph %}show-sparkline{% endif %}" id="sparkline-view_{{ description.id }}" data-target="#data_{{ description.id }}">
+                                        <span class="tooltip-close pull-right">×</span>
+                                    </div>
+                                </div><!-- close summary -->
+                                <div class="detail clearfix" id="collapse_{{ description.id }}">
+                                        <div class="col col-1 narrative">
+                                            {{ description.narrative }}
+                                        </div>
+                                        <div class="col col-23 data-view {% if not hideGraph %}graph-view{% endif %}" id="data-view_{{ description.id }}" data-target="#data_{{ description.id }}">
+                                            <table class="table table-condensed table-bordered">
+                                                <tr>
+                                                    <th>{% trans "Year" %}</th>
+                                                    <th>{% trans "Value" %}</th>
+                                                </tr>
+                                                {% for stat_value in stat_values %}
+                                                <tr>
+                                                    <td>{{ stat_value.year}}</td>
+                                                    <td>{% include "stats/stat_value.html" %}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </div>
+                                </div><!-- close detail -->
+                            </div><!-- close panel-stats-->
+                            {% endwith %}
+                            {% endif %}
+                            {% endfor %}
+
+                        {% endif %}
+                        {% endfor %}
+                </div>
+
+            </div>
+        {% endfor %}

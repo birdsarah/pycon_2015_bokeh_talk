@@ -3,311 +3,30 @@
 {% load i18n %}
 {% load static from staticfiles %}
 
-{% block title %}Report 230{% endblock %}
-{% block sidebar-extranav %}
-    <li class="active"><a href="#top">{% trans "Abstract" %}</a></li>
-    <li><a href="#introduction">{% trans "Introduction" %}</a></li>
-    <li><a href="#background">{% trans "Background & Literature Review" %}</a></li>
-    <li><a href="#results">{% trans "Results" %}</a></li>
-{% endblock sidebar-extranav %}
-{% block sidebar-extra %}
-    <p class="disclaimer">
-        Note: This is a demo site. It is not affiliated with MIT or CECP.
-        Sections reproduced here are from a CECP report available 
-        <a href="http://globalchange.mit.edu/CECP/files/document/MITJPSPGC_Rpt230.pdf">here</a>.
-    </p>
-{% endblock sidebar-extra %}
+{% block title %}Washmap{% endblock %}
 
 {% block content %}
     
-    <div class="row title" id="top">
-        <h1>Quantifying Regional Economic Impacts of CO<sub>2</sub> Intensity Targets in China</h1>
-    </div>
-    <div class="row">
-        <div class="authors clearfix">
-            <div class="overlay-wrapper">
-                <img src="{% static "report_230/images/zhangda.jpg" %}" alt="Da Zhang" class="img-circle overlay-img">
-                <span class="overlay txt-wrapper">
-                    <span class="overlay txt-content">Da Zhang</span>
-                </span>
-            </div>
-            <div class="overlay-wrapper">
-                <img src="{% static "report_230/images/rausch_pic_2013.jpg" %}" alt="Sebastian Rausch" class="img-circle overlay-img">
-                <span class="overlay txt-wrapper">
-                    <span class="overlay txt-content">Sebastian Rausch</span>
-                </span>
-            </div>
-            <div class="overlay-wrapper">
-                <img src="{% static "report_230/images/Valerie.jpg" %}" alt="Valerie Karplus" class="img-circle overlay-img">
-                <span class="overlay txt-wrapper">
-                    <span class="overlay txt-content">Valerie Karplus</span>
-                </span>
-            </div>
-            <div class="overlay-wrapper">
-                <img src="{% static "report_230/images/Prof_Zhang_Xiliang.jpg" %}" alt="Xiliang Zhang" class="img-circle overlay-img">
-                <span class="overlay txt-wrapper">
-                    <span class="overlay txt-content">Xiliang Zhang</span>
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
+    <div class="row title">
         <div class="content">
-            <h2>Abstract</h2>
-            <p>
-            To address rising energy use and CO<sub>2</sub> emissions, China’s leadership has enacted energy and CO<sub>2</sub> intensity
-            targets under the Twelfth Five-Year Plan (2011–2015), which are defined at both the national and provincial
-            levels. We develop a computable general equilibrium (CGE) model with global coverage that disaggregates
-            China’s 30 provinces and includes energy system detail, and apply it to assess the impact of provincial CO<sub>2</sub>
-            emissions intensity targets. We compare the impact of the provincial targets approach to a single national
-            target for China that achieves the same reduction in CO<sub>2</sub> emissions intensity at the national level. We
-            find that at the national level, the national target results in 25% lower welfare loss relative to the provincial
-            targets approach. Given that the regional distribution of impacts has been an important consideration in the
-            target-setting process, we focus on the changes in provincial level CO<sub>2</sub> emissions intensity, CO<sub>2</sub> emissions,
-            energy consumption, and economic welfare. We observe significant heterogeneity across provinces in terms
-            of the energy system response as well as the magnitude and sometimes sign of welfare impacts. We further
-            model the current policy of fixed end-use electricity prices in China and find that national welfare losses
-            increase. Assumptions about capital mobility have a substantial impact on national welfare loss, while
-            assumptions about natural gas resource potential does not have a large effect.
-            </p>
-            <h2 id="introduction" class="nav-target">Introduction</h2>
-            <p>
-            In recent years policy in China has signaled strong intentions to reduce the country’s growing
-            energy and CO<sub>2</sub> emissions footprint. Sustained rapid growth in China over the past three decades
-            has brought great benefits but has also intensified concerns about energy security, air quality and
-            global climate change. China’s comprehensive Five-Year Plans, which lay out the government’s
-            priorities and program of work every five years, have increasingly reflected these concerns. Most
-            recently, China’s Twelfth Five-Year Plan (FYP) (2011–2015) has, for the first time, introduced a
-            national target for reducing the nation’s CO<sub>2</sub> intensity by 17% over the period 2011 to 2015, in
-            line with the nation’s commitment at the 2009 Copenhagen Summit to reduce its CO<sub>2</sub> emissions
-            intensity by 40–45% over the period 2005 to 2020. This national carbon intensity target has been
-            disaggregated at the provincial level, assigning responsibility for different levels of CO<sub>2</sub> intensity
-            reduction to China’s provinces (State Council, 2012).
-            </p>
-            <p>
-            While meeting these targets is mandatory, their existence does not by itself create incentives
-            for firms and households across China to reduce CO<sub>2</sub> emissions intensity. To meet these short-
-            and medium-term policy targets, China’s policy makers have announced a range of programs to
-            support target attainment. These include an industrial energy efficiency mandate, targets for the
-            deployment of renewable and nuclear electricity generation, and reduced subsidies to China’s
-            energy-intensive, export-oriented sectors (State Council, 2011; Xinhuanet, 2011; Industrial
-            Efficiency Policy Database (IEPD), 2012). Also in the early stages of development is a pilot
-            cap-and-trade system for CO<sub>2</sub> emissions to be deployed in a subset of China’s provinces (China
-            Securities Journal, 2012). An energy cap is also under discussion (Xinhuanet, 2012).
-            </p>
-            <p>
-            Alongside economic growth and environmental protection, promoting inter-regional equity
-            remains a priority among China’s policy makers. Identifying the total welfare cost and its
-            distribution under each policy requires a modeling framework capable of resolving policy impacts
-            at the provincial level. In this paper, we first describe how we have developed a new computable
-            general equilibrium (CGE) model that includes a detailed representation of the economy and
-            energy system of China’s 30 provinces connected by inter-provincial trade as well as to the rest of
-            the world through international trade flows and an aggregate representation of other global
-            regions. The model includes economic flows and energy quantities in physical units. We apply
-            this new tool to perform an analysis of China’s CO<sub>2</sub> intensity targets.
-            </p>
-            <p>
-            This paper is organized as follows. In Section 2, we summarize previous studies and identify
-            the contribution of this work. We also provide background on China’s CO<sub>2</sub> intensity target policy
-            and the assignment of reduction targets in each of China’s provinces. In Section 3, we describe
-            the new model, including the model structure, data preparation, representation of inter-provincial
-            trade and integration with a global data set, the 2007 edition of the Global Trade Analysis Project
-            (GTAP 8) data base. In Section 4, we describe the results of our policy scenarios and investigate
-            the sensitivity of our results to electricity pricing policies, capital mobility assumptions, and the
-            availability of natural gas as a potential low carbon substitute fuel. Section 5 discusses some
-            preliminary conclusions and topics for future investigation.
-            </p>
-            <h2 id="background" class="nav-target">Background & Literature Review</h2>
-            <h3>Previous Work</h3>
-            <p>
-            Energy-economic modeling approaches have been widely applied to study prospects for
-            emissions reduction at the sub-national or sectoral level in many countries (Rausch et al., 2011;
-            Lanz and Rausch, 2011; Lanz and Rausch, 2012; Caron et al., 2012; Paltsev et al., 2009; Alton
-            et al., 2012; Ferreira-Filho and Horridge, 2012). Many of these studies have been conducted for
-            China. For instance, Wei et al. (2011) estimate CO<sub>2</sub> emissions reduction potential and marginal
-            abatement costs by province in a model using a distance function approach. Yi et al. (2011)
-            evaluate provincial target allocation schemes based on several indicators related to equity,
-            economic development, and energy intensity, which are used to construct a comprehensive index
-            for policy evaluation. Our study contributes to efforts to evaluate both the economic and
-            distributional impacts of target allocation schemes. For this study we use a new CGE model that
-            disaggregates China at the provincial level. CGE models have been widely used in China to
-            investigate energy and climate policy proposals. Previous research has employed single-region
-            models of China to focus on the impacts of carbon mitigation measures (Cao, 2007; Wang et al.,
-            2009; Lin and Jiang, 2011; Dai et al., 2011). Other analyses have used models with various levels
-            of regional disaggregation to investigate a wide range of energy policy questions (Horridge and
-            Wittwer, 2008; Li et al., 2009; Wang et al., 2006; Li and He, 2005; Xu and Li, 2008; Lu et al.,
-            2010). Li and He (2010) are among the few to analyze carbon mitigation policy in a
-            regionally-disaggregated CGE model. However, these models are mostly based on older
-            input-output data (e.g., China’s 2002 input-output tables) and do not include physical accounting
-            in the energy sector. Moreover, they are not integrated with any global trade data set, treating
-            China as a small or large open economy, which can significantly affect the reliability of
-            simulation results.
-            </p>
-            <h3>Description of the Twelfth Five-Year Plan CO<sub>2</sub> Intensity Targets</h3>
-            <p>
-            China’s primary policy approach to reduce energy and CO<sub>2</sub> emissions takes the form of
-            intensity targets, defined as the allowable energy consumption or emissions per unit of GDP. Prior
-            to the Twelfth FYP (2011–2015), policy was focused on energy intensity. The Eleventh FYP
-            included an energy intensity reduction target of 20% nationwide. This target was not formally
-            allocated to provinces, although provinces made non-binding pledges to undertake a certain level
-            of reductions at the outset of the policy (World Bank, 2009). At the conclusion of the Eleventh
-            FYP, China’s leaders officially declared that a 19.1% reduction in energy intensity had been
-            achieved (Industrial Efficiency Policy Database (IEPD), 2012). The reduction achieved during the
-            Eleventh FYP has been attributed to energy efficiency improvements in industry (much of it
-            claimed to be achieved through an initiative called the 1,000 Enterprises Program) and the closure
-            of small, inefficient industrial and power generation facilities (He et al., 2010; Price et al., 2010;
-            Price and et.al., 2011).
-            </p>
-            <p>
-            A CO<sub>2</sub> intensity target was formally introduced for the first time under the Twelfth FYP, with a
-            reduction goal of 17% (State Council, 2012). The reduction in CO<sub>2</sub> intensity over this period is
-            expected to come from reductions in energy intensity (through further improvements in industrial
-            energy efficiency and a shift in economic structure away from energy-intensive industries), as
-            well as the further introduction of low carbon electricity sources into China’s electric power
-            generation mix. For the first time, binding targets for CO<sub>2</sub> emissions reductions were assigned at
-            the provincial level. These targets are given in <a href="#table-1">Table 1</a>.
-            </p>
+            <h1>WASHMAP</h1>
         </div>
-    </div>
-    <div class="row figure-bar">
+        {% for figure in figures %}
         <div class="figure-wrapper">
-            <p class="caption"><strong>Table 1.</strong> CO<sub>2</sub> Intensity reduction targets across provinces of mainland China.</p>
-            <table id="table-1" class="table table-striped nav-target">
-                <thead>
-                    <tr>
-                        <th>Target (%) </th>
-                        <th>Provinces</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>19.5</td><td>Guangdong</td>
-                    </tr>
-                    <tr>
-                        <td>19.0</td><td>Tianjin, Shanghai, Jiangsu, Zhejiang</td>
-                    </tr>
-                    <tr>
-                        <td>18.0</td><td>Beijing, Hebei, Liaoning, Shandong</td>
-                    </tr>
-                    <tr>
-                        <td>17.5</td><td>Fujian, Sichuan</td>
-                    </tr>
-                    <tr>
-                        <td>17.0</td><td>Shanxi, Jilin, Anhui, Jiangxi, Henan, Hubei, Hu-
-                        nan, Chongqing, Shannxi</td>
-                    </tr>
-                    <tr>
-                        <td>16.5</td><td>Yunnan</td>
-                    </tr>
-                    <tr>
-                        <td>16.0</td><td>Inner Mongolia, Heilongjiang, Guangxi, Guizhou,
-                        Gansu, Ningxia</td>
-                    </tr>
-                    <tr>
-                        <td>11.0</td><td>Hainan, Xinjiang</td>
-                    </tr>
-                    <tr>
-                        <td>10.0</td><td>Qinghai, Tibet</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="{{ figure.elementid }}" class="plotdiv" data-min-width="700"></div>
         </div>
+        {% endfor %}
     </div>
-    <div class="row">
-        <div class="content">
-            <p>
-            A driving principle behind the allocation is to assign reduction burdens according to provincial
-            wealth, which is intended to ease pressure on less affluent regions or regions targeted for
-            accelerated development. Presently China is characterized by significant heterogeneity across
-            provinces in terms of per-capita GDP, total emissions rates, and emissions intensities (see <a href="#{{ figure_1.elementid }}">Figure
-                1</a>). In general, the eastern coastal provinces have higher per-capita GDP and higher total
-            emissions rates but low emission intensities compared to the western provinces in China, and thus
-            have been assigned higher intensity reduction targets. An alternative to provincial targets is to set
-            a single national reduction target that would induce reductions at least cost nationwide. Our
-            modeling framework allows us to compare national and provincial target allocation approaches,
-            and to understand how each leads to heterogeneous energy, emissions, and economic outcomes
-            across provinces.
-            </p>
-        </div>
-    </div>
-    <div class="row figure-bar">
-        <div class="figure-wrapper">
-            <p class="caption"><strong>Figure 1.</strong> GDP and emissions in 2007.</p>
-            <div id="{{ figure_1.elementid }}" class="plotdiv" data-min-width="700"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="content">
-            <h2 id="results" class="nav-target">Results</h2>
-            <p>
-            China is characterized by significant regional heterogeneity in per-capita income, energy
-            demand, CO<sub>2</sub> emissions and CO<sub>2</sub> emissions intensity as described above. We therefore anticipate
-            that policy impacts will vary across provinces, and also expect different responses under the two
-            policy approaches modeled. Below we discuss the impact of each policy approach (regional or
-            national targets) at the national level before considering in depth heterogeneity in terms of CO<sub>2</sub>
-            intensity, total CO<sub>2</sub> emissions, energy consumption and welfare outcomes at the provincial level.
-            </p>
-            <h3>Comparing Policy Impact at the National Level</h3>
-            <p>
-            By design both scenarios achieve a reduction in CO<sub>2</sub> emissions intensity of 17.4%, but at
-            different national welfare costs. In both scenarios, welfare loss is modest at the national level,
-            1.5% in Scenario RT and 1.2% in Scenario NT (see <a href="#{{ figure_7.elementid }}">Figure 7</a>). More welfare loss occurs at the
-            national level under Scenario RT, the provincial allocation scheme (a 25% greater reduction
-            relative to Scenario NT), consistent with the fact that abatement flexibility, and thus the
-            equilibrium allocation, is more constrained by the provincial-level reductions required. 
-            </p>
-        </div>
-    </div>
-    <div class="row figure-bar">
-        <div class="figure-wrapper">
-            <p class="caption"><strong>Figure 7.</strong> Regional welfare change.</p>
-            <div id="{{ figure_7.elementid }}" class="plotdiv" data-min-width="700"></div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="content">
-            <p>CO<sub>2</sub>
-            intensity reduction under Scenarios NT and RT are achieved by reducing coal use by around 25%,
-            while total final consumption of fossil energy falls by 18%. At the same time, generation from
-            non-fossil sources (hydro, nuclear and wind) increases from 120 million tons of coal equivalent
-            (mtce) to about 160 mtce in Scenario RT and 150 mtce in Scenario NT. 6 Very slight differences
-            exist between the two scenarios—slightly more non-fossil energy is brought online in Scenario
-            RT, while coal use is reduced more under Scenario NT. It is interesting that the outcomes are
-            similar, despite the fact that under the provincial targets, cost effective opportunities to reduce
-            coal are regionally constrained—for instance, a more modest reduction in CO<sub>2</sub> intensity may be
-            required within a province that has a large opportunity to cost-effectively reduce coal use, while a
-            province facing a more aggressive target may have limited opportunities to improve coal use
-            efficiency and instead needs to rely on adoption of non-fossil sources.
-            </p>
-            <p>
-            In both scenarios CO<sub>2</sub> emissions reductions are slightly larger in percentage terms than CO<sub>2</sub>
-            intensity reductions at the national level (see <a href="#{{ figure_8.elementid }}">Figure 8</a>). We observe a reduction in emissions in
-            the static model framework because the intensity target reduces China’s GDP, and so a CO<sub>2</sub>
-            intensity reduction consistent with the new level of GDP results in a disproportionately larger
-            reduction in CO<sub>2</sub> emissions. We would expect the effect to be the opposite if the policy were
-            modeled in a dynamic framework that captured increases in GDP over the same period—i.e. total
-            emissions may decrease less or increase if the economy is growing over the period covered by the
-            intensity target. As this analysis is aimed at understanding the relationship between policy design
-            and the distribution of impacts, we adopt a static approach to build intuition, acknowledging that
-            in practice emissions outcomes are a function of the intensity target stringency and the rate of
-            GDP growth.
-            </p>
-        </div>
-    </div>
-    <div class="row figure-bar">
-        <div class="figure-wrapper">
-            <p class="caption"><strong>Figure 8.</strong> Regional carbon emissions reductions.</p>
-            <div id="{{ figure_8.elementid }}" class="plotdiv" data-min-width="700"></div>
-        </div>
-    </div>
+
 {% endblock content %}
 {% block extra_javascript %}
     <script>
-        function figures() {
+        bokehJS.done( function () {
             {% for figure in figures %}
                 {% include 'main/snippets/bokeh_script.js' %}
             {% endfor %}
-        }
+           resize_figures();
+        });
         function resize_figures() {
             var width, plot_width, plot_height;
             {% for figure in figures %}
@@ -328,7 +47,5 @@
                 Bokeh.Collections('Plot').get("{{ figure.modelid }}").set('plot_height', plot_height);
             {% endfor %}
         }
-        bokehJS.done(figures).done(resize_figures);
-        $( window ).resize(resize_figures);
     </script>
 {% endblock extra_javascript %}

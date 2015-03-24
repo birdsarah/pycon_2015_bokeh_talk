@@ -1,0 +1,30 @@
+{% for group in stats_groups %}
+<tbody class="_declarations">
+    <tr class="_declaration_name _group_name">
+        <th colspan="{{ countries|length|add:2 }}">{{ group.description }}</th>
+    </tr>
+    {% for description in stats_descriptions %}
+    {% if description.group = group %}
+    <tr class="_stat">
+        <td class="_description">
+            {{ description.description }}
+        </td>
+        {% for country in countries %}{% spaceless %}
+                <td class="_stat_cell">
+                    {% for s_country, s_descriptions in stats.items %}
+                        {% if s_country == country %}
+                            {% for s_description, stat_value in s_descriptions.items %}
+                                {% if s_description = description %}
+                                    {% include "stats/stat_value.html" with abbr=True %}
+                                    {% if stat_value.visible %}<span class="_stat_year">({{ stat_value.year }})</span>{% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+        {% endspaceless %}{% endfor %}<td class="_country_add_cell"></td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+</tbody>
+{% endfor %}

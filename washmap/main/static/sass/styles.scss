@@ -1,0 +1,111 @@
+// Import Bootstrap Compass integration
+@import "bootstrap-compass";
+
+// Import custom Bootstrap variables
+@import "bootstrap-variables";
+
+// Import Bootstrap for Sass
+@import "bootstrap-custom";
+
+// Compass clearfix
+@import "compass/utilities/general/clearfix";
+
+
+body {
+    position: relative;
+    min-width: 400px;
+}
+@media (max-width: 1200px) {
+    h1 {
+        font-size: $font-size-h1 * 0.8;
+    }
+    h2 {
+        font-size: $font-size-h2 * 0.8;
+    }
+    h3 {
+        font-size: $font-size-h3 * 0.8;
+    }
+    p {
+        font-size: $font-size-base  * 0.8;
+    }
+}
+
+a.btn {
+    color: $text-color;
+    font-family: $font-family-sans-serif;
+}
+
+.title {
+    margin: 0 auto;
+    max-width: 800px;
+    text-align: center;
+}
+
+.content {
+    @include clearfix;
+    margin: 0 auto;
+    width: 40vw;
+    @media (max-width: 1200px) {
+        width: 60vw;
+    }
+}
+/* ---------- FIGURES AND TABLES */
+.figure-bar {
+    margin: ($padding-large-vertical * 4) 0;
+    background: $gray-lighter;
+}
+
+.figure-wrapper {
+    @include clearfix;
+    margin: ($padding-large-vertical * 2) auto;
+    width: 60vw;
+    padding: 0 ($padding-large-vertical * 2);
+    background: $body-bg;
+    @media (max-width: 1200px) {
+        width: 80vw;
+    }
+}
+
+.table {
+    margin-bottom: 0;
+    font-family: $font-family-sans-serif;
+}
+
+.caption {
+    @extend h5;
+    background: $brand-primary;
+    color: $body-bg;
+    padding: ($padding-large-vertical * 2);
+}
+
+
+.plotdiv {
+    @include clearfix;
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: ($padding-large-vertical * 2);
+}
+
+.screen-too-small .bk-plot-wrapper {
+    position: fixed;
+}
+
+.screen-too-small:after {
+    content: "Unfortunately, this graph needs a larger screen to display correctly.";
+    font-family: $font-family-sans-serif;
+    padding: ($padding-large-vertical * 2);
+    padding-top: 0;
+}
+
+/* ---- END figures and tables */
+
+/* ------ FOR PRINTING ---- */
+@media print {
+    .content {
+        width: 100vw;
+    }
+    .figure-wrapper {
+        width: 100vw;
+        page-break-before: always;    
+    }
+}

@@ -1,6 +1,7 @@
 .ipynb_checkpoints
 private_settings.py
 .ropeproject
+.sass-cache
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

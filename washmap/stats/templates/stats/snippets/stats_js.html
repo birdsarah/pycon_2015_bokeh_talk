@@ -1,0 +1,19 @@
+{% load assets %}
+<script>
+    var assets = [
+        {% if vendor = "true" %}
+            {% assets "stats.vendor_js" %}
+                $.ajax("{{ ASSET_URL }}"),
+            {% endassets %}
+        {% endif %}
+
+        {% assets "stats.stat_graph_js" %}
+            $.ajax("{{ ASSET_URL }}"),
+        {% endassets %}
+    ];
+    $.when.apply($, assets).done(function(){
+        stats.drawGraph();
+        stats.drawSparkline();
+    });
+</script>
+
