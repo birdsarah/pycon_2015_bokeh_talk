@@ -1,0 +1,26 @@
+{# No map to display if there is no country code #}
+{% with country_code=country.code map_data=washmap_data.get_json %}
+{% if country_code %}
+<div class="panel panel-default panel-country-summary _country_vis"
+   data-maplang="{{ LANGUAGE_CODE }}"
+   data-mapdata="{{ map_data }}"
+   data-maptype="{{ map_type }}"
+   data-country="{{ country_code }}">
+
+    <div class="wrapper _washmap_wrapper_div {{ map_type }}"> 
+        {% include "washmap/snippets/washmap_top.html" %}
+
+        {% if map_data %}
+        <div class="row">
+            <section class="col-md-12 _year_slider_row">
+                <div class="_washmap_year_slider"></div>
+            </section>
+        </div>
+
+        {# only display this section (and the slider if) if there is data #}
+        {% include "washmap/snippets/washmap_bottom.html" %}
+        {% endif %} 
+    </div>
+</div>
+{% endif %}
+{% endwith %}

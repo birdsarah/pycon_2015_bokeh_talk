@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header">
+                <h1>CECP data explorer</h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Report taster - R230</h4>
+                </div>
+                <div class="panel-body">
+                    <p>A taster of a web-ready report with basic charts. This is a sample of the report "Quantifying Regional Economic Impacts of CO<sub>2</sub> Intensity Targets in China."</p>
+                    <p>This has basic chart implementations, staying true to the original report.</p>
+                    <p><a class="btn btn-default pull-right" href="{% url 'report-230' %}" role="button">View</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Chart samples - R230</h4>
+                </div>
+                <div class="panel-body">
+                    <p>An exploration of different charts that could be used alternatively in Quantifying Regional Economic Impacts of CO<sub>2</sub> Intensity Targets in China</p>
+                    <p>This has a variety of static experiments and interactive plots.</p>
+                    <p><a class="btn btn-default pull-right" href="{% url 'report-230-exp' %}" role="button">View</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Data explorer</h4>
+                </div>
+                <div class="panel-body">
+                    <p>An example of using the cross filter feature to look at the data from Report230.</p>
+                    <img class="img-responsive img-rounded" src="{% static "images/cross_filter_230_screenshot.jpg" %}" alt="Screenshot of cross-filtered data">
+                    <p><a class="btn btn-default pull-right" href="{% url 'report-230-crossfilter' %}" role="button">View</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

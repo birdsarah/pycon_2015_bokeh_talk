@@ -1,0 +1,49 @@
+{% load i18n %}
+{% load static from staticfiles %}
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <title>{% block title %}{% endblock %}</title>
+
+    {% block head %}{% endblock %}
+
+    <link rel="stylesheet" media="screen" href="http://openfontlibrary.org/face/gidole-regular" type="text/css"/>
+    <link rel="stylesheet" href="{% static "stylesheets/styles.css" %}" />
+
+</head>
+<body data-spy="scroll" data-target="#sidebar" id="top">
+    <div class="container-fluid">
+        {% block sidebar %}
+            <div class="sidebar-icon">
+            <a data-toggle="collapse" data-target="#sidebar" data-animation="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="open visible">≡</span>
+            </a>
+            </div>
+            <div class="row report-wrapper">
+                <div class="col-sm-2 sidebar-custom collapse" id="sidebar" data-animation="false">
+                <ul class="nav nav-sidebar" role="navigation">
+                    <li class="home-link"><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                    {% block sidebar-extranav %}{% endblock sidebar-extranav %}
+                </ul>
+                    {% block sidebar-extra %}{% endblock sidebar-extra %}
+                </div>
+            </div>
+        {% endblock sidebar %}
+        {% block content %}
+        {% endblock content %}
+    </div>
+    {% block javascript %}
+        <script src="{% static "javascripts/jquery-1.11.2.min.js" %}"></script>
+        <script src="{% static "javascripts/bootstrap.min.js" %}"></script>
+        <script>
+            bokehJS = $.getScript("{% static "javascripts/bokeh.min.js" %}");
+        </script>
+    {% endblock javascript %}
+    {% block extra_javascript %}
+    {% endblock extra_javascript %}
+</body>
+</html>

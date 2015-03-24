@@ -1,0 +1,2 @@
+django-countries==3.2
+django-hvad==1.2.0
