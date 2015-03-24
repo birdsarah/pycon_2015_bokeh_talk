@@ -38,6 +38,9 @@ class GettingStarted(TemplateView):
         return context
 
 
+
+
+
 class WaterAccessPercentLineChart(object):
     def get_data(self):
         query = StatValue.objects.filter(country__name='Angola')
@@ -49,26 +52,26 @@ class WaterAccessPercentLineChart(object):
 
     def construct_plot_basic(self):
         data = self.get_data()
-        plot = Line(data)
-        return plot
+        chart = Line(data)
+        return chart
+
+    chart_options = dict(
+        tools="", palette=["#2875A7"],
+        xlabel=None, ylabel=None, xgrid=None, ygrid=None,
+        title="% access to an improved water source"
+    )
 
     def construct_plot_args(self):
         data = self.get_data()
-        plot = Line(
-            data, tools="",
-            xlabel=None, ylabel=None, xgrid=None, ygrid=None,
-            title="% access to an improved water source"
-        )
-        return plot
+        chart = Line(data, **self.chart_options)
+        return chart
 
     def construct_plot_tweaks(self):
         data = self.get_data()
-        plot = Line(
-            data, tools="",
-            xlabel=None, ylabel=None, xgrid=None, ygrid=None,
-            title="% access to an improved water source"
-        )
-        plot.toolbar_location = None
-        plot.renderers[2].glyph.line_width = 5
-        plot.renderers[2].glyph.line_cap = 'round'
-        return plot
+        chart = Line(data, **self.chart_options)
+        chart.toolbar_location = None
+        chart.renderers[2].glyph.line_width = 5
+        chart.renderers[2].glyph.line_cap = 'round'
+        chart.toolbar_location = None
+        chart.outline_line_color = None
+        return chart
