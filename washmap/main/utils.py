@@ -1,4 +1,5 @@
 import uuid
+import json
 
 from bokeh.document import Document
 from bokeh.protocol import serialize_json
@@ -37,3 +38,35 @@ def app_document_no_tag(prefix, url="default"):
         wrapper.__name__ = func.__name__
         return wrapper
     return decorator
+
+def build_coords_lists(boundary_series):
+    def _append_coords(coord, xs, ys):
+        if len(coord) == 2:
+            xs.append(coord[0])
+            ys.append(coord[1])
+        else:
+            for co in coord:
+                xs.append(co[0])
+                ys.append(co[1])
+        return xs, ys
+
+    # Build coordinate lists
+    def get_coords(boundary_cell):
+        boundary = json.loads(boundary_cell)
+        xs = []
+        ys = []
+        multi = False
+        if len(boundary['coordinates']) > 1:
+            multi = True
+        if not multi:
+            for coord in boundary['coordinates']:
+                xs, ys = _append_coords(coord, xs, ys)
+        else:
+            for polygon in boundary['coordinates']:
+                for coord in polygon:
+                    xs, ys = _append_coords(coord, xs, ys)
+
+        return xs, ys
+
+    xs, ys = zip(*boundary_series.map(get_coords))
+    return xs, ys

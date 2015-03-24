@@ -44,7 +44,6 @@ class Country(TranslatableModel):
     last_contributed_sector = models.CharField(max_length=255, blank=True)
     country_meta = CountryField(null=True, blank=True)
     boundary = models.TextField(
-        editable=False,
         blank=True,
         help_text="A geojson representation of the geographical boundary"
     )
