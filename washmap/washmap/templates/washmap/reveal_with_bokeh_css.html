@@ -1,87 +1,27 @@
+{% extends 'reveal_base.html' %}
 {% load static from staticfiles %}
 
-<!doctype html>
-<html lang="en">
+{% block head %}
+    <link rel="stylesheet" href="{% static "css/bokeh-0.8.1.min.css" %}" />
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+{% endblock head %}
 
-    <head>
-        <meta charset="utf-8">
+{% block content %}
+    <section>
+        <h1>{{ title }}</h1>
+    </section>
+    {% for figure in figures %}
+    <section>
+        <div id="{{ figure.elementid }}" class="plotdiv" data-min-width="{{ figure.min_width }}"></div>
+        <pre>{{ figure.elementid }}</pre>
+    </section>
+    {% endfor %}
+{% endblock content %}
 
-        <title>reveal.js - The HTML Presentation Framework</title>
-
-        <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-        <meta name="author" content="Hakim El Hattab">
-
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
-        <link rel="stylesheet" href="{% static "css/bokeh-0.8.1.min.css" %}" />
-
-        <link rel="stylesheet" href="{% static 'vendor/reveal/css/reveal.css' %}">
-        <link rel="stylesheet" href="{% static 'vendor/reveal/css/theme/white.css' %}" id="theme">
-
-        <!-- Code syntax highlighting -->
-        <link rel="stylesheet" href="{% static 'vendor/reveal/lib/css/zenburn.css' %}">
-
-        <link rel="stylesheet" href="{% static "css/styles.css" %}" />
-
-    </head>
-
-    <body>
-
-        <div class="reveal">
-
-            <!-- Any section element inside of this container is displayed as a slide -->
-            <div class="slides">
-                <section>
-                    <h1>{{ title }}</h1>
-                </section>
-                {% for figure in figures %}
-                <section>
-                    <div id="{{ figure.elementid }}" class="plotdiv" data-min-width="{{ figure.min_width }}"></div>
-                </section>
-                {% endfor %}
-
-
-            </div>
-
-        </div>
-
-        <script src="{% static 'vendor/reveal/lib/js/head.min.js' %}"></script>
-        <script src="{% static 'vendor/reveal/js/reveal.js' %}"></script>
-
-        <script>
-
-            // Full list of configuration options available at:
-            // https://github.com/hakimel/reveal.js#configuration
-            Reveal.initialize({
-                controls: true,
-                progress: true,
-                history: true,
-                center: true,
-
-                transition: 'slide', // none/fade/slide/convex/concave/zoom
-
-                // Optional reveal.js plugins
-                dependencies: [
-                    { src: '{% static 'vendor/reveal/lib/js/classList.js' %}', condition: function() { return !document.body.classList; } },
-                    { src: '{% static 'vendor/reveal/plugin/markdown/marked.js' %}', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '{% static 'vendor/reveal/plugin/markdown/markdown.js' %}', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-                    { src: '{% static 'vendor/reveal/plugin/highlight/highlight.js' %}', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-                    { src: '{% static 'vendor/reveal/plugin/zoom-js/zoom.js' %}', async: true },
-                    { src: '{% static 'vendor/reveal/plugin/notes/notes.js' %}', async: true }
-                ]
-            });
-
-        </script>
-
-        <script src="{% static "js/jquery-1.11.2.min.js" %}"></script>
-        <script>
-            bokehJS = $.getScript("{% static "js/bokeh-0.8.1.min.js" %}");
-        </script>
-        {% include 'main/snippets/embed_resize_reveal.js' %}
-
-    </body>
-</html>
-
+{% block extra_javascript %}
+    <script src="{% static "js/jquery-1.11.2.min.js" %}"></script>
+    <script>
+        bokehJS = $.getScript("{% static "js/bokeh-0.8.1.min.js" %}");
+    </script>
+    {% include 'main/snippets/embed_resize_reveal.js' %}
+{% endblock extra_javascript %}

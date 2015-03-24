@@ -16,24 +16,24 @@ class GettingStarted(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(GettingStarted, self).get_context_data(*args, **kwargs)
-        line_basic = BokehScriptComponents(
+        chart_basic = BokehScriptComponents(
             plot_object=WaterAccessPercentLineChart().construct_plot_basic(),
-            elementid='line_basic',
+            elementid='chart_basic',
             min_width=300
         )
-        line_args = BokehScriptComponents(
+        chart_args = BokehScriptComponents(
             plot_object=WaterAccessPercentLineChart().construct_plot_args(),
-            elementid='line_args',
+            elementid='chart_args',
             min_width=300
         )
-        line_tweaks = BokehScriptComponents(
+        chart_tweaks = BokehScriptComponents(
             plot_object=WaterAccessPercentLineChart().construct_plot_tweaks(),
-            elementid='line_tweaks',
+            elementid='chart_tweaks',
             min_width=300
         )
         context.update(
-            figures=[line_basic, line_args, line_tweaks],
-            title="Getting started"
+            figures=[chart_basic, chart_args, chart_tweaks],
+            title="Components"
         )
         return context
 
