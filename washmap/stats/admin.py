@@ -8,10 +8,11 @@ from .models import (
     StatValue
 )
 
+
 class StatValueAdmin(admin.ModelAdmin):
     list_display = ('description', 'year', 'country', 'value')
-    list_filter = ('description', 'country')
+    list_filter = ('description', 'country', 'year')
 
 
 admin.site.register(StatDescription)
-admin.site.register(StatValue)
+admin.site.register(StatValue, StatValueAdmin)

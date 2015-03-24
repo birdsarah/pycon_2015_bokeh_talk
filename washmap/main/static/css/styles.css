@@ -3856,40 +3856,41 @@ a.btn {
 /* ---------- FIGURES AND TABLES */
 /* line 53, ../sass/styles.scss */
 .figure-bar {
-  margin: 40px 0;
   background: #eeeeee;
+  padding: 20px;
+  margin-bottom: 40px;
 }
 
-/* line 58, ../sass/styles.scss */
+/* line 60, ../sass/styles.scss */
 .figure-wrapper {
   overflow: hidden;
   *zoom: 1;
   margin: 20px auto;
   width: 60vw;
-  padding: 0 20px;
+  padding: 20px;
   background: #fff;
 }
 @media (max-width: 1200px) {
-  /* line 58, ../sass/styles.scss */
+  /* line 60, ../sass/styles.scss */
   .figure-wrapper {
     width: 80vw;
   }
 }
 
-/* line 69, ../sass/styles.scss */
+/* line 71, ../sass/styles.scss */
 .table {
   margin-bottom: 0;
   font-family: "News Cycle", Helvetica, Arial, sans-serif;
 }
 
-/* line 74, ../sass/styles.scss */
+/* line 76, ../sass/styles.scss */
 .caption {
   background: #893033;
   color: #fff;
   padding: 20px;
 }
 
-/* line 82, ../sass/styles.scss */
+/* line 84, ../sass/styles.scss */
 .plotdiv {
   overflow: hidden;
   *zoom: 1;
@@ -3898,12 +3899,12 @@ a.btn {
   margin-bottom: 20px;
 }
 
-/* line 89, ../sass/styles.scss */
+/* line 91, ../sass/styles.scss */
 .screen-too-small .bk-plot-wrapper {
-  position: fixed;
+  display: none;
 }
 
-/* line 93, ../sass/styles.scss */
+/* line 95, ../sass/styles.scss */
 .screen-too-small:after {
   content: "Unfortunately, this graph needs a larger screen to display correctly.";
   font-family: "News Cycle", Helvetica, Arial, sans-serif;
@@ -3911,15 +3912,25 @@ a.btn {
   padding-top: 0;
 }
 
+/* line 102, ../sass/styles.scss */
+.bk-canvas {
+  position: relative;
+}
+
+/* line 106, ../sass/styles.scss */
+.reveal table th, .reveal table td {
+  border-bottom: 0;
+}
+
 /* ---- END figures and tables */
 /* ------ FOR PRINTING ---- */
 @media print {
-  /* line 104, ../sass/styles.scss */
+  /* line 114, ../sass/styles.scss */
   .content {
     width: 100vw;
   }
 
-  /* line 107, ../sass/styles.scss */
+  /* line 117, ../sass/styles.scss */
   .figure-wrapper {
     width: 100vw;
     page-break-before: always;

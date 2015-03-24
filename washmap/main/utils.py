@@ -6,10 +6,11 @@ from bokeh.session import Session
 
 
 class BokehScriptComponents(object):
-    def __init__(self, plot_object, elementid=None):
+    def __init__(self, plot_object, elementid=None, min_width=700):
         if not elementid:
             elementid = str(uuid.uuid4())
         self.elementid = elementid
+        self.min_width = min_width
         self.modelid = plot_object.ref["id"]
         self.modeltype = plot_object.ref["type"]
         self.all_models = serialize_json(plot_object.dump())

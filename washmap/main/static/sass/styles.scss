@@ -51,15 +51,17 @@ a.btn {
 }
 /* ---------- FIGURES AND TABLES */
 .figure-bar {
-    margin: ($padding-large-vertical * 4) 0;
     background: $gray-lighter;
+    padding: ($padding-large-vertical * 2);
+    margin-bottom: ($padding-large-vertical * 4);
+
 }
 
 .figure-wrapper {
     @include clearfix;
     margin: ($padding-large-vertical * 2) auto;
     width: 60vw;
-    padding: 0 ($padding-large-vertical * 2);
+    padding: ($padding-large-vertical * 2);
     background: $body-bg;
     @media (max-width: 1200px) {
         width: 80vw;
@@ -87,7 +89,7 @@ a.btn {
 }
 
 .screen-too-small .bk-plot-wrapper {
-    position: fixed;
+    display: none;
 }
 
 .screen-too-small:after {
@@ -95,6 +97,14 @@ a.btn {
     font-family: $font-family-sans-serif;
     padding: ($padding-large-vertical * 2);
     padding-top: 0;
+}
+
+.bk-canvas {
+    position: relative;
+}
+
+.reveal table th, .reveal table td {
+    border-bottom: 0;
 }
 
 /* ---- END figures and tables */
