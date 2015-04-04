@@ -33,3 +33,21 @@ class WashMapStaticView(TemplateView):
             title="Washmap"
         )
         return context
+
+class WashMapServerView(TemplateView):
+    template_name = 'washmap/chart.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(WashMapServerView, self).get_context_data(*args, **kwargs)
+        water_map_static = BokehScriptComponents(
+            plot_object=make_washmap(),
+            elementid='water_map_server',
+            min_width=600
+        )
+        context.update(
+            figures=[
+                water_map_static
+            ],
+            title="Washmap Server"
+        )
+        return context
