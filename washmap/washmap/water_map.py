@@ -6,6 +6,7 @@ from bokeh.models import (
     Plot,
     Patches,
     HoverTool,
+    TapTool,
 )
 from bokeh.models import Text, Rect, Triangle
 from bokeh.models import LinearAxis, SingleIntervalTicker
@@ -103,8 +104,15 @@ def construct_map(data=None):
         fill_color='color_for_active_year', fill_alpha=1,
         line_color="#FFFFFF", line_width=1,
     )
-    plot.add_glyph(source, borders)
+    selected_borders = Patches(
+        xs='xs', ys='ys',
+        fill_color='color_for_active_year', fill_alpha=1,
+        line_color=ORANGE, line_width=5,
+    )
+
+    plot.add_glyph(source, borders, selection_glyph=selected_borders, nonselection_glyph=borders)
     plot.add_tools(HoverTool(tooltips="@active_year<br />@name<br />@active_year_value"))
+    plot.add_tools(TapTool())
     return plot
 
 
