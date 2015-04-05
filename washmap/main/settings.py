@@ -28,6 +28,8 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+BOKEH_URL = "http://localhost:4444"
+
 
 # Application definition
 

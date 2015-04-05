@@ -22,64 +22,12 @@ from .chart_constants import *
 
 from numpy import where
 
-
-def get_active_data(data, active_year, palette=None):
-    if not palette:
-        palette = WATER_COLOR_RANGE
-
-    def _get_color(value):
-        if value < 0: return GRAY
-        index = int(value / 10)
-        return palette[index]
-
-    data['active_year'] = active_year
-    data['active_year_value'] = data[active_year]
-    data['color_for_active_year'] = data[active_year].apply(_get_color)
-    data['active_year_value'] = where(data['active_year_value'] < 0, 'No Data', data['active_year_value'])
-    return data
-
-
-def get_data_with_countries(year_of_color=1990, stat_code='WNTI_%', palette=None):
-    if not palette:
-        palette = WATER_COLOR_RANGE
-
-    # Get the countries data frame
-    countries = Country.objects.exclude(boundary='')
-    countries = countries.filter(region__in=[1, 2, 3, 6, 7])  # Only African countries
-    countries = countries.values('name', 'boundary', 'id')
-    countries_df = DataFrame.from_records(countries)
-    countries_df['xs'], countries_df['ys'] = build_coords_lists(countries_df['boundary'])
-
-    # Get the stats for access to water
-    stats = StatValue.objects.filter(description__code=stat_code)
-    stats = stats.values('value', 'year', 'country_id')
-    stats_df = DataFrame.from_records(stats, coerce_float=True)
-
-    # Pivot it before merging
-    pivot_df = stats_df.pivot(columns='year', index='country_id', values='value')
-    pivot_df['id'] = pivot_df.index
-
-    # Merge the countries and stats together
-    merged_df = merge(countries_df, pivot_df, how='left')
-    merged_df = merged_df.fillna(value=-99)
-
-    # Color it
-    colored_df = get_active_data(merged_df, year_of_color, palette)
-    return colored_df
-
-
-def get_water_data_with_countries(year=1990):
-    return get_data_with_countries(year, 'WNTI_%', WATER_COLOR_RANGE)
-
-
-def get_sanitation_data_with_countries(year=1990):
-    return get_data_with_countries(year, 'SNTI_%', SANITATION_COLOR_RANGE)
-
-
-def construct_map(data=None):
+def construct_map(data=None, source=None):
     if data is None:
         data = get_water_data_with_countries()
-    source = ColumnDataSource(data)
+
+    if source is None:
+        source = ColumnDataSource(data)
 
     # Plot and axes
     x_start, x_end = (-20, 60)
@@ -116,9 +64,13 @@ def construct_map(data=None):
     return plot
 
 
-def construct_text_box(data, bar_color=BLUE):
-    angola = data[data.name == 'South Africa']
-    source = ColumnDataSource(angola)
+def construct_text_box(data=None, source=None, bar_color=BLUE):
+    if data is None:
+        data = get_water_data_with_countries()
+
+    if source is None:
+        angola = data[data.name == 'South Africa']
+        source = ColumnDataSource(angola)
 
     # Plot and axes
     xdr = Range1d(0, 220)
@@ -172,14 +124,17 @@ def construct_text_box(data, bar_color=BLUE):
     return plot
 
 
-def construct_line(data, palette):
+def construct_line(data=None, source=None, palette=WATER_COLOR_RANGE):
     year_range = range(1990, 2013)
 
-    data = get_sanitation_data_with_countries()
+    if data is None:
+        data = get_sanitation_data_with_countries()
     data = data[data.name == 'South Africa']
     data = data[year_range].transpose()
     data['country'] = data.iloc[:,0]
-    source = ColumnDataSource(data)
+
+    if source is None:
+        source = ColumnDataSource(data)
 
     xdr = Range1d(1990, 2013)
     ydr = Range1d(0, 100)
@@ -197,10 +152,11 @@ def construct_line(data, palette):
     line_plot.add_layout(xaxis, 'left')
     line_plot.add_layout(yaxis, 'below')
 
-    line = Line(x='index', y='country',
-                line_width = 5, line_cap="round",
-                line_color=palette[int(data['country'].mean() / 10)]
-                )
+    line = Line(
+        x='index', y='country',
+        line_width=5, line_cap="round",
+        line_color=palette[int(data['country'].mean() / 10)]
+    )
     line_plot.add_glyph(source, line)
 
     return line_plot
@@ -211,22 +167,3 @@ def layout_components(map_plot, line_plot, text_box):
     mapbox = VBox(children=[map_plot])
     composed = HBox(children=[mapbox, detail])
     return composed
-
-
-def make_washmap():
-    water_data = get_water_data_with_countries()
-    water_plot = construct_map(water_data)
-    water_line = construct_line(water_data, WATER_COLOR_RANGE)
-    water_text = construct_text_box(water_data, BLUE)
-
-    sanitation_data = get_sanitation_data_with_countries()
-    sanitation_plot = construct_map(sanitation_data)
-    sanitation_line = construct_line(sanitation_data, SANITATION_COLOR_RANGE)
-    sanitation_text = construct_text_box(sanitation_data, GREEN)
-
-    tabs = Tabs(tabs=[
-            Panel(title="Water", child=layout_components(water_plot, water_line, water_text)),
-            Panel(title="Sanitation", child=layout_components(sanitation_plot, sanitation_line, sanitation_text))
-        ])
-
-    return VBox(children=[tabs])
