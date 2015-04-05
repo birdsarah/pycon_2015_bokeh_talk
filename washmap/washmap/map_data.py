@@ -3,6 +3,7 @@ from __future__ import unicode_literals, absolute_import
 from numpy import where
 from pandas import DataFrame, merge
 
+from bokeh.models import ColumnDataSource
 from country.models import Country
 from main.utils import build_coords_lists
 from stats.models import StatValue
@@ -23,7 +24,7 @@ def get_active_data(data, active_year, palette=None):
     data['active_year'] = active_year
     data['active_year_value'] = data[active_year]
     data['color_for_active_year'] = data[active_year].apply(_get_color)
-    data['active_year_value'] = where(data['active_year_value'] < 0, 'No Data', data['active_year_value'])  # nopep8
+    data['active_year_value'] = where(data['active_year_value'] < 0, '-', data['active_year_value'])  # nopep8
     return data
 
 
@@ -43,8 +44,15 @@ def get_data_with_countries(year_of_color=1990, stat_code='WNTI_%', palette=None
     stats = stats.values('value', 'year', 'country_id')
     stats_df = DataFrame.from_records(stats, coerce_float=True)
 
+    data_as_dict = DataFrame(
+        stats_df.groupby('country_id').apply(
+            lambda x: ColumnDataSource({'watsan': x.value, 'year': x.year})
+        ),
+        columns=['line_source']
+    )
     # Pivot it before merging
     pivot_df = stats_df.pivot(columns='year', index='country_id', values='value')  # nopep8
+    pivot_df = pivot_df.join(data_as_dict)
     pivot_df['id'] = pivot_df.index
 
     # Merge the countries and stats together

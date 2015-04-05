@@ -10,25 +10,15 @@ from bokeh.models import (
 )
 from bokeh.models import Text, Rect, Triangle
 from bokeh.models import LinearAxis, SingleIntervalTicker
-from bokeh.models.widgets import Tabs, Panel, VBox, HBox
+from bokeh.models.widgets import VBox, HBox
+
+from .chart_constants import (
+    PLOT_FORMATS, ORANGE, BLUE, DARK_GRAY, FONT, AXIS_FORMATS, ORANGE_SHADOW
+)
 
 
-from pandas import DataFrame, merge
-
-from country.models import Country
-from main.utils import build_coords_lists
-from stats.models import StatValue
-from .chart_constants import *
-
-from numpy import where
-
-def construct_map(data=None, source=None):
-    if data is None:
-        data = get_water_data_with_countries()
-
-    if source is None:
-        source = ColumnDataSource(data)
-
+def construct_map(source):
+    assert isinstance(source, ColumnDataSource), "Require ColumnDataSource"
     # Plot and axes
     x_start, x_end = (-20, 60)
     y_start, y_end = (-40, 40)
@@ -58,19 +48,13 @@ def construct_map(data=None, source=None):
         line_color=ORANGE, line_width=5,
     )
 
-    plot.add_glyph(source, borders, selection_glyph=selected_borders, nonselection_glyph=borders)
-    plot.add_tools(HoverTool(tooltips="@active_year<br />@name<br />@active_year_value"))
+    plot.add_glyph(source, borders, selection_glyph=selected_borders, nonselection_glyph=borders)  # nopep8
+    plot.add_tools(HoverTool(tooltips="@active_year<br />@name<br />@active_year_value"))  # nopep8
     plot.add_tools(TapTool())
     return plot
 
 
-def construct_text_box(data=None, source=None, bar_color=BLUE):
-    if data is None:
-        data = get_water_data_with_countries()
-
-    if source is None:
-        angola = data[data.name == 'South Africa']
-        source = ColumnDataSource(angola)
+def construct_text_box(source, bar_color=BLUE):
 
     # Plot and axes
     xdr = Range1d(0, 220)
@@ -100,7 +84,7 @@ def construct_text_box(data=None, source=None, bar_color=BLUE):
     # Add the writing
     percent = Text(x=0, y=0, text='active_year_value', **font_props_lg)
     percent_sign = Text(x=54, y=0, text=['%'], **font_props_lg)
-    line_one = Text(x=85, y=20, text=['of people had'],  **font_props_sm)
+    line_one = Text(x=85, y=20, text=['of people had'], **font_props_sm)
     line_two_p1 = Text(x=85, y=5, text=['access in'], **font_props_sm)
     line_two_p2 = Text(x=131, y=5, text='active_year', **font_props_sm)
     plot.add_glyph(source, percent)
@@ -110,20 +94,55 @@ def construct_text_box(data=None, source=None, bar_color=BLUE):
     plot.add_glyph(source, line_two_p2)
 
     # Add the blue bar
-    bar = Rect(x=75, y=55, width=150, height=5, fill_color=bar_color, line_color=None)
-    plot.add_glyph(bar)
+    rect = Rect(x=75, y=55, width=150, height=5, fill_color=bar_color, line_color=None)  # nopep8
+    plot.add_glyph(rect)
 
     # Add the orange box with year
-    shadow = Triangle(x=150, y=65, size=25, fill_color=ORANGE_SHADOW, line_color=None)
+    shadow = Triangle(x=150, y=65, size=25, fill_color=ORANGE_SHADOW, line_color=None)  # nopep8
     plot.add_glyph(shadow)
-    box = Rect(x=200, y=60, width=100, height=40, fill_color=ORANGE, line_color=None)
+    box = Rect(x=200, y=60, width=100, height=40, fill_color=ORANGE, line_color=None)  # nopep8
     plot.add_glyph(box)
-    year = Text(x=160, y=45, text='active_year', text_font_size='18pt', text_color="#FFFFF", text_font_style="bold")
+    year = Text(x=160, y=45, text='active_year', text_font_size='18pt', text_color="#FFFFF", text_font_style="bold")  # nopep8
     plot.add_glyph(source, year)
 
     return plot
 
 
+def construct_line_single(source, line_color=BLUE):
+    xdr = Range1d(1990, 2013)
+    ydr = Range1d(0, 100)
+    line_plot = Plot(
+        x_range=xdr,
+        y_range=ydr,
+        title="",
+        plot_width=250,
+        plot_height=250,
+        min_border_right=10,
+        **PLOT_FORMATS
+    )
+    xaxis = LinearAxis(SingleIntervalTicker(interval=50), **AXIS_FORMATS)
+    yaxis = LinearAxis(SingleIntervalTicker(interval=10), **AXIS_FORMATS)
+    line_plot.add_layout(xaxis, 'left')
+    line_plot.add_layout(yaxis, 'below')
+
+    line = Line(
+        x='year', y='watsan',
+        line_width=5, line_cap="round",
+        line_color=source.data['color_for_active_year'][0],
+    )
+    line_plot.add_glyph(source.data['line_source'][0], line)
+
+    return line_plot
+
+
+def layout_components(map_plot, line_plot, text_box):
+    detail = VBox(children=[text_box, line_plot])
+    mapbox = VBox(children=[map_plot])
+    composed = HBox(children=[mapbox, detail])
+    return composed
+
+
+"""
 def construct_line(data=None, source=None, palette=WATER_COLOR_RANGE):
     year_range = range(1990, 2013)
 
@@ -160,10 +179,4 @@ def construct_line(data=None, source=None, palette=WATER_COLOR_RANGE):
     line_plot.add_glyph(source, line)
 
     return line_plot
-
-
-def layout_components(map_plot, line_plot, text_box):
-    detail = VBox(children=[text_box, line_plot])
-    mapbox = VBox(children=[map_plot])
-    composed = HBox(children=[mapbox, detail])
-    return composed
+"""

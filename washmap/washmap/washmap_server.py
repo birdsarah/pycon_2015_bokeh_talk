@@ -33,11 +33,11 @@ class WashmapApp(VBox):
 
         water_data = get_water_data_with_countries()
         obj.water_source = ColumnDataSource(water_data)
-        water_plot = construct_map(data=water_data, source=obj.water_source)
+        water_plot = construct_map(source=obj.water_source)
 
         san_data = get_sanitation_data_with_countries()
         obj.sanitation_source = ColumnDataSource(san_data)
-        san_plot = construct_map(data=san_data, source=obj.sanitation_source)
+        san_plot = construct_map(source=obj.sanitation_source)
 
         tabs = Tabs(
             tabs=[

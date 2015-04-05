@@ -21,8 +21,8 @@
             aspect_ratio = cur_width / cur_height;
             plot_width = Math.max(element_width, 300);
             plot_height = parseInt(plot_width / aspect_ratio);
-            Bokeh.Collections('Plot').get("{{ figure.modelid }}").set('plot_width', plot_width);
-            Bokeh.Collections('Plot').get("{{ figure.modelid }}").set('plot_height', plot_height);
+            Bokeh.index["{{ figure.modelid }}"].model.set('plot_width', plot_width);
+            Bokeh.index["{{ figure.modelid }}"].model.set('plot_height', plot_height);
         {% endfor %}
     }
     $(window).resize(resize_figures);
