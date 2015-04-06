@@ -68,15 +68,15 @@ def construct_text_box(source, bar_color=BLUE):
         y_range=ydr,
         title="",
         plot_width=250,
-        plot_height=80,
+        plot_height=120,
         min_border=0,
         **PLOT_FORMATS
     )
     font_props_lg = dict(
-        text_color=DARK_GRAY,
+        text_color='color_for_active_year',
         text_font=FONT,
         text_font_style="bold",
-        text_font_size='25pt',
+        text_font_size='23pt',
     )
     font_props_sm = dict(
         text_color=DARK_GRAY,
@@ -84,26 +84,34 @@ def construct_text_box(source, bar_color=BLUE):
         text_font_style="normal",
         text_font_size='10pt',
     )
+    font_props_md = dict(
+        text_color=DARK_GRAY,
+        text_font=FONT,
+        text_font_style="normal",
+        text_font_size='18pt',
+    )
     # Add the writing
-    percent = Text(x=0, y=0, text='active_year_value', **font_props_lg)
-    percent_sign = Text(x=54, y=0, text=['%'], **font_props_lg)
-    line_one = Text(x=85, y=20, text=['of people had'], **font_props_sm)
-    line_two_p1 = Text(x=85, y=5, text=['access in'], **font_props_sm)
-    line_two_p2 = Text(x=131, y=5, text='active_year', **font_props_sm)
+    country = Text(x=5, y=25, text='name', **font_props_md)
+    percent = Text(x=15, y=0, text='active_year_value', **font_props_lg)
+    percent_sign = Text(x=69, y=0, text=['%'], **font_props_lg)
+    line_one = Text(x=90, y=13, text=['of people had'], **font_props_sm)
+    line_two_p1 = Text(x=90, y=3, text=['access in'], **font_props_sm)
+    line_two_p2 = Text(x=136, y=3, text='active_year', **font_props_sm)
+    plot.add_glyph(source, country)
     plot.add_glyph(source, percent)
-    plot.add_glyph(percent_sign)
+    plot.add_glyph(source, percent_sign)
     plot.add_glyph(line_one)
     plot.add_glyph(line_two_p1)
     plot.add_glyph(source, line_two_p2)
 
     # Add the blue bar
-    rect = Rect(x=75, y=55, width=150, height=5, fill_color=bar_color, line_color=None)  # nopep8
+    rect = Rect(x=75, y=50, width=150, height=5, fill_color=bar_color, line_color=None)  # nopep8
     plot.add_glyph(rect)
 
     # Add the orange box with year
-    shadow = Triangle(x=150, y=65, size=25, fill_color=ORANGE_SHADOW, line_color=None)  # nopep8
+    shadow = Triangle(x=150, y=57.5, size=25, fill_color=ORANGE_SHADOW, line_color=None)  # nopep8
     plot.add_glyph(shadow)
-    box = Rect(x=200, y=60, width=100, height=40, fill_color=ORANGE, line_color=None)  # nopep8
+    box = Rect(x=200, y=55, width=100, height=25, fill_color=ORANGE, line_color=None)  # nopep8
     plot.add_glyph(box)
     year = Text(x=160, y=45, text='active_year', text_font_size='18pt', text_color="#FFFFF", text_font_style="bold")  # nopep8
     plot.add_glyph(source, year)
