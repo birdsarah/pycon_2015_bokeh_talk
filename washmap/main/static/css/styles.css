@@ -3923,6 +3923,11 @@ a.btn {
 }
 
 /* line 110, ../sass/styles.scss */
+.bk-ui-slider-horizontal {
+  width: 60%;
+}
+
+/* line 114, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom {
   background-color: black;
   opacity: 0.8;
@@ -3930,25 +3935,25 @@ a.btn {
   font-size: 0.8em;
   padding: 0.5em 1.5em;
 }
-/* line 116, ../sass/styles.scss */
+/* line 120, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom:before {
   border: none;
 }
-/* line 119, ../sass/styles.scss */
+/* line 123, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom:after {
   border: none;
 }
 
-/* line 124, ../sass/styles.scss */
+/* line 128, ../sass/styles.scss */
 .tooltip-text {
   clear: both;
   float: left;
 }
-/* line 127, ../sass/styles.scss */
+/* line 131, ../sass/styles.scss */
 .tooltip-text.country {
   font-weight: bold;
 }
-/* line 130, ../sass/styles.scss */
+/* line 134, ../sass/styles.scss */
 .tooltip-text.value {
   font-size: 1.2em;
   font-weight: bold;
@@ -3958,12 +3963,12 @@ a.btn {
 /* ---- END figures and tables */
 /* ------ FOR PRINTING ---- */
 @media print {
-  /* line 141, ../sass/styles.scss */
+  /* line 145, ../sass/styles.scss */
   .content {
     width: 100vw;
   }
 
-  /* line 144, ../sass/styles.scss */
+  /* line 148, ../sass/styles.scss */
   .figure-wrapper {
     width: 100vw;
     page-break-before: always;
