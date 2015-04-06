@@ -101,10 +101,14 @@ a.btn {
     border: none;
     outline: none;
 }
-.bk-ui-slider-horizontal {
-    margin-left: 0.5em;
+.bk-slider-horizontal {
+    margin-left: 1em;
     margin-top: 0.5em;
     width: 60%;
+}
+.bk-ui-slider .bk-ui-slider-handle {
+    width: 2em;
+    height: 1.3em;
 }
 
 .bk-tooltip.bk-tooltip-custom {

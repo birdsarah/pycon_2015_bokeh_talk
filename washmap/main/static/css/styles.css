@@ -3918,13 +3918,19 @@ a.btn {
 }
 
 /* line 104, ../sass/styles.scss */
-.bk-ui-slider-horizontal {
-  margin-left: 0.5em;
+.bk-slider-horizontal {
+  margin-left: 1em;
   margin-top: 0.5em;
   width: 60%;
 }
 
-/* line 110, ../sass/styles.scss */
+/* line 109, ../sass/styles.scss */
+.bk-ui-slider .bk-ui-slider-handle {
+  width: 2em;
+  height: 1.3em;
+}
+
+/* line 114, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom {
   background-color: black;
   opacity: 0.8;
@@ -3932,32 +3938,32 @@ a.btn {
   font-size: 0.8em;
   padding: 0.5em 1.5em;
 }
-/* line 116, ../sass/styles.scss */
+/* line 120, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom:before {
   border: none;
 }
-/* line 119, ../sass/styles.scss */
+/* line 123, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom:after {
   border: none;
 }
 
-/* line 124, ../sass/styles.scss */
+/* line 128, ../sass/styles.scss */
 .bk-bs-nav-tabs > li.bk-bs-active > a,
 .bk-bs-nav-tabs > li.bk-bs-active > a:hover,
 .bk-bs-nav-tabs > li.bk-bs-active > a:focus {
   outline: none;
 }
 
-/* line 131, ../sass/styles.scss */
+/* line 135, ../sass/styles.scss */
 .tooltip-text {
   clear: both;
   float: left;
 }
-/* line 134, ../sass/styles.scss */
+/* line 138, ../sass/styles.scss */
 .tooltip-text.country {
   font-weight: bold;
 }
-/* line 137, ../sass/styles.scss */
+/* line 141, ../sass/styles.scss */
 .tooltip-text.value {
   font-size: 1.2em;
   font-weight: bold;
@@ -3967,7 +3973,7 @@ a.btn {
 /* ---- END figures and tables */
 /* ------ FOR PRINTING ---- */
 @media print {
-  /* line 148, ../sass/styles.scss */
+  /* line 152, ../sass/styles.scss */
   .content {
     width: 100vw;
   }

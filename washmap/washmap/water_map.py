@@ -65,7 +65,7 @@ def construct_map(source, selected_color=ORANGE):
 def construct_text_box(source, bar_color=BLUE):
     # Plot and axes
     xdr = Range1d(0, 220)
-    ydr = Range1d(0, 80)
+    ydr = Range1d(0, 120)
 
     plot = Plot(
         x_range=xdr,
@@ -95,12 +95,12 @@ def construct_text_box(source, bar_color=BLUE):
         text_font_size='18pt',
     )
     # Add the writing
-    country = Text(x=5, y=25, text='name', **font_props_md)
-    percent = Text(x=15, y=0, text='active_year_value', **font_props_lg)
-    percent_sign = Text(x=69, y=0, text=['%'], **font_props_lg)
-    line_one = Text(x=90, y=13, text=['of people had'], **font_props_sm)
-    line_two_p1 = Text(x=90, y=3, text=['access in'], **font_props_sm)
-    line_two_p2 = Text(x=136, y=3, text='active_year', **font_props_sm)
+    country = Text(x=5, y=50, text='name', **font_props_md)
+    percent = Text(x=15, y=10, text='active_year_value', **font_props_lg)
+    percent_sign = Text(x=69, y=10, text=['%'], **font_props_lg)
+    line_one = Text(x=90, y=28, text=['of people had'], **font_props_sm)
+    line_two_p1 = Text(x=90, y=14, text=['access in'], **font_props_sm)
+    line_two_p2 = Text(x=136, y=14, text='active_year', **font_props_sm)
     plot.add_glyph(source, country)
     plot.add_glyph(source, percent)
     plot.add_glyph(source, percent_sign)
@@ -108,16 +108,16 @@ def construct_text_box(source, bar_color=BLUE):
     plot.add_glyph(line_two_p1)
     plot.add_glyph(source, line_two_p2)
 
-    # Add the blue bar
-    rect = Rect(x=75, y=50, width=150, height=5, fill_color=bar_color, line_color=None)  # nopep8
-    plot.add_glyph(rect)
 
     # Add the orange box with year
-    shadow = Triangle(x=150, y=57.5, size=25, fill_color=ORANGE_SHADOW, line_color=None)  # nopep8
+    shadow = Triangle(x=150, y=109, size=25, fill_color=ORANGE_SHADOW, line_color=None)  # nopep8
     plot.add_glyph(shadow)
-    box = Rect(x=200, y=55, width=100, height=25, fill_color=ORANGE, line_color=None)  # nopep8
+    # Add the blue bar
+    rect = Rect(x=75, y=99, width=150, height=5, fill_color=bar_color, line_color=None)  # nopep8
+    plot.add_glyph(rect)
+    box = Rect(x=200, y=100, width=100, height=40, fill_color=ORANGE, line_color=None)  # nopep8
     plot.add_glyph(box)
-    year = Text(x=160, y=45, text='active_year', text_font_size='18pt', text_color="#FFFFF", text_font_style="bold")  # nopep8
+    year = Text(x=160, y=85, text='active_year', text_font_size='18pt', text_color="#FFFFF", text_font_style="bold")  # nopep8
     plot.add_glyph(source, year)
 
     return plot
@@ -132,6 +132,7 @@ def construct_line(source, line_color=BLUE):
         title="",
         plot_width=250,
         plot_height=250,
+        min_border_top=10,
         min_border_left=50,
         **PLOT_FORMATS
     )
@@ -165,7 +166,7 @@ def construct_key(palette):
     )
 
     for index, color in enumerate(palette):
-        width = 18
+        width = 19
         rect = Rect(
             x=((width * index) + 40), y=40,
             width=width, height=10,
@@ -176,12 +177,12 @@ def construct_key(palette):
     font_props_sm = dict(
         text_color=DARK_GRAY,
         text_font=FONT,
-        text_font_style="normal",
+        text_font_style="bold",
         text_font_size='10pt',
     )
 
-    zero = Text(x=30, y=15, text=['0%'], **font_props_sm)
-    hundred = Text(x=190, y=15, text=['100%'], **font_props_sm)
+    zero = Text(x=30, y=15, text=['0 %'], **font_props_sm)
+    hundred = Text(x=190, y=15, text=['100 %'], **font_props_sm)
     plot.add_glyph(zero)
     plot.add_glyph(hundred)
 
