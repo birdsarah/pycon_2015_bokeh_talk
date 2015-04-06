@@ -3875,7 +3875,7 @@ a.btn {
   padding: 20px;
 }
 
-/* line 72, ../sass/styles.scss */
+/* line 71, ../sass/styles.scss */
 .plotdiv {
   overflow: hidden;
   *zoom: 1;
@@ -3884,12 +3884,12 @@ a.btn {
   margin-bottom: 20px;
 }
 
-/* line 79, ../sass/styles.scss */
+/* line 78, ../sass/styles.scss */
 .screen-too-small .bk-plot-wrapper {
   display: none;
 }
 
-/* line 83, ../sass/styles.scss */
+/* line 82, ../sass/styles.scss */
 .screen-too-small:after {
   content: "Unfortunately, this graph needs a larger screen to display correctly.";
   font-family: "News Cycle", Helvetica, Arial, sans-serif;
@@ -3897,17 +3897,17 @@ a.btn {
   padding-top: 0;
 }
 
-/* line 90, ../sass/styles.scss */
+/* line 89, ../sass/styles.scss */
 .bk-canvas {
   position: relative;
 }
 
-/* line 94, ../sass/styles.scss */
+/* line 93, ../sass/styles.scss */
 .reveal table th, .reveal table td {
   border-bottom: 0;
 }
 
-/* line 97, ../sass/styles.scss */
+/* line 96, ../sass/styles.scss */
 .bk-ui-state-default,
 .bk-ui-widget-content .bk-ui-state-default,
 .bk-ui-widget-header .bk-ui-state-default {
@@ -3917,14 +3917,14 @@ a.btn {
   outline: none;
 }
 
-/* line 105, ../sass/styles.scss */
+/* line 104, ../sass/styles.scss */
 .bk-ui-slider-horizontal {
   margin-left: 0.5em;
   margin-top: 0.5em;
   width: 60%;
 }
 
-/* line 111, ../sass/styles.scss */
+/* line 110, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom {
   background-color: black;
   opacity: 0.8;
@@ -3932,25 +3932,32 @@ a.btn {
   font-size: 0.8em;
   padding: 0.5em 1.5em;
 }
-/* line 117, ../sass/styles.scss */
+/* line 116, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom:before {
   border: none;
 }
-/* line 120, ../sass/styles.scss */
+/* line 119, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom:after {
   border: none;
 }
 
-/* line 125, ../sass/styles.scss */
+/* line 124, ../sass/styles.scss */
+.bk-bs-nav-tabs > li.bk-bs-active > a,
+.bk-bs-nav-tabs > li.bk-bs-active > a:hover,
+.bk-bs-nav-tabs > li.bk-bs-active > a:focus {
+  outline: none;
+}
+
+/* line 131, ../sass/styles.scss */
 .tooltip-text {
   clear: both;
   float: left;
 }
-/* line 128, ../sass/styles.scss */
+/* line 134, ../sass/styles.scss */
 .tooltip-text.country {
   font-weight: bold;
 }
-/* line 131, ../sass/styles.scss */
+/* line 137, ../sass/styles.scss */
 .tooltip-text.value {
   font-size: 1.2em;
   font-weight: bold;
@@ -3960,7 +3967,7 @@ a.btn {
 /* ---- END figures and tables */
 /* ------ FOR PRINTING ---- */
 @media print {
-  /* line 142, ../sass/styles.scss */
+  /* line 148, ../sass/styles.scss */
   .content {
     width: 100vw;
   }

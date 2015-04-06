@@ -150,8 +150,46 @@ def construct_line(source, line_color=BLUE):
     return line_plot
 
 
-def layout_components(map_plot, line_plot, text_box):
-    detail = vplot(text_box, line_plot)
+def construct_key(palette):
+    xdr = Range1d(0, 220)
+    ydr = Range1d(0, 50)
+
+    plot = Plot(
+        x_range=xdr,
+        y_range=ydr,
+        title="",
+        plot_width=220,
+        plot_height=50,
+        min_border=0,
+        **PLOT_FORMATS
+    )
+
+    for index, color in enumerate(palette):
+        width = 18
+        rect = Rect(
+            x=((width * index) + 40), y=40,
+            width=width, height=10,
+            fill_color=color, line_color='white'
+        )
+        plot.add_glyph(rect)
+
+    font_props_sm = dict(
+        text_color=DARK_GRAY,
+        text_font=FONT,
+        text_font_style="normal",
+        text_font_size='10pt',
+    )
+
+    zero = Text(x=30, y=15, text=['0%'], **font_props_sm)
+    hundred = Text(x=190, y=15, text=['100%'], **font_props_sm)
+    plot.add_glyph(zero)
+    plot.add_glyph(hundred)
+
+    return plot
+
+
+def layout_components(map_plot, line_plot, text_box, key):
+    detail = vplot(text_box, line_plot, key)
     mapbox = vplot(map_plot)
     composed = hplot(mapbox, detail)
     return composed

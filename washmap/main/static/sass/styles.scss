@@ -68,7 +68,6 @@ a.btn {
     padding: ($padding-large-vertical * 2);
 }
 
-
 .plotdiv {
     @include clearfix;
     position: relative;
@@ -120,6 +119,13 @@ a.btn {
     &:after {
         border: none;
     }
+}
+
+.bk-bs-nav-tabs > li.bk-bs-active > a, 
+.bk-bs-nav-tabs > li.bk-bs-active > a:hover,
+.bk-bs-nav-tabs > li.bk-bs-active > a:focus {
+
+    outline: none;
 }
 
 .tooltip-text {

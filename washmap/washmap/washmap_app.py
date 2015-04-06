@@ -11,9 +11,12 @@ from washmap.water_map import (
     construct_map,
     construct_line,
     construct_text_box,
+    construct_key,
     layout_components,
 )
-from washmap.chart_constants import BLUE, GREEN, DARK_GRAY
+from washmap.chart_constants import (
+    BLUE, GREEN, DARK_GRAY, WATER_COLOR_RANGE, SANITATION_COLOR_RANGE
+)
 
 
 class WashmapApp(VBox):
@@ -69,20 +72,22 @@ class WashmapApp(VBox):
         wat_plot = construct_map(obj.wat_source_map)
         wat_line = construct_line(obj.wat_source_line, line_color=BLUE)
         wat_text = construct_text_box(obj.wat_source_text, bar_color=BLUE)
+        wat_key = construct_key(WATER_COLOR_RANGE)
 
         san_plot = construct_map(obj.san_source_map, selected_color=DARK_GRAY)
         san_line = construct_line(obj.san_source_line, line_color=GREEN)
         san_text = construct_text_box(obj.san_source_text, bar_color=GREEN)
+        san_key = construct_key(SANITATION_COLOR_RANGE)
 
         tabs = Tabs(
             tabs=[
                 Panel(
                     title="Water",
-                    child=layout_components(wat_plot, wat_line, wat_text)
+                    child=layout_components(wat_plot, wat_line, wat_text, wat_key)  # nopep8
                 ),
                 Panel(
                     title="Sanitation",
-                    child=layout_components(san_plot, san_line, san_text)
+                    child=layout_components(san_plot, san_line, san_text, san_key)  # nopep8
                 )
             ]
         )
