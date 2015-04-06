@@ -45,11 +45,14 @@ def construct_map(source, selected_color=ORANGE):
     selected_borders = Patches(
         xs='xs', ys='ys',
         fill_color='color_for_active_year', fill_alpha=1,
-        line_color=selected_color, line_width=5,
+        line_color=selected_color, line_width=3,
     )
 
     plot.add_glyph(source, borders, selection_glyph=selected_borders, nonselection_glyph=borders)  # nopep8
-    plot.add_tools(HoverTool(tooltips="@active_year<br />@name<br />@active_year_value"))  # nopep8
+    tooltips = "<span class='tooltip-text year'>@active_year</span>"
+    tooltips += "<span class='tooltip-text country'>@name</span>"
+    tooltips += "<span class='tooltip-text value'>@active_year_value %</span>"
+    plot.add_tools(HoverTool(tooltips=tooltips))
     plot.add_tools(TapTool())
     return plot
 
