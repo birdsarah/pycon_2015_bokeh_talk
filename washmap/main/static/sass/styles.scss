@@ -50,22 +50,10 @@ a.btn {
     }
 }
 /* ---------- FIGURES AND TABLES */
-.figure-bar {
-    background: $gray-lighter;
-    padding: ($padding-large-vertical * 2);
-    margin-bottom: ($padding-large-vertical * 4);
-
-}
-
 .figure-wrapper {
     @include clearfix;
     margin: ($padding-large-vertical * 2) auto;
-    width: 60vw;
-    padding: ($padding-large-vertical * 2);
-    background: $body-bg;
-    @media (max-width: 1200px) {
-        width: 80vw;
-    }
+    width: 80vw;
 }
 
 .table {
@@ -106,8 +94,17 @@ a.btn {
 .reveal table th, .reveal table td {
     border-bottom: 0;
 }
-
+.bk-ui-state-default,
+.bk-ui-widget-content .bk-ui-state-default,
+.bk-ui-widget-header .bk-ui-state-default {
+    background-image: none;
+    background-color: #FFA500;
+    border: none;
+    outline: none;
+}
 .bk-ui-slider-horizontal {
+    margin-left: 0.5em;
+    margin-top: 0.5em;
     width: 60%;
 }
 
@@ -144,9 +141,5 @@ a.btn {
 @media print {
     .content {
         width: 100vw;
-    }
-    .figure-wrapper {
-        width: 100vw;
-        page-break-before: always;    
     }
 }

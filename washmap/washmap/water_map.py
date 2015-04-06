@@ -1,16 +1,19 @@
 from __future__ import unicode_literals, absolute_import
 from bokeh.models import (
     ColumnDataSource,
-    Line,
-    Range1d,
-    Plot,
-    Patches,
     HoverTool,
+    Line,
+    LinearAxis,
+    Patches,
+    Plot,
+    Range1d,
+    Rect,
+    SingleIntervalTicker,
     TapTool,
+    Text,
+    Triangle,
 )
-from bokeh.models import Text, Rect, Triangle
-from bokeh.models import LinearAxis, SingleIntervalTicker
-from bokeh.models.widgets import VBox, HBox
+from bokeh.plotting import vplot, hplot
 
 from .chart_constants import (
     PLOT_FORMATS, ORANGE, BLUE, DARK_GRAY, FONT, AXIS_FORMATS, ORANGE_SHADOW
@@ -21,8 +24,8 @@ def construct_map(source, selected_color=ORANGE):
     assert isinstance(source, ColumnDataSource), "Require ColumnDataSource"
 
     # Plot and axes
-    x_start, x_end = (-20, 60)
-    y_start, y_end = (-40, 40)
+    x_start, x_end = (-18, 55)
+    y_start, y_end = (-35, 38)
     xdr = Range1d(x_start, x_end)
     ydr = Range1d(y_start, y_end)
 
@@ -35,6 +38,7 @@ def construct_map(source, selected_color=ORANGE):
         title="",
         plot_width=plot_width,
         plot_height=plot_height,
+        min_border=0,
         **PLOT_FORMATS
     )
 
@@ -128,7 +132,7 @@ def construct_line(source, line_color=BLUE):
         title="",
         plot_width=250,
         plot_height=250,
-        min_border_right=10,
+        min_border_left=50,
         **PLOT_FORMATS
     )
     xaxis = LinearAxis(SingleIntervalTicker(interval=50), **AXIS_FORMATS)
@@ -147,7 +151,7 @@ def construct_line(source, line_color=BLUE):
 
 
 def layout_components(map_plot, line_plot, text_box):
-    detail = VBox(children=[text_box, line_plot])
-    mapbox = VBox(children=[map_plot])
-    composed = HBox(children=[mapbox, detail])
+    detail = vplot(text_box, line_plot)
+    mapbox = vplot(map_plot)
+    composed = hplot(mapbox, detail)
     return composed
