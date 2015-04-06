@@ -19,6 +19,7 @@ from .chart_constants import (
 
 def construct_map(source, selected_color=ORANGE):
     assert isinstance(source, ColumnDataSource), "Require ColumnDataSource"
+
     # Plot and axes
     x_start, x_end = (-20, 60)
     y_start, y_end = (-40, 40)

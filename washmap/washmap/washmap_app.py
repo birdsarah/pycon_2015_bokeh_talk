@@ -39,11 +39,11 @@ class WashmapApp(VBox):
             title="Year", name='year',
             value=1990, start=1990, end=2012, step=1
         )
+        country = 'Morocco'
         obj.current_country = TextInput(
-            title="Country", name="country", value="South Africa"
+            title="Country", name="country", value=country
         )
 
-        country = 'South Africa'
         year_range = [str(x) for x in range(1990, 2013)]
         wat_data = get_water_data_with_countries()
         san_data = get_sanitation_data_with_countries()
@@ -58,7 +58,9 @@ class WashmapApp(VBox):
         san_data_line = san_data_line[san_data_line['value'] > 0]
 
         obj.wat_source_map = ColumnDataSource(wat_data)
+        obj.wat_source_map.selected = [30]
         obj.san_source_map = ColumnDataSource(san_data)
+        obj.san_source_map.selected = [30]
         obj.wat_source_line = ColumnDataSource(wat_data_line)
         obj.san_source_line = ColumnDataSource(san_data_line)
         obj.wat_source_text = ColumnDataSource(wat_data_text)
