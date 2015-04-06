@@ -1718,12 +1718,12 @@ textarea {
 
 /* line 48, ../../../../../../../../../var/lib/gems/1.9.1/gems/bootstrap-sass-3.3.3/assets/stylesheets/bootstrap/_scaffolding.scss */
 a {
-  color: #893033;
+  color: #555555;
   text-decoration: none;
 }
 /* line 52, ../../../../../../../../../var/lib/gems/1.9.1/gems/bootstrap-sass-3.3.3/assets/stylesheets/bootstrap/_scaffolding.scss */
 a:hover, a:focus {
-  color: #501c1e;
+  color: #2f2f2f;
   text-decoration: underline;
 }
 /* line 58, ../../../../../../../../../var/lib/gems/1.9.1/gems/bootstrap-sass-3.3.3/assets/stylesheets/bootstrap/_scaffolding.scss */
