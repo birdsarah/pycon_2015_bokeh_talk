@@ -17,7 +17,7 @@ from .chart_constants import (
 )
 
 
-def construct_map(source):
+def construct_map(source, selected_color=ORANGE):
     assert isinstance(source, ColumnDataSource), "Require ColumnDataSource"
     # Plot and axes
     x_start, x_end = (-20, 60)
@@ -45,7 +45,7 @@ def construct_map(source):
     selected_borders = Patches(
         xs='xs', ys='ys',
         fill_color='color_for_active_year', fill_alpha=1,
-        line_color=ORANGE, line_width=5,
+        line_color=selected_color, line_width=5,
     )
 
     plot.add_glyph(source, borders, selection_glyph=selected_borders, nonselection_glyph=borders)  # nopep8
@@ -55,7 +55,6 @@ def construct_map(source):
 
 
 def construct_text_box(source, bar_color=BLUE):
-
     # Plot and axes
     xdr = Range1d(0, 220)
     ydr = Range1d(0, 80)
@@ -108,7 +107,7 @@ def construct_text_box(source, bar_color=BLUE):
     return plot
 
 
-def construct_line_single(source, line_color=BLUE):
+def construct_line(source, line_color=BLUE):
     xdr = Range1d(1990, 2013)
     ydr = Range1d(0, 100)
     line_plot = Plot(
@@ -126,11 +125,11 @@ def construct_line_single(source, line_color=BLUE):
     line_plot.add_layout(yaxis, 'below')
 
     line = Line(
-        x='year', y='watsan',
+        x='index', y='value',
         line_width=5, line_cap="round",
-        line_color=source.data['color_for_active_year'][0],
+        line_color=line_color,
     )
-    line_plot.add_glyph(source.data['line_source'][0], line)
+    line_plot.add_glyph(source, line)
 
     return line_plot
 
@@ -140,43 +139,3 @@ def layout_components(map_plot, line_plot, text_box):
     mapbox = VBox(children=[map_plot])
     composed = HBox(children=[mapbox, detail])
     return composed
-
-
-"""
-def construct_line(data=None, source=None, palette=WATER_COLOR_RANGE):
-    year_range = range(1990, 2013)
-
-    if data is None:
-        data = get_sanitation_data_with_countries()
-    data = data[data.name == 'South Africa']
-    data = data[year_range].transpose()
-    data['country'] = data.iloc[:,0]
-
-    if source is None:
-        source = ColumnDataSource(data)
-
-    xdr = Range1d(1990, 2013)
-    ydr = Range1d(0, 100)
-    line_plot = Plot(
-        x_range=xdr,
-        y_range=ydr,
-        title="",
-        plot_width=250,
-        plot_height=250,
-        min_border_right=10,
-        **PLOT_FORMATS
-    )
-    xaxis = LinearAxis(SingleIntervalTicker(interval=50), **AXIS_FORMATS)
-    yaxis = LinearAxis(SingleIntervalTicker(interval=10), **AXIS_FORMATS)
-    line_plot.add_layout(xaxis, 'left')
-    line_plot.add_layout(yaxis, 'below')
-
-    line = Line(
-        x='index', y='country',
-        line_width=5, line_cap="round",
-        line_color=palette[int(data['country'].mean() / 10)]
-    )
-    line_plot.add_glyph(source, line)
-
-    return line_plot
-"""

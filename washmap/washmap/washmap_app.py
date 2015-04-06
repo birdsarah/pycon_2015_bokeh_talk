@@ -1,7 +1,6 @@
 from bokeh.models import ColumnDataSource
 from bokeh.properties import Instance
-from bokeh.models.widgets import Slider, VBox
-from bokeh.models.widgets import Tabs, Panel
+from bokeh.models.widgets import Slider, VBox, Tabs, Panel, TextInput
 
 from washmap.map_data import (
     get_water_data_with_countries,
@@ -10,11 +9,11 @@ from washmap.map_data import (
 )
 from washmap.water_map import (
     construct_map,
-    construct_line_single,
+    construct_line,
     construct_text_box,
     layout_components,
 )
-from washmap.chart_constants import BLUE, GREEN
+from washmap.chart_constants import BLUE, GREEN, DARK_GRAY
 
 
 class WashmapApp(VBox):
@@ -23,10 +22,14 @@ class WashmapApp(VBox):
 
     year = Instance(Slider)
 
-    wat_source = Instance(ColumnDataSource)
-    san_source = Instance(ColumnDataSource)
-    wat_source_single = Instance(ColumnDataSource)
-    san_source_single = Instance(ColumnDataSource)
+    current_country = Instance(TextInput)
+
+    wat_source_map = Instance(ColumnDataSource)
+    san_source_map = Instance(ColumnDataSource)
+    wat_source_line = Instance(ColumnDataSource)
+    san_source_line = Instance(ColumnDataSource)
+    wat_source_text = Instance(ColumnDataSource)
+    san_source_text = Instance(ColumnDataSource)
 
     @classmethod
     def create(cls):
@@ -36,25 +39,38 @@ class WashmapApp(VBox):
             title="Year", name='year',
             value=1990, start=1990, end=2012, step=1
         )
+        obj.current_country = TextInput(
+            title="Country", name="country", value="South Africa"
+        )
 
         country = 'South Africa'
+        year_range = [str(x) for x in range(1990, 2013)]
         wat_data = get_water_data_with_countries()
-        wat_data_single = get_frame_for_country(wat_data, country)
         san_data = get_sanitation_data_with_countries()
-        san_data_single = get_frame_for_country(san_data, country)
+        wat_data_text = get_frame_for_country(wat_data, country)
+        san_data_text = get_frame_for_country(san_data, country)
+        wat_data_line = wat_data_text[year_range].transpose()
+        wat_data_line.columns = ['value']
+        wat_data_line = wat_data_line[wat_data_line['value'] > 0]
 
-        obj.wat_source = ColumnDataSource(wat_data)
-        obj.wat_source_single = ColumnDataSource(wat_data_single)
-        obj.san_source = ColumnDataSource(san_data)
-        obj.san_source_single = ColumnDataSource(san_data_single)
+        san_data_line = san_data_text[year_range].transpose()
+        san_data_line.columns = ['value']
+        san_data_line = san_data_line[san_data_line['value'] > 0]
 
-        wat_plot = construct_map(obj.wat_source)
-        wat_line = construct_line_single(obj.wat_source_single)
-        wat_text = construct_text_box(obj.wat_source_single, bar_color=BLUE)
+        obj.wat_source_map = ColumnDataSource(wat_data)
+        obj.san_source_map = ColumnDataSource(san_data)
+        obj.wat_source_line = ColumnDataSource(wat_data_line)
+        obj.san_source_line = ColumnDataSource(san_data_line)
+        obj.wat_source_text = ColumnDataSource(wat_data_text)
+        obj.san_source_text = ColumnDataSource(san_data_text)
 
-        san_plot = construct_map(obj.san_source)
-        san_line = construct_line_single(obj.san_source_single)
-        san_text = construct_text_box(obj.san_source_single, bar_color=GREEN)
+        wat_plot = construct_map(obj.wat_source_map)
+        wat_line = construct_line(obj.wat_source_line, line_color=BLUE)
+        wat_text = construct_text_box(obj.wat_source_text, bar_color=BLUE)
+
+        san_plot = construct_map(obj.san_source_map, selected_color=DARK_GRAY)
+        san_line = construct_line(obj.san_source_line, line_color=GREEN)
+        san_text = construct_text_box(obj.san_source_text, bar_color=GREEN)
 
         tabs = Tabs(
             tabs=[

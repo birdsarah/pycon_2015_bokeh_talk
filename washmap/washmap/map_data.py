@@ -1,6 +1,5 @@
 from __future__ import unicode_literals, absolute_import
 
-from bokeh.models import ColumnDataSource
 from pandas import DataFrame, merge
 from numpy import where
 
@@ -50,15 +49,8 @@ def get_data_with_countries(year_of_color=1990, stat_code='WNTI_%', palette=None
     stats = stats.values('value', 'year', 'country_id')
     stats_df = DataFrame.from_records(stats, coerce_float=True)
 
-    data_as_dict = DataFrame(
-        stats_df.groupby('country_id').apply(
-            lambda x: ColumnDataSource({'watsan': x.value, 'year': x.year})
-        ),
-        columns=['line_source']
-    )
     # Pivot it before merging
     pivot_df = stats_df.pivot(columns='year', index='country_id', values='value')  # nopep8
-    pivot_df = pivot_df.join(data_as_dict)
     pivot_df['id'] = pivot_df.index
 
     # Merge the countries and stats together
