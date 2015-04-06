@@ -7,7 +7,7 @@ from main.utils import BokehScriptComponents, app_document_no_tag
 
 
 from .washmap_static import make_washmap
-from .washmap_server import WashmapApp
+from .washmap_app import WashmapApp
 
 
 class WashMapStaticView(TemplateView):

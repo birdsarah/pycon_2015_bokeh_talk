@@ -1,9 +1,9 @@
 from __future__ import unicode_literals, absolute_import
 
-from numpy import where
-from pandas import DataFrame, merge
-
 from bokeh.models import ColumnDataSource
+from pandas import DataFrame, merge
+from numpy import where
+
 from country.models import Country
 from main.utils import build_coords_lists
 from stats.models import StatValue
@@ -11,9 +11,11 @@ from stats.models import StatValue
 from .chart_constants import SANITATION_COLOR_RANGE, WATER_COLOR_RANGE, GRAY
 
 
-def get_active_data(data, active_year, palette=None):
-    if not palette:
-        palette = WATER_COLOR_RANGE
+def update_active_data(data, active_year, palette_name=None):
+    # Default to water
+    palette = WATER_COLOR_RANGE
+    if palette_name == 'sanitation':
+        palette = SANITATION_COLOR_RANGE
 
     def _get_color(value):
         if value < 0:
@@ -26,6 +28,10 @@ def get_active_data(data, active_year, palette=None):
     data['color_for_active_year'] = data[active_year].apply(_get_color)
     data['active_year_value'] = where(data['active_year_value'] < 0, '-', data['active_year_value'])  # nopep8
     return data
+
+
+def get_frame_for_country(frame, country):
+    return frame[frame.name == country]
 
 
 def get_data_with_countries(year_of_color=1990, stat_code='WNTI_%', palette=None):  # nopep8
@@ -60,7 +66,7 @@ def get_data_with_countries(year_of_color=1990, stat_code='WNTI_%', palette=None
     merged_df = merged_df.fillna(value=-99)
 
     # Color it
-    colored_df = get_active_data(merged_df, year_of_color, palette)
+    colored_df = update_active_data(merged_df, year_of_color, palette)
 
     # Otherwise things are sad!
     colored_df.columns = colored_df.columns.astype('str')
@@ -68,8 +74,8 @@ def get_data_with_countries(year_of_color=1990, stat_code='WNTI_%', palette=None
 
 
 def get_water_data_with_countries(year=1990):
-    return get_data_with_countries(year, 'WNTI_%', WATER_COLOR_RANGE)
+    return get_data_with_countries(year, 'WNTI_%', 'water')
 
 
 def get_sanitation_data_with_countries(year=1990):
-    return get_data_with_countries(year, 'SNTI_%', SANITATION_COLOR_RANGE)
+    return get_data_with_countries(year, 'SNTI_%', 'sanitation')
