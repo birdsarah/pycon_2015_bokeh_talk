@@ -43,3 +43,21 @@ LINE_FORMATS = dict(
     line_alpha=0.8,
     line_color=BLUE,
 )
+FONT_PROPS_SM = dict(
+    text_color=DARK_GRAY,
+    text_font=FONT,
+    text_font_style="normal",
+    text_font_size='10pt',
+)
+FONT_PROPS_MD = dict(
+    text_color=DARK_GRAY,
+    text_font=FONT,
+    text_font_style="normal",
+    text_font_size='18pt',
+)
+FONT_PROPS_LG = dict(
+    text_color='color_for_active_year',
+    text_font=FONT,
+    text_font_style="bold",
+    text_font_size='23pt',
+)

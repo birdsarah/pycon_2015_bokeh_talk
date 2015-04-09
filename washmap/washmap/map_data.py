@@ -71,3 +71,8 @@ def get_water_data_with_countries(year=1990):
 
 def get_sanitation_data_with_countries(year=1990):
     return get_data_with_countries(year, 'SNTI_%', 'sanitation')
+
+
+def get_water_data_for_one_country(year=1990, country="South Africa"):
+    data = get_data_with_countries(year, 'WNTI_%', 'water')
+    return data[data.name == 'South Africa']

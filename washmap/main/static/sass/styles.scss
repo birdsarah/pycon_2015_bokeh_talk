@@ -35,6 +35,10 @@ body {
     text-align: center;
 }
 
+.bk-vbox, .bk-hbox {
+    text-align: left;
+}
+
 .figure-bar {
     display: inline-block;
     margin: 0 auto;
@@ -135,7 +139,7 @@ a.btn {
     }
 }
 
-.bk-bs-nav-tabs > li.bk-bs-active > a, 
+.bk-bs-nav-tabs > li.bk-bs-active > a,
 .bk-bs-nav-tabs > li.bk-bs-active > a:hover,
 .bk-bs-nav-tabs > li.bk-bs-active > a:focus {
 

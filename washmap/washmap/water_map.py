@@ -16,7 +16,8 @@ from bokeh.models import (
 from bokeh.plotting import vplot, hplot
 
 from .chart_constants import (
-    PLOT_FORMATS, ORANGE, BLUE, DARK_GRAY, FONT, AXIS_FORMATS, ORANGE_SHADOW
+    PLOT_FORMATS, ORANGE, BLUE, DARK_GRAY, FONT, AXIS_FORMATS, ORANGE_SHADOW,
+    FONT_PROPS_SM, FONT_PROPS_MD, FONT_PROPS_LG,
 )
 
 
@@ -76,31 +77,13 @@ def construct_text_box(source, bar_color=BLUE):
         min_border=0,
         **PLOT_FORMATS
     )
-    font_props_lg = dict(
-        text_color='color_for_active_year',
-        text_font=FONT,
-        text_font_style="bold",
-        text_font_size='23pt',
-    )
-    font_props_sm = dict(
-        text_color=DARK_GRAY,
-        text_font=FONT,
-        text_font_style="normal",
-        text_font_size='10pt',
-    )
-    font_props_md = dict(
-        text_color=DARK_GRAY,
-        text_font=FONT,
-        text_font_style="normal",
-        text_font_size='18pt',
-    )
     # Add the writing
-    country = Text(x=5, y=50, text='name', **font_props_md)
-    percent = Text(x=15, y=10, text='active_year_value', **font_props_lg)
-    percent_sign = Text(x=69, y=10, text=['%'], **font_props_lg)
-    line_one = Text(x=90, y=28, text=['of people had'], **font_props_sm)
-    line_two_p1 = Text(x=90, y=14, text=['access in'], **font_props_sm)
-    line_two_p2 = Text(x=136, y=14, text='active_year', **font_props_sm)
+    country = Text(x=5, y=50, text='name', **FONT_PROPS_MD)
+    percent = Text(x=15, y=10, text='active_year_value', **FONT_PROPS_LG)
+    percent_sign = Text(x=69, y=10, text=['%'], **FONT_PROPS_LG)
+    line_one = Text(x=90, y=28, text=['of people had'], **FONT_PROPS_SM)
+    line_two_p1 = Text(x=90, y=14, text=['access in'], **FONT_PROPS_SM)
+    line_two_p2 = Text(x=136, y=14, text='active_year', **FONT_PROPS_SM)
     plot.add_glyph(source, country)
     plot.add_glyph(source, percent)
     plot.add_glyph(source, percent_sign)
@@ -174,15 +157,8 @@ def construct_key(palette):
         )
         plot.add_glyph(rect)
 
-    font_props_sm = dict(
-        text_color=DARK_GRAY,
-        text_font=FONT,
-        text_font_style="bold",
-        text_font_size='10pt',
-    )
-
-    zero = Text(x=30, y=15, text=['0 %'], **font_props_sm)
-    hundred = Text(x=190, y=15, text=['100 %'], **font_props_sm)
+    zero = Text(x=30, y=15, text=['0 %'], **FONT_PROPS_SM)
+    hundred = Text(x=190, y=15, text=['100 %'], **FONT_PROPS_SM)
     plot.add_glyph(zero)
     plot.add_glyph(hundred)
 
