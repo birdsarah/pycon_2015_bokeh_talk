@@ -131,7 +131,7 @@ def construct_line(source, line_color=BLUE):
         y_range=ydr,
         title="",
         plot_width=250,
-        plot_height=250,
+        plot_height=150,
         min_border_top=10,
         min_border_left=50,
         **PLOT_FORMATS
@@ -152,14 +152,14 @@ def construct_line(source, line_color=BLUE):
 
 
 def construct_key(palette):
-    xdr = Range1d(0, 220)
+    xdr = Range1d(0, 250)
     ydr = Range1d(0, 50)
 
     plot = Plot(
         x_range=xdr,
         y_range=ydr,
         title="",
-        plot_width=220,
+        plot_width=250,
         plot_height=50,
         min_border=0,
         **PLOT_FORMATS
