@@ -316,6 +316,28 @@ embed_script, embed_div = components(chart, resources=Resources())
         </ul>
         <p>See the talk repo</p>
         </section>
+        <section>
+            <h2>Widgets</h2>
+        <pre><code class="python" data-trim>
+from bokeh.models.widgets import Tabs, Panel
+from bokeh.plotting import vplot, hplot
+tabs = Tabs(
+    tabs=[
+        Panel(
+            title="Water",
+            child=hplot(vplot(water_map), vplot(water_line, water_key))
+        ),
+        Panel(
+            title="Sanitation",
+            child=hplot(vplot(san_map), vplot(san_line, san_key))
+        )
+    ]
+)
+        </code></pre>
+        </section>
+        <section>
+            <iframe src="http://localhost:8001/static" width="900" height="1000" frameborder="0"></iframe>
+        </section>
         <!-- END SECTION 4 -->
     </section>
     <!-- SAMPLE SLIDES
