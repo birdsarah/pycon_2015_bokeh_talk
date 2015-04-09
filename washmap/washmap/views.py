@@ -1,5 +1,6 @@
 from __future__ import unicode_literals, absolute_import
 
+from bokeh.embed import components, Resources
 from django.conf import settings
 from django.views.generic import TemplateView
 
@@ -63,7 +64,6 @@ class LineStaticView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(LineStaticView, self).get_context_data(*args, **kwargs)
         line_chart = make_line_chart()
-        from bokeh.embed import components, Resources
         embed_script, embed_div = components(line_chart, Resources())
         context.update(
             embed_div=embed_div,

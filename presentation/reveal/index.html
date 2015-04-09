@@ -50,7 +50,7 @@
 
     <section>
         <section>
-            <h1>Bokeh <i class="bokeh"></i></h1>
+            <h2>Bokeh <i class="bokeh"></i></h2>
             <ul>
                 <li>Data visualization libary</li>
                 <li>Web</li>
@@ -88,7 +88,7 @@
             </div>
         </section>
         <section>
-            <h1>Why bokeh<i class="bokeh"></i>?</h1>
+            <h2>Why bokeh<i class="bokeh"></i>?</h2>
             <ul>
                 <li>python vs javascript</li>
                 <li>mid-data (and big-data)</li>
@@ -117,20 +117,35 @@
     <section>
         <!-- START SECTION 2 -->
         <section>
-        <h1>Charts interface</h1>
-        <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-        <aside class="notes">
-        </aside>
+        <h2>Charts interface</h2>
+        <pre><code class="python" data-trim>
+..views.py
+    from bokeh.charts import Line
+    from bokeh.embed import components, Resources
+
+    data = get_line_data()
+    chart = Line(data)
+    embed_script, embed_div = components(chart, resources=Resources())
+        </code></pre>
+        <pre><code class="django" data-trim>
+..template.html
+
+    <script src="js/bokeh.min.js"></script>
+    <link rel="stylesheet" href="css/bokeh.min.css" /> 
+
+    {{ embed_div|safe }}
+    {{ embed_script|safe }}
+        </code></pre>
+        </section>
+
+        <section>
+            <iframe src="http://localhost:8001/line" width="800" height="550" frameborder="0"></iframe>
+            <h3 class="fragment"><code>chart = Line(data)</code></h3>
         </section>
     </section>
-    <!-- SAMPLE SLIDES 
+    <!-- SAMPLE SLIDES
     <section>
-        <h1>Bullet slide</h1>
+        <h2>Bullet slide</h2>
         <ul>
             <li></li>
             <li></li>
