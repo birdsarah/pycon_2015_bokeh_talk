@@ -3,7 +3,6 @@ from .map_data import get_water_data_with_countries, get_frame_for_country
 
 def get_line_data():
     country = 'South Africa'
-    wat_source_line = ColumnDataSource(wat_data_line)
     year_range = [str(x) for x in range(1990, 2013)]
 
     wat_data = get_water_data_with_countries()
