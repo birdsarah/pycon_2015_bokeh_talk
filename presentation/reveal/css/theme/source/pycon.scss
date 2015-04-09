@@ -73,6 +73,20 @@ i.bokeh {
     }
 }
 
+.attribution {
+    clear: both;
+    > img {
+        width: 20%;
+        float: right;
+    }
+    > p {
+        clear: both;
+        font-size: 0.5em;
+        text-align: right;
+    }
+}
+
+
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------

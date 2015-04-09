@@ -30,6 +30,16 @@ i.bokeh {
   .side_by_side.right {
     float: right; }
 
+.attribution {
+  clear: both; }
+  .attribution > img {
+    width: 20%;
+    float: right; }
+  .attribution > p {
+    clear: both;
+    font-size: 0.5em;
+    text-align: right; }
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/

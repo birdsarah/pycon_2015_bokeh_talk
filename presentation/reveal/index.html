@@ -75,16 +75,16 @@
         </section>
         <section>
             <img class="stretch" data-src="images/bokeh_alot.png">
-            <img data-src="images/copyright_hyperbole_half.png" style="width:20%; float: right;">
-            <div style="width: 20%; clear: both; float: right; font-size: 0.4em;">
-                <a href="http://hyperboleandahalf.blogspot.ca/2010/04/alot-is-better-than-you-at-everything.html">hyperbole and a half - the alot</a>
+            <div class="attribution">
+                <img data-src="images/copyright_hyperbole_half.png">
+                <p><a href="http://hyperboleandahalf.blogspot.ca/2010/04/alot-is-better-than-you-at-everything.html">hyperbole and a half - the alot</a></p>
             </div>
         </section>
         <section>
             <img class="stretch" data-src="images/alot_more_python_2.png">
-            <img data-src="images/copyright_hyperbole_half.png" style="width:20%; clear: both; float: right;">
-            <div style="width: 20%; clear: both; float: right; font-size: 0.4em;">
-                <a href="http://hyperboleandahalf.blogspot.ca/2010/04/alot-is-better-than-you-at-everything.html">hyperbole and a half - the alot</a>
+            <div class="attribution">
+                <img data-src="images/copyright_hyperbole_half.png">
+                <p><a href="http://hyperboleandahalf.blogspot.ca/2010/04/alot-is-better-than-you-at-everything.html">hyperbole and a half - the alot</a></p>
             </div>
         </section>
         <section>
@@ -118,7 +118,7 @@
         <!-- START SECTION 2 -->
         <section>
         <h2>Charts interface</h2>
-        <pre><code class="python" data-trim>
+        <pre class="fragment"><code class="python" data-trim>
 ..views.py
     from bokeh.charts import Line
     from bokeh.embed import components, Resources
@@ -126,7 +126,7 @@
     chart = Line(data)
     embed_script, embed_div = components(chart, resources=Resources())
         </code></pre>
-        <pre><code class="django" data-trim>
+        <pre class="fragment"><code class="django" data-trim>
 ..template.html
 
     <script src="js/bokeh.min.js"></script>
@@ -143,7 +143,7 @@
         </section>
 
         <section>
-            <img class="stretch" data-src="images/bokeh_basic.png">
+            <img class="stretch" data-src="images/bokeh_basic.svg">
         </section>
 
         <section>
@@ -193,7 +193,23 @@ stats_df = DataFrame.from_records(stats, coerce_float=True)
     <section>
         <!-- START SECTION 3 -->
         <section>
-            <h2>bullet slide</h2>
+            <p>pandas.DataFrame & bokeh.charts.Line</p>
+            <p>
+                <img data-src="images/screenshot_line.png" class="side_by_side left">
+                <img data-src="images/Grumpy_Cat_by_Gage_Skidmore_cropped.jpg" class="fragment side_by_side right">
+            </p>
+            <h3 class="fragment" style="text-align:right">NOT PRETTY</h3>
+            <aside class="notes">
+            <p>We had out DataFrame and our charts function. Bokeh turns that 
+            into JSON and bokehjs turns it into javascript. So we're feeling pretty good.
+            </p>
+            </aside>
+        </section>
+        <section>
+            <iframe data-src="http://localhost:8888/notebooks/_1_prettify_chart.ipynb" width=1024 height=600></iframe>
+        </section>
+        <section>
+            <img class="stretch" data-src="images/bokeh_with_high_low.svg">
         </section>
     </section>
     <!-- SAMPLE SLIDES
