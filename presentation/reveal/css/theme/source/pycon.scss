@@ -63,6 +63,16 @@ i.bokeh {
     background-repeat: no-repeat;
 }
 
+.side_by_side {
+    width: 49%;
+    &.left {
+        float: left;
+    }
+    &.right {
+        float: right;
+    }
+}
+
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------

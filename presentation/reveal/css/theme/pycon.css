@@ -23,6 +23,13 @@ i.bokeh {
   background-position: 0 0.1em;
   background-repeat: no-repeat; }
 
+.side_by_side {
+  width: 49%; }
+  .side_by_side.left {
+    float: left; }
+  .side_by_side.right {
+    float: right; }
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
