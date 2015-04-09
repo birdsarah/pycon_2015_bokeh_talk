@@ -4,6 +4,7 @@ private_settings.py
 .sass-cache
 *.swp
 node_modules
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
