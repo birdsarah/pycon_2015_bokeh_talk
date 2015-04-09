@@ -8,6 +8,7 @@ from main.utils import BokehScriptComponents, app_document_no_tag
 
 from .washmap_static import make_washmap
 from .washmap_app import WashmapApp
+from .charts_demos import make_line_chart
 
 
 class WashMapStaticView(TemplateView):
@@ -52,5 +53,20 @@ class WashMapServerView(TemplateView):
         }
         context.update(
             applet=applet_dict
+        )
+        return context
+
+
+class LineStaticView(TemplateView):
+    template_name = 'washmap/chart_basic_embed.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(LineStaticView, self).get_context_data(*args, **kwargs)
+        line_chart = make_line_chart()
+        from bokeh.embed import components, Resources
+        embed_script, embed_div = components(line_chart, Resources())
+        context.update(
+            embed_div=embed_div,
+            embed_script=embed_script
         )
         return context

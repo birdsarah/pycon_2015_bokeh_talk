@@ -5,9 +5,11 @@ from django.conf.urls import patterns, url
 from .views import (
     WashMapStaticView,
     WashMapServerView,
+    LineStaticView,
 )
 
 urlpatterns = patterns('',
-    url(r'^$', WashMapStaticView.as_view(), name='home'),
-    url(r'^server$', WashMapServerView.as_view(), name='server'),
+    url(r'^$', WashMapServerView.as_view(), name='server'),
+    url(r'^static$', WashMapStaticView.as_view(), name='home'),
+    url(r'^line$', LineStaticView.as_view(), name='line'),
 )
