@@ -40,6 +40,12 @@ i.bokeh {
     font-size: 0.5em;
     text-align: right; }
 
+li {
+  list-style-image: url("../../../images/bokeh-bullet.png"); }
+  li li {
+    list-style-image: none;
+    list-style-type: none; }
+
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
@@ -298,7 +304,10 @@ body {
   .reveal .slides {
     text-align: left; }
   .reveal pre {
-    width: 100%; }
+    width: 100%;
+    box-shadow: none; }
+    .reveal pre code {
+      padding-left: 1em; }
   .reveal .highlight {
     padding: 0 0.2em;
     background-color: #FF5E99;
@@ -306,8 +315,8 @@ body {
   .reveal .footer {
     position: absolute;
     bottom: -0.5em;
-    left: 1em;
-    font-size: 0.5em; }
+    left: 0.5em;
+    font-size: 1em; }
   .reveal section img {
     border: none;
     box-shadow: none; }

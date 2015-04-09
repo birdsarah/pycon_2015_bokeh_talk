@@ -50,7 +50,7 @@
 
     <section>
         <section>
-            <h2>Bokeh <i class="bokeh"></i></h2>
+            <h2>Bokeh</h2>
             <ul>
                 <li>Data visualization libary</li>
                 <li>Web</li>
@@ -88,22 +88,28 @@
             </div>
         </section>
         <section>
-            <h2>Why bokeh<i class="bokeh"></i>?</h2>
+            <h2>Why bokeh?</h2>
             <ul>
                 <li>python vs javascript</li>
                 <li>mid-data (and big-data)</li>
                 <li>real-time data updates</li>
                 <li>server-side processing</li>
             </ul>
-        </section>
-        <section>
-            <iframe src="http://africawatermap.aptivate.org/index.html" width="900" height="1000" frameborder="0"></iframe>
+            <p>My new default</p>
         </section>
         <section>
             <img data-src="images/washwatch_original.png" class="stretch">
-            <p><a href="http://www.wateraid.org/what-we-do/the-crisis/africa-wash-map#/interactive-map">http://www.wateraid.org/what-we-do/the-crisis/africa-wash-map</a></p>
-            <p><a href="https://github.com/aptivate/africawatermap">https://github.com/aptivate/africawatermap</a></p>
-            <p><a href="http://www.aptivate.org">Aptivate</a> | <a href="http://d3js.org">d3.js</a></p>
+            <div style="font-size:0.8em">
+                <p>
+                    <a href="http://www.wateraid.org/what-we-do/the-crisis/africa-wash-map#/interactive-map">http://www.wateraid.org/what-we-do/the-crisis/africa-wash-map</a><br />
+                    <a href="https://github.com/aptivate/africawatermap">https://github.com/aptivate/africawatermap</a><br />
+                    <a href="http://www.aptivate.org">Aptivate</a> | <a href="http://d3js.org">d3.js</a><br />
+                    WASH = <span class="highlight">wa</span>ter, <span class="highlight">s</span>anitation & <span class="highlight">h</span>ygiene
+                </p>
+            </div>
+        </section>
+        <section>
+            <iframe src="http://africawatermap.aptivate.org/index.html" width="900" height="1000" frameborder="0"></iframe>
         </section>
         <section>
             <p>
@@ -221,25 +227,94 @@ stats_df = DataFrame.from_records(stats, coerce_float=True)
         <section>
             <img class="stretch" data-src="images/bokeh_with_high_low.svg">
         </section>
+        <section>
+            <h2>Charts Intermission</h2>
+            <ul>
+                <li>Charts are awesome!</li>
+                <li>Area, Bar, BoxPlot, Donut, Dot, HeatMap, Histogram, Horizon, Line, Scatter, Step, TimeSeries</li>
+                <li>Great way to get started</li>
+                <li>Code is interesting for learning bokeh
+                    <ul>
+                        <li><pre>bokeh/bokeh/charts/builder/*_builder.py</pre></li>
+                    </ul>
+                </li>
+            </ul>
+            <aside class="notes">
+            <p>I have a pull request that I'm going to finish in the 
+            during the sprints where I show an example of making a sparkline
+            starting from a line chart.
+            </p>
+            </aside>
+        </section>
         <!-- END SECTION 3 -->
     </section>
     <section>
         <!-- START SECTION 4 -->
         <section>
-            <h2>Low level interface</h2>
+            <img data-src="images/water_screenshot.png" class="stretch">
+        </section>
+        <section>
+            <h3>Plot</h3>
             <pre><code class="python" data-trim>
 from bokeh.models import Plot
 
 plot = Plot()
-
 plot.add_glyph()
 plot.add_layout()
 plot.add_tools()
             </code></pre>
-            <img data-src="images/water_screenshot.png" class="side_by_side right">
+            <h3>Glyph (shape)</h3>
+            <pre><code class="python" data-trim>
+from bokeh.models import Rect, Circle, Line, Triangle, ...
+            </code></pre>
+            <h3>Tools (interactions)</h3>
+            <pre><code class="python" data-trim>
+from bokeh.models import (
+    TapTool, HoverTool, 
+    BoxSelectTool, BoxZoomTool, WheelZoomTool, PanTool,
+    ResetTool, ResizeTool, ....
+)
+            </code></pre>
+        </section>
+        <section>
+            <img data-src="images/burtin.png" class="stretch">
         </section>
         <section>
             <iframe data-src="http://localhost:8888/notebooks/_2_building_up.ipynb" width=1024 height=600></iframe>
+        </section>
+        <section>
+            <h2>CSS Intermission</h2>
+            <ul>
+                <li>Canvas - no css required</li>
+                <li>Bokeh needs some css - tools, hover styling, slider styling</li>
+                <li>Bokeh's built-in css is large</li>
+                <li>I prefer to roll my own
+                    <ul>
+                        <li><pre>bokeh/bokehjs/build/css/bokeh.css</pre></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section>
+            <h2>Embedding intermission</h2>
+        <pre><code class="python" data-trim>
+from bokeh.embed import components, Resources
+embed_script, embed_div = components(chart, resources=Resources())
+        </code></pre>
+        <pre><code class="django" data-trim>
+{{ embed_div|safe }}
+{{ embed_script|safe }}
+        </code></pre>
+        <ul>
+            <li>Want to load bokehjs async or ...</li>
+            <li>Copy bokeh's templates to make your own
+                <ul>
+                    <li><pre>bokeh/bokeh/_templates/*</pre></li>
+                </ul>
+            </li>
+            <li>Useful for making responsive plots</li>
+        </ul>
+        <p>See the talk repo</p>
         </section>
         <!-- END SECTION 4 -->
     </section>

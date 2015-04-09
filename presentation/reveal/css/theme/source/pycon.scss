@@ -86,6 +86,13 @@ i.bokeh {
     }
 }
 
+li {
+    list-style-image: url("../../../images/bokeh-bullet.png");
+    li {
+        list-style-image: none;
+        list-style-type: none;
+    }
+}
 
 // Theme template ------------------------------
 @import "../template/theme";
@@ -101,6 +108,10 @@ i.bokeh {
     }
     pre {
         width: 100%;
+        box-shadow: none;
+        code {
+            padding-left: 1em;
+        }
     }
     .highlight {
         padding: 0 .2em;
@@ -111,8 +122,8 @@ i.bokeh {
     .footer {
         position: absolute;
         bottom: -0.5em;
-        left: 1em;
-        font-size: 0.5em;
+        left: 0.5em;
+        font-size: 1em;
     }
 
     section img {
