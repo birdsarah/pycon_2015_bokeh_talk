@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>Interactive data for the web</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -123,7 +123,6 @@
     from bokeh.charts import Line
     from bokeh.embed import components, Resources
 
-    data = get_line_data()
     chart = Line(data)
     embed_script, embed_div = components(chart, resources=Resources())
         </code></pre>
@@ -142,10 +141,58 @@
             <iframe src="http://localhost:8001/line" width="800" height="550" frameborder="0"></iframe>
             <h3 class="fragment"><code>chart = Line(data)</code></h3>
         </section>
+
+        <section>
+            <img class="stretch" data-src="images/bokeh_basic.png">
+        </section>
+
+        <section>
+        <h2>Getting the data</h2>
+        <p>data - DataFrame - <a href="http://pandas.pydata.org">pandas.pydata.org</a></p>
+        <pre><code class="python" data-trim>
+In[4]: data.head()
+
+Out[4]:
+    year    value
+    1990    42.4
+    1991    42.4
+    1992    42.4
+    1993    42.4
+    1994    43.0
+        </code></pre>
+        </section>
+        <section>
+        <h2>Getting the data</h2>
+        <h4>Django Queryset</h4>
+        <pre><code class="python" data-trim>
+..views.py
+
+from pandas import DataFrame
+from .models import StatValue
+
+stats = StatValue.objects.filter(description__code=stat_code)
+stats = stats.values('value', 'year', 'country_id')
+stats_df = DataFrame.from_records(stats, coerce_float=True)
+        </code></pre>
+
+        <div class="fragment">
+            <h4>Raw SQL</h4>
+            <pre><code class="python" data-trim>
+    import pandas as pd
+
+    from sqlalchemy import create_engine
+    engine = create_engine('sqlite:///:memory:'
+    data_from_table = pd.read_sql_table('data', engine)
+    data_from_query = pd.read_sql_query('SELECT * FROM data', engine)
+            </code></pre>
+            <p><a href="http://pandas.pydata.org/pandas-docs/stable/io.html#io-sql">http://pandas.pydata.org/pandas-docs/stable/io.html#io-sql</a>
+        </div>
+
+        </section>
     </section>
     <!-- SAMPLE SLIDES
     <section>
-        <h2>Bullet slide</h2>
+        <h2>bullet slide</h2>
         <ul>
             <li></li>
             <li></li>
