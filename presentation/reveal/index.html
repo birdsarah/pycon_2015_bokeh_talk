@@ -40,16 +40,36 @@
 
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
-				<section>
+                <section>
                     <h1>Interactive data for the web</h1>
                     <h3>Bokeh for web developers</h3>
                     <p>Sarah Bird</p>
-                    <br >
                     <p><a href="#">github url</a></p>
-                    <img id="slide_1_image" src="images/sanitation screenshot.png"></img>
+                    <img class="slide_image" data-src="images/sanitation screenshot.png">
 				</section>
 
+				<section>
+                <h1>Bokeh <i class="bokeh"></i></h1>
+                    <ul>
+                        <li>Data visualization libary</li>
+                        <li>Web</li>
+                        <li>Interactive</li>
+                        <li>Roots in data science</li>
+                    </ul>
+                    <img class="slide_image" data-src="images/bokeh screenshot.png">
+				</section>
+                <aside class="notes">
+                    <p>Bokeh is a Python interactive visualization library that
+                    targets modern web browsers for presentation. Its goal is
+                    to provide elegant, concise construction of novel graphics
+                    in the style of D3.js, but also deliver this capability
+                    with high-performance interactivity over very large or
+                    streaming datasets. Bokeh can help anyone who would like to
+                    quickly and easily create interactive plots, dashboards,
+                    and data applications.</p>
+                </aside>
 			</div>
+
             <div class="footer">
                 <p><i class="fa fa-twitter"></i> birdsarah</p>
             </div>
@@ -65,9 +85,9 @@
 			// https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				controls: false,
-				progress: true,
+				progress: false,
 				history: true,
-				center: true,
+				center: false,
 
 				transition: 'none', // none/fade/slide/convex/concave/zoom
 

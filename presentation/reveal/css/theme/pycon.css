@@ -8,11 +8,20 @@
 section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
   color: #fff; }
 
-#slide_1_image {
+.slide_image {
   position: absolute;
-  right: -3em;
+  right: 0em;
   bottom: -3.5em;
   z-index: -10; }
+
+i.bokeh {
+  background-image: url("../../../images/bokeh-transparent.png");
+  display: inline-block;
+  background-size: 1em;
+  height: 1em;
+  width: 1em;
+  background-position: 0 0.1em;
+  background-repeat: no-repeat; }
 
 /*********************************************
  * GLOBAL STYLES
@@ -279,7 +288,7 @@ body {
     color: white; }
   .reveal .footer {
     position: absolute;
-    bottom: 1em;
+    bottom: -0.5em;
     left: 1em;
     font-size: 0.5em; }
   .reveal section img {
