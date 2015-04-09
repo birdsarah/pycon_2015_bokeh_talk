@@ -2,6 +2,8 @@
 private_settings.py
 .ropeproject
 .sass-cache
+*.swp
+node_modules
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
