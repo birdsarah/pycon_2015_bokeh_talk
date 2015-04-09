@@ -3850,19 +3850,31 @@ body {
   }
 }
 /* line 33, ../sass/styles.scss */
+.row {
+  width: 100%;
+  text-align: center;
+}
+
+/* line 38, ../sass/styles.scss */
+.figure-bar {
+  display: inline-block;
+  margin: 0 auto;
+}
+
+/* line 43, ../sass/styles.scss */
 a.btn {
   color: #333333;
   font-family: "News Cycle", Helvetica, Arial, sans-serif;
 }
 
-/* line 38, ../sass/styles.scss */
+/* line 48, ../sass/styles.scss */
 .title {
   margin: 0 auto;
   max-width: 800px;
   text-align: center;
 }
 
-/* line 44, ../sass/styles.scss */
+/* line 54, ../sass/styles.scss */
 .content {
   overflow: hidden;
   *zoom: 1;
@@ -3870,14 +3882,14 @@ a.btn {
   width: 40vw;
 }
 @media (max-width: 1200px) {
-  /* line 44, ../sass/styles.scss */
+  /* line 54, ../sass/styles.scss */
   .content {
     width: 60vw;
   }
 }
 
 /* ---------- FIGURES AND TABLES */
-/* line 53, ../sass/styles.scss */
+/* line 63, ../sass/styles.scss */
 .figure-wrapper {
   overflow: hidden;
   *zoom: 1;
@@ -3885,20 +3897,20 @@ a.btn {
   width: 95vw;
 }
 
-/* line 59, ../sass/styles.scss */
+/* line 69, ../sass/styles.scss */
 .table {
   margin-bottom: 0;
   font-family: "News Cycle", Helvetica, Arial, sans-serif;
 }
 
-/* line 64, ../sass/styles.scss */
+/* line 74, ../sass/styles.scss */
 .caption {
   background: #893033;
   color: #fff;
   padding: 20px;
 }
 
-/* line 71, ../sass/styles.scss */
+/* line 81, ../sass/styles.scss */
 .plotdiv {
   overflow: hidden;
   *zoom: 1;
@@ -3907,12 +3919,12 @@ a.btn {
   margin-bottom: 20px;
 }
 
-/* line 78, ../sass/styles.scss */
+/* line 88, ../sass/styles.scss */
 .screen-too-small .bk-plot-wrapper {
   display: none;
 }
 
-/* line 82, ../sass/styles.scss */
+/* line 92, ../sass/styles.scss */
 .screen-too-small:after {
   content: "Unfortunately, this graph needs a larger screen to display correctly.";
   font-family: "News Cycle", Helvetica, Arial, sans-serif;
@@ -3920,17 +3932,17 @@ a.btn {
   padding-top: 0;
 }
 
-/* line 89, ../sass/styles.scss */
+/* line 99, ../sass/styles.scss */
 .bk-canvas {
   position: relative;
 }
 
-/* line 93, ../sass/styles.scss */
+/* line 103, ../sass/styles.scss */
 .reveal table th, .reveal table td {
   border-bottom: 0;
 }
 
-/* line 96, ../sass/styles.scss */
+/* line 106, ../sass/styles.scss */
 .bk-ui-state-default,
 .bk-ui-widget-content .bk-ui-state-default,
 .bk-ui-widget-header .bk-ui-state-default {
@@ -3940,20 +3952,20 @@ a.btn {
   outline: none;
 }
 
-/* line 104, ../sass/styles.scss */
+/* line 114, ../sass/styles.scss */
 .bk-slider-horizontal {
   margin-left: 1em;
   margin-top: 0.5em;
   width: 60%;
 }
 
-/* line 109, ../sass/styles.scss */
+/* line 119, ../sass/styles.scss */
 .bk-ui-slider .bk-ui-slider-handle {
   width: 2em;
   height: 1.3em;
 }
 
-/* line 114, ../sass/styles.scss */
+/* line 124, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom {
   background-color: black;
   opacity: 0.8;
@@ -3961,32 +3973,32 @@ a.btn {
   font-size: 0.8em;
   padding: 0.5em 1.5em;
 }
-/* line 120, ../sass/styles.scss */
+/* line 130, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom:before {
   border: none;
 }
-/* line 123, ../sass/styles.scss */
+/* line 133, ../sass/styles.scss */
 .bk-tooltip.bk-tooltip-custom:after {
   border: none;
 }
 
-/* line 128, ../sass/styles.scss */
+/* line 138, ../sass/styles.scss */
 .bk-bs-nav-tabs > li.bk-bs-active > a,
 .bk-bs-nav-tabs > li.bk-bs-active > a:hover,
 .bk-bs-nav-tabs > li.bk-bs-active > a:focus {
   outline: none;
 }
 
-/* line 135, ../sass/styles.scss */
+/* line 145, ../sass/styles.scss */
 .tooltip-text {
   clear: both;
   float: left;
 }
-/* line 138, ../sass/styles.scss */
+/* line 148, ../sass/styles.scss */
 .tooltip-text.country {
   font-weight: bold;
 }
-/* line 141, ../sass/styles.scss */
+/* line 151, ../sass/styles.scss */
 .tooltip-text.value {
   font-size: 1.2em;
   font-weight: bold;
@@ -3996,7 +4008,7 @@ a.btn {
 /* ---- END figures and tables */
 /* ------ FOR PRINTING ---- */
 @media print {
-  /* line 152, ../sass/styles.scss */
+  /* line 162, ../sass/styles.scss */
   .content {
     width: 100vw;
   }

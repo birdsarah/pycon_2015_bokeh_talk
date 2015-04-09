@@ -30,6 +30,16 @@ body {
     }
 }
 
+.row {
+    width: 100%;
+    text-align: center;
+}
+
+.figure-bar {
+    display: inline-block;
+    margin: 0 auto;
+}
+
 a.btn {
     color: $text-color;
     font-family: $font-family-sans-serif;
