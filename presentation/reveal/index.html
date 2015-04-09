@@ -109,7 +109,7 @@
             </div>
         </section>
         <section>
-            <iframe src="http://africawatermap.aptivate.org/index.html" width="900" height="1000" frameborder="0"></iframe>
+            <iframe data-src="http://africawatermap.aptivate.org/index.html" width="900" height="1000" frameborder="0"></iframe>
         </section>
         <section>
             <p>
@@ -144,7 +144,7 @@
         </section>
 
         <section>
-            <iframe src="http://localhost:8001/line" width="800" height="550" frameborder="0"></iframe>
+            <iframe data-src="http://localhost:8001/line" width="800" height="550" frameborder="0"></iframe>
             <h3 class="fragment"><code>chart = Line(data)</code></h3>
         </section>
 
@@ -336,12 +336,50 @@ tabs = Tabs(
         </code></pre>
         </section>
         <section>
-            <iframe src="http://localhost:8001/static" width="900" height="1000" frameborder="0"></iframe>
+            <iframe data-src="http://localhost:8001/static" width="900" height="1000" frameborder="0"></iframe>
+        </section>
+        <section>
+            <h2>Hover</h2>
+        <pre><code class="python" data-trim>
+from bokeh.models import HoverTool
+plot.add_tools(HoverTool(tooltips="@active_year"))
+        </pre></code>
+        <p>Use @ to reference your column name. You can attach a hover tool to a specific source if necessary.</p>
+        <pre><code class="fragment python" data-trim>
+tooltips = '<span class="tooltip-text year">@active_year</span>'
+tooltips += '<span class="tooltip-text country">@name</span>'
+tooltips += '<span class="tooltip-text value">@active_year_value %</span>'
+plot.add_tools(HoverTool(tooltips=tooltips))
+        </code></pre>
+        <pre><code class="fragment css" data-trim>
+.bk-tooltip.bk-tooltip-custom {
+    background-color: black;
+    opacity: 0.8;
+}
+.tooltip-text {
+    clear: both;
+    float: left;
+}
+        </code></pre>
+        </section>
+        <section>
+            <iframe data-src="http://localhost:8001/static" width="900" height="1000" frameborder="0"></iframe>
+        </section>
+        <section>
+            <h2>Linked sources</h2>
+        <pre><code class="python" data-trim>
+source = ColumnDataSource(data)
+map.add_glyph(source, countries)
+text_box.add_glyph(source, country_name)
+        </pre></code>
+        </section>
+        <section>
+            <iframe data-src="http://localhost:8001" width="900" height="500" frameborder="0"></iframe>
         </section>
         <!-- END SECTION 4 -->
     </section>
     <!-- SAMPLE SLIDES
-    <section>
+    <section
         <h2>bullet slide</h2>
         <ul>
             <li></li>
