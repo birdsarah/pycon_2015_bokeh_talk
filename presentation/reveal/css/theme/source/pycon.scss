@@ -13,6 +13,7 @@
 
 // Include theme-specific fonts
 @import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+@import url(../../lib/font/font-awesome/css/font-awesome.css);
 
 
 // Override theme settings (see ../template/settings.scss)
@@ -45,6 +46,13 @@ section.has-dark-background {
 	}
 }
 
+#slide_1_image {
+    position: absolute;
+    right: -3em;
+    bottom: -3.5em;
+    z-index: -10;
+}
+
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
@@ -52,6 +60,8 @@ section.has-dark-background {
 // Reveal overrides ----------------------------
 
 .reveal {
+    position: relative; 
+
     .slides {
         text-align: left;
     }
@@ -63,5 +73,18 @@ section.has-dark-background {
         background-color: $pink;;
         color: white;
     }
+
+    .footer {
+        position: absolute;
+        bottom: 1em;
+        left: 1em;
+        font-size: 0.5em;
+    }
+
+    section img {
+        border: none;
+        box-shadow: none;
+    }
 }
+
 

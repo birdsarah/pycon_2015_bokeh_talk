@@ -1,4 +1,5 @@
 @import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+@import url(../../lib/font/font-awesome/css/font-awesome.css);
 /**
  * White theme for reveal.js. This is the opposite of the 'black' theme.
  *
@@ -6,6 +7,12 @@
  */
 section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
   color: #fff; }
+
+#slide_1_image {
+  position: absolute;
+  right: -3em;
+  bottom: -3.5em;
+  z-index: -10; }
 
 /*********************************************
  * GLOBAL STYLES
@@ -260,11 +267,21 @@ body {
 .reveal .slide-number {
   color: #2a76dd; }
 
-.reveal .slides {
-  text-align: left; }
-.reveal pre {
-  width: 100%; }
-.reveal .highlight {
-  padding: 0 0.2em;
-  background-color: #FF5E99;
-  color: white; }
+.reveal {
+  position: relative; }
+  .reveal .slides {
+    text-align: left; }
+  .reveal pre {
+    width: 100%; }
+  .reveal .highlight {
+    padding: 0 0.2em;
+    background-color: #FF5E99;
+    color: white; }
+  .reveal .footer {
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    font-size: 0.5em; }
+  .reveal section img {
+    border: none;
+    box-shadow: none; }
