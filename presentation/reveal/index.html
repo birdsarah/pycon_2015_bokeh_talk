@@ -109,7 +109,7 @@
             </div>
         </section>
         <section>
-            <iframe data-src="http://africawatermap.aptivate.org/index.html" width="900" height="1000" frameborder="0"></iframe>
+            <iframe src="http://africawatermap.aptivate.org/index.html" width="900" height="1000" frameborder="0"></iframe>
         </section>
         <section>
             <p>
@@ -222,7 +222,7 @@ stats_df = DataFrame.from_records(stats, coerce_float=True)
             </aside>
         </section>
         <section>
-            <iframe data-src="http://localhost:8888/notebooks/_1_prettify_chart.ipynb" width=1024 height=600></iframe>
+            <iframe src="http://localhost:8888/notebooks/_1_prettify_chart.ipynb#/slide-0-0" width=1024 height=600></iframe>
         </section>
         <section>
             <img class="stretch" data-src="images/bokeh_with_high_low.svg">
@@ -280,7 +280,7 @@ from bokeh.models import (
             <img data-src="images/burtin.png" class="stretch">
         </section>
         <section>
-            <iframe data-src="http://localhost:8888/notebooks/_2_building_up.ipynb" width=1024 height=600></iframe>
+            <iframe src="http://localhost:8888/notebooks/_2_building_up.ipynb" width=1024 height=600></iframe>
         </section>
         <section>
             <h2>CSS Intermission</h2>
@@ -377,6 +377,96 @@ text_box.add_glyph(source, country_name)
             <iframe data-src="http://localhost:8001" width="900" height="500" frameborder="0"></iframe>
         </section>
         <!-- END SECTION 4 -->
+    </section>
+    <section>
+        <!-- START SECTION 5 -->
+        <section>
+            <h2>Introducing bokeh server</h2>
+            <img class="stretch" data-src="images/bokeh_with_server.svg">
+        <aside class="notes">
+            Now we introduce a new piece of bokeh - the bokeh server.
+            The bokeh server lets you host plots and brings lots of really
+            interesting functionality to the table.  We're going to do a simple
+            example of connecting our plot to the bokeh server which will
+            hopefully get you started and give you a taste of what's possible.
+
+            Previously we generated our plot and passed it, as json, down to the 
+            browser. In the server case. We build our plot and sent it to the 
+            server. To the browser we send information of how to get the plot.
+            The plot then makes a connection to the server. It first gets the json
+            as before. In addition it sets up a websocket connection.
+
+            There are now two scenarios. First, and the one that we're going to focus on today.
+            When a user interacts with the plot, it triggers a REST call to the server. 
+            We can then respond to these events.  In addition, and this will become clearer,
+            the server can trigger udpates to the plot.
+        </aside>
+        </section>
+        <section>
+            <h2>Server app</h2>
+            <p>Define app <span class="highlight">Instance</span>s</p>
+            <pre class="fragment"><code class="python" data-trim>
+from bokeh.properties import Instance
+
+class WashmapApp(VBox):
+    year = Instance(Slider)
+    source = Instance(ColumnDataSource)
+            </pre></code>
+            <p class="fragment">Need this "blueprint" on the bokeh server and 
+            your webapp server (if they're different).</p>
+        </section>
+        <section>
+            <h2>Create plot (webapp)</h2>
+            <pre><code style="max-height:800px" class="python" data-trim>
+class WashmapApp(VBox):
+    year = Instance(Slider)
+    source = Instance(ColumnDataSource)
+
+    @classmethod
+    def create(cls):
+        obj = cls()
+        obj.year = Slider(
+            title='Year', name='year',
+            value=1990, start=1990, end=2012, step=1
+        )
+        data = get_data_from_database_and_convert_to_dataframe()
+        obj.source = ColumnDataSource(data)
+        obj.source.selected = [30]
+
+        water_map = construct_map(obj.source)
+        water_text = construct_text(obj.source)
+
+        obj.children = [water_map, water_text, obj.year]
+        return obj
+            </pre></code>
+        </section>
+        <section>
+        <iframe data-src="http://localhost:8001" width="900" height="1000" 
+            style="margin-top:-50px; margin-left:150px;" frameborder="0"></iframe>
+        </section>
+        <section>
+            <h2>Serve plot (bokeh server)</h2>
+            <pre><code style="max-height:800px" class="python" data-trim>
+class WashmapApp(VBox):
+    year = Instance(Slider)
+    source = Instance(ColumnDataSource)
+
+    def setup_events(self):
+        self.year.on_change('value', self, 'change_year')
+
+    def change_year(self, obj, attrname, old, new):
+        year = new
+        data = self.source.to_df()
+        new_data = manipulate_data(data, year)
+        new_source = ColumnDataSource(new_data)
+        self.source.data = new_source.data
+            </pre></code>
+        </section>
+        <section>
+        <iframe data-src="http://localhost:8001" width="900" height="1000" 
+            style="margin-top:-50px; margin-left:150px;" frameborder="0"></iframe>
+        </section>
+        <!-- END SECTION 5 -->
     </section>
     <!-- SAMPLE SLIDES
     <section
