@@ -13,7 +13,7 @@
    height="657.84711"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="bokeh_with_tentacles.svg">
   <defs
      id="defs4">
@@ -53,16 +53,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="-273.3609"
-     inkscape:cy="54.112697"
+     inkscape:zoom="0.56810325"
+     inkscape:cx="506.06998"
+     inkscape:cy="328.92355"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="2364"
-     inkscape:window-height="1722"
-     inkscape:window-x="328"
-     inkscape:window-y="36"
+     inkscape:window-width="1024"
+     inkscape:window-height="596"
+     inkscape:window-x="-142"
+     inkscape:window-y="66"
      inkscape:window-maximized="0"
      fit-margin-top="20"
      fit-margin-left="20"
@@ -76,7 +76,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -248,7 +248,7 @@
            height="69.638908"
            x="379.14517"
            y="178.70302" /></flowRegion><flowPara
-         id="flowPara3552"></flowPara></flowRoot>    <text
+         id="flowPara3552" /></flowRoot>    <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:News Cycle;-inkscape-font-specification:Sans Bold"
        x="858"
@@ -394,37 +394,5 @@
          y="365.1571"
          id="tspan2991-3-6"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:100%;fill:#9d2e37;font-family:News Cycle;-inkscape-font-specification:News Cycle Medium" /></text>
-    <rect
-       style="fill:none;stroke:#2b2b2d;stroke-width:0.87577707;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
-       id="rect2985-5-3"
-       width="205.74321"
-       height="137.74321"
-       x="857.62836"
-       y="299.99054"
-       rx="7.8881893"
-       ry="8.6166153" />
-    <text
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:News Cycle;-inkscape-font-specification:Sans Bold"
-       x="893.87109"
-       y="419.97156"
-       id="text3590-5"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan3592-4"
-         x="893.87109"
-         y="419.97156"
-         style="font-weight:normal">server</tspan></text>
-    <path
-       style="fill:none;stroke:#9d2e37;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 3;stroke-dashoffset:0;marker-end:none"
-       d="m 878.2618,400.51828 c 0,0 -0.24122,-38.79928 -6.45799,-37.78964 -19.93668,-3.34037 -101.60546,-1.27722 -101.60546,-1.27722"
-       id="path4631"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="ccc" />
-    <path
-       style="fill:none;stroke:#9d2e37;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 3;stroke-dashoffset:0"
-       d="m 863.5,562.36218 c 45.5,-92 46.5,-110 46.5,-110"
-       id="path5447"
-       inkscape:connector-curvature="0" />
   </g>
 </svg>

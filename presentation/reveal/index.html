@@ -463,22 +463,89 @@ class WashmapApp(VBox):
             </pre></code>
         </section>
         <section>
-        <iframe data-src="http://localhost:8001" width="900" height="1000" 
-            style="margin-top:-50px; margin-left:150px;" frameborder="0"></iframe>
+            <iframe data-src="http://localhost:8001" width="900" height="1000" 
+                style="margin-top:-50px; margin-left:150px;" frameborder="0"></iframe>
+        </section>
+        <section>
+            <p>The line plot updates by subscribing to the selection event.</p>
+            <pre><code style="max-height:800px" class="python" data-trim>
+class WashmapApp(VBox):
+    year = Instance(Slider)
+    source = Instance(ColumnDataSource)
+    line_source = Instance(ColumnDataSource)
+
+    def setup_events(self):
+        self.year.on_change('value', self, 'change_year')
+        self.source.on_change('selected', self, 'change_country')
+
+    def change_country(self, obj, attrname, old, new):
+        ...
+        self.line_source.data = new_source.data
+            </pre></code>
+        </section>
+        <section>
+            <iframe data-src="http://localhost:8001" width="900" height="1000" 
+                style="margin-top:-50px; margin-left:150px;" frameborder="0"></iframe>
+        </section>
+        <section>
+            <h2>....so to get a slider....I need a server...?</h2>
+            <p>
+                <img data-src="images/sanitation screenshot.png" class="side_by_side left">
+                <img data-src="images/Grumpy_Cat_by_Gage_Skidmore_cropped.jpg" class="side_by_side right">
+            </p>
+            <div class="attribution">
+                <p><a href="https://en.wikipedia.org/wiki/Grumpy_Cat#/media/File:Grumpy_Cat_by_Gage_Skidmore.jpg">Gage Skidmore</a>
+            </div>
+        </section>
+        <section>
+            <h3>Javascript actions</h3>
+            <ul>
+                <li>Full framework "next few months"</li>
+                <li>See OpenURL
+                    <ul>
+                        <li><pre>bokeh/bokeh/models/actions.py</pre></li>
+                    </ul>
+                </li>
+            </ul>
+            <br />
+            <h3>The server is awesome!</h3>
+            <ul>
+                <li>Complex data manipulation</li>
+                <li>Downsampling</li>
+                <li>Stream your data</li>
+            </ul>
         </section>
         <!-- END SECTION 5 -->
     </section>
-    <!-- SAMPLE SLIDES
-    <section
-        <h2>bullet slide</h2>
+    <section>
+        <h2>Final thoughts</h2>
         <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>Run ALL THE EXAMPLES
+                <ul>
+                    <li><pre>bokeh/examples/*/*.py</pre></li>
+                </ul>
+            </li>
+            <li>1.0 by end of year</li>
+            <li>Get a server up and running
+            <ul><li><pre><a href="https://github.com/birdsarah/bokeh-server-heroku">https://github.com/birdsarah/bokeh-server-heroku</a></pre></li></ul>
+            </li>
         </ul>
     </section>
-    -->
+    <section>
+        <h2>Final, final thoughts</h2>
+            <p>So much more - come find me during sprints, or reach out to
+            bokeh community:
+            <ul>
+                <li>
+                    <a href="https://groups.google.com/a/continuum.io/forum/#!forum/bokeh">https://groups.google.com/a/continuum.io/forum/#!forum/bokeh</a>
+                </li>
+                <li>
+                    <a href="http://github.com/bokeh/bokeh">https://github.com/bokeh/bokeh</a>
+                </li>
+            </ul>
+            All the code for this talk available at: 
+            </p>
+    </section>
 </div>
 
             <div class="footer">
