@@ -43,19 +43,30 @@
     <section>
         <h1>Interactive data for the web</h1>
         <h3>Bokeh for web developers</h3>
-        <p>Sarah Bird</p>
-        <p><a href="#">github url</a></p>
-        <img class="slide_image" data-src="images/sanitation screenshot.png">
+        <p>Sarah Bird
+        <br />sarah@aptivate.org</p>
+        <img class="home_image" data-src="images/sanitation screenshot.png">
+        <br />
+        <br />
+        <br />
+        <br />
+        <p><a href="https://github.com/birdsarah/pycon_2015_bokeh_talk">github.com/birdsarah/pycon_2015_bokeh_talk</a></p>
     </section>
 
     <section>
         <section>
             <h2>Bokeh</h2>
             <ul>
-                <li>Data visualization libary</li>
-                <li>Web</li>
-                <li>Interactive</li>
-                <li>Roots in data science</li>
+                <li>data visualization libary
+                    <ul>
+                    <li>d3.js & many more</li>
+                    <li>matplotlib / seaborn</li>
+                    </ul>
+                </li>
+                <li>web</li>
+                <li>interactive</li>
+                <li>dynamic & data-driven</li>
+                <li>roots in data science</li>
             </ul>
             <img class="slide_image" data-src="images/bokeh screenshot.png">
             <aside class="notes">
@@ -67,10 +78,6 @@
                 streaming datasets. Bokeh can help anyone who would like to
                 quickly and easily create interactive plots, dashboards,
                 and data applications.</p>
-
-                <p>
-                Show of hands for data scientists vs web developers.
-                </p>
             </aside>
         </section>
         <section>
@@ -98,15 +105,25 @@
             <p>My new default</p>
         </section>
         <section>
-            <img data-src="images/washwatch_original.png" class="stretch">
-            <div style="font-size:0.8em">
-                <p>
-                    <a href="http://www.wateraid.org/what-we-do/the-crisis/africa-wash-map#/interactive-map">http://www.wateraid.org/what-we-do/the-crisis/africa-wash-map</a><br />
-                    <a href="https://github.com/aptivate/africawatermap">https://github.com/aptivate/africawatermap</a><br />
-                    <a href="http://www.aptivate.org">Aptivate</a> | <a href="http://d3js.org">d3.js</a><br />
-                    WASH = <span class="highlight">wa</span>ter, <span class="highlight">s</span>anitation & <span class="highlight">h</span>ygiene
-                </p>
+            <img class="stretch" data-src="images/bokeh_basic.svg">
+        </section>
+        <section>
+            <img class="stretch" data-src="images/bokeh_with_tentacles_2.svg">
+        </section>
+        <section>
+            <img class="stretch" data-src="images/bokeh_with_tentacles_2_highlight.svg">
+        </section>
+        <section>
+            <div>
+                <img data-src="images/washwatch_original.png" class="side_by_side left">
+                <ul class="side_by_side right" style="font-size: 0.7em; margin-top: 1em;">
+                    <li><a href="http://www.aptivate.org">Aptivate</a></li> 
+                    <li><a href="http://d3js.org">d3.js</a></li>
+                    <li><a href="http://www.wateraid.org/what-we-do/the-crisis/africa-wash-map#/interactive-map">www.wateraid.org/what-we-do/the-crisis/africa-wash-map</a></li>
+                    <li><a href="https://github.com/aptivate/africawatermap">github.com/aptivate/africawatermap</a></li>
+                </ul>
             </div>
+            <p style="clear: both; padding-top: 2em; font-size: 0.7em;">WASH = <span class="highlight">wa</span>ter, <span class="highlight">s</span>anitation & <span class="highlight">h</span>ygiene</p>
         </section>
         <section>
             <iframe src="http://africawatermap.aptivate.org/index.html" width="900" height="1000" frameborder="0"></iframe>
@@ -146,10 +163,6 @@
         <section>
             <iframe data-src="http://localhost:8001/line" width="800" height="550" frameborder="0"></iframe>
             <h3 class="fragment"><code>chart = Line(data)</code></h3>
-        </section>
-
-        <section>
-            <img class="stretch" data-src="images/bokeh_basic.svg">
         </section>
 
         <section>

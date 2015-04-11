@@ -52,6 +52,13 @@ section.has-dark-background {
     bottom: -3.5em;
     z-index: -10;
 }
+.home_image {
+    position: absolute;
+    height: 55%;
+    right: 0em;
+    top: 4em;
+    z-index: -10;
+}
 
 i.bokeh {
     background-image: url("../../../images/bokeh-transparent.png");
@@ -61,16 +68,6 @@ i.bokeh {
     width: 1em;
     background-position: 0 0.1em;
     background-repeat: no-repeat;
-}
-
-.side_by_side {
-    width: 49%;
-    &.left {
-        float: left;
-    }
-    &.right {
-        float: right;
-    }
 }
 
 .attribution {
@@ -83,14 +80,6 @@ i.bokeh {
         clear: both;
         font-size: 0.5em;
         text-align: right;
-    }
-}
-
-li {
-    list-style-image: url("../../../images/bokeh-bullet.png");
-    li {
-        list-style-image: none;
-        list-style-type: none;
     }
 }
 
@@ -121,8 +110,8 @@ li {
 
     .footer {
         position: absolute;
-        bottom: -0.5em;
-        left: 1em;
+        top: -0.5em;
+        right: 1em;
         font-size: 0.5em;
     }
 
@@ -134,5 +123,36 @@ li {
     iframe {
         max-width: 100%;
         max-height: 100%;
+    }
+
+    ul {
+        padding-left: 1em;
+        ul {
+            padding-left: 0em;
+            font-size: 0.8em
+        }
+    }
+    li {
+        margin-top: 0.1em;
+        list-style-image: url("../../../images/bokeh-bullet.png");
+        li {
+            list-style-image: none;
+            list-style-type: none;
+            pre {
+                margin-top: 0.3em;
+                font-size: 1.0em;
+            }
+        }
+    }
+
+    .side_by_side {
+        width: 45%;
+        display: inline-block;
+        &.left {
+            float: left;
+        }
+        &.right {
+            float: right;
+        }
     }
 }
