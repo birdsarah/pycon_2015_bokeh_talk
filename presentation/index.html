@@ -144,35 +144,34 @@
     <section>
         <!-- START SECTION 2 -->
         <section>
-        <h2>Charts interface</h2>
-        <pre class="fragment"><code class="python" data-trim>
-..views.py
-    from bokeh.charts import Line
-    from bokeh.embed import components, Resources
+            <h2>High-level Charts interface</h2>
+            <pre><code class="python" data-trim>
+from bokeh.charts import Line
+from bokeh.plotting import show
 
-    chart = Line(data)
-    embed_script, embed_div = components(chart, resources=Resources())
-        </code></pre>
-        <pre class="fragment"><code class="django" data-trim>
-..template.html
-
-    <script src="js/bokeh.min.js"></script>
-    <link rel="stylesheet" href="css/bokeh.min.css" /> 
-
-    {{ embed_div|safe }}
-    {{ embed_script|safe }}
-        </code></pre>
+chart = Line(data)
+show(chart)
+            </code></pre>
+            <iframe class="fragment" data-src="http://localhost:8001/line" width="800" height="550" frameborder="0"></iframe>
+            <aside class="notes">
+                Walk through all the tools that come out of the box
+            </aside>
         </section>
-
         <section>
-            <iframe data-src="http://localhost:8001/line" width="800" height="550" frameborder="0"></iframe>
-            <h3 class="fragment"><code>chart = Line(data)</code></h3>
+            <h2>Line(data)</h2>
+            <h4>Line is a chart function</h4>
+            <h4>Chart functions are awesome!</h4>
+            <pre><code class="python" data-trim>
+from bokeh.charts import (
+    Line, Area, Bar, BoxPlot, Donut, Dot, HeatMap, Histogram,
+    Horizon, Line, Scatter, Step, TimeSeries, .....
+)
+            </code></pre>
         </section>
-
         <section>
-        <h2>Getting the data</h2>
-        <p>data - DataFrame - <a href="http://pandas.pydata.org">pandas.pydata.org</a></p>
-        <pre><code class="python" data-trim>
+            <h2>Line(data)</h2>
+            <h4>data - pandas DataFrame (can be other things)</h4>
+            <pre><code class="python" data-trim>
 In[4]: data.head()
 
 Out[4]:
@@ -182,26 +181,32 @@ Out[4]:
     1992    42.4
     1993    42.4
     1994    43.0
-        </code></pre>
+            </code></pre>
+            <h4>Structured data</h4>
+            <pre><code class="python" data-trim>
+import pandas as pd
+
+pd.read_csv("my_beautiful_csv.csv")
+pd.read_json("my_deliciously_nested.json")
+            </code></pre>
+            <div class="attribution">
+                <p><a href="http://pandas.pydata.org/pandas-docs/stable/io.html">http://pandas.pydata.org/pandas-docs/stable/io.html</a>
+            </div>
         </section>
         <section>
-        <h2>Getting the data</h2>
-        <h4>Django Queryset</h4>
-        <pre><code class="python" data-trim>
-..views.py
-
-from pandas import DataFrame
+            <h4>Django Queryset</h4>
+            <pre><code class="python" data-trim>
+import pandas as pd
 from .models import StatValue
 
 stats = StatValue.objects.filter(description__code=stat_code)
 stats = stats.values('value', 'year', 'country_id')
-stats_df = DataFrame.from_records(stats, coerce_float=True)
-        </code></pre>
+stats_df = pd.DataFrame.from_records(stats, coerce_float=True)
+            </code></pre>
             <div class="attribution">
                 <p><a href="http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.from_records.html">http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.from_records.html</a>
             </div>
 
-        <div class="fragment">
             <h4>Raw SQL</h4>
             <pre><code class="python" data-trim>
     import pandas as pd
@@ -214,14 +219,14 @@ stats_df = DataFrame.from_records(stats, coerce_float=True)
             <div class="attribution">
                 <p><a href="http://pandas.pydata.org/pandas-docs/stable/io.html#io-sql">http://pandas.pydata.org/pandas-docs/stable/io.html#io-sql</a>
             </div>
-        </div>
+            <p><a href="http://pandas.pydata.org">pandas.pydata.org</a></p>
         </section>
         <!-- END SECTION 2 -->
     </section>
     <section>
         <!-- START SECTION 3 -->
         <section>
-            <p>pandas.DataFrame,  bokeh.charts.Line</p>
+            <p>Line(data)</p>
             <p>
                 <img data-src="images/screenshot_line.png" class="side_by_side left">
                 <img data-src="images/Grumpy_Cat_by_Gage_Skidmore_cropped.jpg" class="fragment side_by_side right">
@@ -239,29 +244,51 @@ stats_df = DataFrame.from_records(stats, coerce_float=True)
             </aside>
         </section>
         <section>
-            <iframe src="http://localhost:8888/notebooks/_1_prettify_chart.ipynb#/slide-0-0" width=1024 height=600></iframe>
+            <h2>Make it <span class="highlight">shiny</span> - reductive approach</h2>
+            <pre><code class="python" data-trim>
+chart = Line(
+    data,
+    tools="", palette=["#6aa6bd"],
+    height=250, width=250,
+    xlabel=None, ylabel=None,
+    xgrid=None, ygrid=None,
+)
+            </code></pre>
+            <img style="margin-top:0; width: 35%;"data-src="images/reductive_1.png">
+        </section>
+        <section>
+            <h2>Make it <span class="highlight">shiny</span> - reductive approach</h2>
+            <pre><code class="python" data-trim>
+>>> chart = Line(data, **chart_options)
+>>> chart.renderers
+[bokeh.models.axes.LinearAxis at 0x10a226f50,
+ bokeh.models.axes.LinearAxis at 0x10a22d190,
+ bokeh.models.renderers.GlyphRenderer at 0x10a04df50]
+            </code></pre>
+            <pre><code class="python fragment" data-trim>
+# Specify ranges
+chart.x_range = Range1d(1990, 2012)
+chart.y_range = Range1d(0, 100)
+
+# Remove the toolbar and outline
+chart.toolbar_location = None
+chart.outline_line_color = None
+
+# Prettify the line
+chart.renderers[2].glyph.line_width = 5
+chart.renderers[2].glyph.line_cap = 'round'
+
+show(chart)
+            </code></pre>
+        </section>
+        <section>
+            <p>
+                <img data-src="images/reductive_1.png" class="side_by_side left">
+                <img data-src="images/reductive_2.png" class="fragment side_by_side right">
+            </p>
         </section>
         <section>
             <img class="stretch" data-src="images/bokeh_with_high_low.svg">
-        </section>
-        <section>
-            <h2>Charts Intermission</h2>
-            <ul>
-                <li>Charts are awesome!</li>
-                <li>Area, Bar, BoxPlot, Donut, Dot, HeatMap, Histogram, Horizon, Line, Scatter, Step, TimeSeries</li>
-                <li>Great way to get started</li>
-                <li>Code is interesting for learning bokeh
-                    <ul>
-                        <li><pre>bokeh/bokeh/charts/builder/*_builder.py</pre></li>
-                    </ul>
-                </li>
-            </ul>
-            <aside class="notes">
-            <p>I have a pull request that I'm going to finish in the 
-            during the sprints where I show an example of making a sparkline
-            starting from a line chart.
-            </p>
-            </aside>
         </section>
         <!-- END SECTION 3 -->
     </section>
@@ -313,14 +340,23 @@ from bokeh.models import (
             </ul>
         </section>
         <section>
-            <h2>Embedding intermission</h2>
+            <h2>Embedding</h2>
         <pre><code class="python" data-trim>
-from bokeh.embed import components, Resources
-embed_script, embed_div = components(chart, resources=Resources())
+..views.py
+
+    from bokeh.embed import components, Resources
+    embed_script, embed_div = components(chart, resources=Resources())
+
         </code></pre>
         <pre><code class="django" data-trim>
-{{ embed_div|safe }}
-{{ embed_script|safe }}
+
+..template.html
+
+    <script src="js/bokeh.min.js"></script>
+    <link rel="stylesheet" href="css/bokeh.min.css" /> 
+
+    {{ embed_div|safe }}
+    {{ embed_script|safe }}
         </code></pre>
         <ul>
             <li>Want to load bokehjs async or ...</li>
@@ -533,6 +569,25 @@ class WashmapApp(VBox):
             </ul>
         </section>
         <!-- END SECTION 5 -->
+    </section>
+    <section>
+        <h2>Wrap-up thoughts</h2>
+        <p>Charts
+            <ul>
+                <li>Great way to get started</li>
+                <li>Code is interesting for learning bokeh
+                    <ul>
+                        <li><pre>bokeh/bokeh/charts/builder/*_builder.py</pre></li>
+                    </ul>
+                </li>
+            </ul>
+        </p>
+            <aside class="notes">
+            <p>I have a pull request that I'm going to finish in the 
+            during the sprints where I show an example of making a sparkline
+            starting from a line chart.
+            </p>
+            </aside>
     </section>
     <section>
         <h2>Final thoughts</h2>
