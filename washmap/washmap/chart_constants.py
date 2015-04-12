@@ -56,7 +56,6 @@ FONT_PROPS_MD = dict(
     text_font_size='18pt',
 )
 FONT_PROPS_LG = dict(
-    text_color='color_for_active_year',
     text_font=FONT,
     text_font_style="bold",
     text_font_size='23pt',

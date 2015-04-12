@@ -86,7 +86,7 @@ def construct_san_map_tools(source):
     return plot
 
 
-def construct_text_box(source, bar_color=BLUE):
+def construct_text_box(source, value_string, color_string, bar_color):
     # Plot and axes
     xdr = Range1d(0, 220)
     ydr = Range1d(0, 120)
@@ -102,17 +102,17 @@ def construct_text_box(source, bar_color=BLUE):
     )
     # Add the writing
     country = Text(x=5, y=50, text='name', **FONT_PROPS_MD)
-    percent = Text(x=15, y=10, text='active_year_value', **FONT_PROPS_LG)
-    percent_sign = Text(x=69, y=10, text=['%'], **FONT_PROPS_LG)
+    percent = Text(x=15, y=10, text=value_string, text_color=color_string, **FONT_PROPS_LG)
+    percent_sign = Text(x=69, y=10, text=['%'], text_color=color_string, **FONT_PROPS_LG)
     line_one = Text(x=90, y=28, text=['of people had'], **FONT_PROPS_SM)
     line_two_p1 = Text(x=90, y=14, text=['access in'], **FONT_PROPS_SM)
-    line_two_p2 = Text(x=136, y=14, text='active_year', **FONT_PROPS_SM)
-    plot.add_glyph(source, country)
-    plot.add_glyph(source, percent)
-    plot.add_glyph(source, percent_sign)
+    line_two_p2 = Text(x=136, y=14, text='year', **FONT_PROPS_SM)
+    plot.add_glyph(source, Text(), selection_glyph=country)
+    plot.add_glyph(source, Text(), selection_glyph=percent)
+    plot.add_glyph(source, Text(), selection_glyph=percent_sign)
     plot.add_glyph(line_one)
     plot.add_glyph(line_two_p1)
-    plot.add_glyph(source, line_two_p2)
+    plot.add_glyph(source, Text(), selection_glyph=line_two_p2)
 
 
     # Add the orange box with year
@@ -123,11 +123,21 @@ def construct_text_box(source, bar_color=BLUE):
     plot.add_glyph(rect)
     box = Rect(x=200, y=100, width=100, height=40, fill_color=ORANGE, line_color=None)  # nopep8
     plot.add_glyph(box)
-    year = Text(x=160, y=85, text='active_year', text_font_size='18pt', text_color="#FFFFF", text_font_style="bold")  # nopep8
-    plot.add_glyph(source, year)
+    year = Text(x=160, y=85, text='year', text_font_size='18pt', text_color="#FFFFF", text_font_style="bold")  # nopep8
+    plot.add_glyph(source, Text(), selection_glyph=year)
+
 
     return plot
 
+
+def construct_water_text(source):
+    plot = construct_text_box(source, 'wat_value', 'wat_color', BLUE)
+    return plot
+
+
+def construct_san_text(source):
+    plot = construct_text_box(source, 'san_value', 'san_color', GREEN)
+    return plot
 
 def construct_line(source, line_color=BLUE):
     xdr = Range1d(1990, 2013)

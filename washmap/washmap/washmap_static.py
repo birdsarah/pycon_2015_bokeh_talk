@@ -12,7 +12,8 @@ from .water_map import (
     construct_san_map,
     construct_san_map_tools,
     construct_line,
-    construct_text_box,
+    construct_water_text,
+    construct_san_text,
     construct_key,
     layout_components,
 )
@@ -37,20 +38,20 @@ def make_washmap_map():
 
 
 def make_washmap_map_tools():
-    wat_data = get_data_with_countries()
-    wat_source = ColumnDataSource(wat_data)
-    wat_map = construct_water_map_tools(wat_source)
+    data = get_data_with_countries()
+    source = ColumnDataSource(data)
+    wat_map = construct_water_map_tools(source)
     wat_key = construct_key(WATER_COLOR_RANGE)
     return hplot(vplot(wat_map), vplot(wat_key))
 
 
 def make_washmap_map_tools_linked():
-    wat_data = get_data_with_countries()
-    wat_source = ColumnDataSource(wat_data)
-    wat_map = construct_water_map_tools(wat_source)
-    wat_text = construct_text(wat_source)
+    data = get_data_with_countries()
+    source = ColumnDataSource(data)
+    wat_map = construct_water_map_tools(source)
+    wat_text = construct_water_text(source)
     wat_key = construct_key(WATER_COLOR_RANGE)
-    return hplot(vplot(wat_map), vplot(wat_key))
+    return hplot(vplot(wat_map), vplot(wat_text, wat_key))
 
 
 def make_washmap_map_tools_linked_tabbed():
