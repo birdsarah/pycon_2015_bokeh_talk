@@ -111,5 +111,9 @@ def make_washmap_all():
             )
         ]
     )
+    year = Slider(
+        title="Year", name='year',
+        value=1990, start=1990, end=2012, step=1
+    )
 
-    return vplot(tabs)
+    return vplot(tabs, year)

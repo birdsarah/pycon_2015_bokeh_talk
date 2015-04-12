@@ -89,6 +89,10 @@ a.btn {
     margin-bottom: ($padding-large-vertical * 2);
 }
 
+.plotdiv div:nth-child(2) {
+    text-align: left;
+}
+
 .screen-too-small .bk-plot-wrapper {
     display: none;
 }
