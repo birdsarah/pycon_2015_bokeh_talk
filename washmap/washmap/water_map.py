@@ -17,7 +17,7 @@ from bokeh.plotting import vplot, hplot
 
 from .chart_constants import (
     PLOT_FORMATS, ORANGE, BLUE, DARK_GRAY, FONT, AXIS_FORMATS, ORANGE_SHADOW,
-    FONT_PROPS_SM, FONT_PROPS_MD, FONT_PROPS_LG,
+    FONT_PROPS_SM, FONT_PROPS_MD, FONT_PROPS_LG, GREEN
 )
 
 

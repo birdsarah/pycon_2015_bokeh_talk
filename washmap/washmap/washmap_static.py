@@ -55,7 +55,28 @@ def make_washmap_map_tools_linked():
 
 
 def make_washmap_map_tools_linked_tabbed():
-    pass
+    data = get_data_with_countries()
+    source = ColumnDataSource(data)
+    wat_map = construct_water_map_tools(source)
+    wat_text = construct_water_text(source)
+    wat_key = construct_key(WATER_COLOR_RANGE)
+    san_map = construct_san_map_tools(source)
+    san_text = construct_san_text(source)
+    san_key = construct_key(SANITATION_COLOR_RANGE)
+
+    tabs = Tabs(
+        tabs=[
+            Panel(
+                title="Water",
+                child=hplot(vplot(wat_map), vplot(wat_text, wat_key))
+            ),
+            Panel(
+                title="Sanitation",
+                child=hplot(vplot(san_map), vplot(san_text, san_key))
+            )
+        ]
+    )
+    return vplot(tabs)
 
 
 def make_washmap_all():
