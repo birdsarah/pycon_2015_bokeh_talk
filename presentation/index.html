@@ -81,13 +81,6 @@
             </aside>
         </section>
         <section>
-            <img class="stretch" data-src="images/bokeh_alot.png">
-            <div class="attribution">
-                <img data-src="images/copyright_hyperbole_half.png">
-                <p><a href="http://hyperboleandahalf.blogspot.ca/2010/04/alot-is-better-than-you-at-everything.html">hyperbole and a half - the alot</a></p>
-            </div>
-        </section>
-        <section>
             <img class="stretch" data-src="images/alot_more_python_2.png">
             <div class="attribution">
                 <img data-src="images/copyright_hyperbole_half.png">
@@ -423,12 +416,14 @@ plot.add_tools(HoverTool(tooltips=tooltips))
             <iframe data-src="http://localhost:8001/static" width="900" height="1000" frameborder="0"></iframe>
         </section>
         <section>
-            <h2>Linked sources</h2>
+            <h2>Linked selection</h2>
+        <p>Everything's a python objects</p>
         <pre><code class="python" data-trim>
 source = ColumnDataSource(data)
-map.add_glyph(source, countries)
-text_box.add_glyph(source, country_name)
+map_plot.add_glyph(source, countries)
+text_plot.add_glyph(source, country_name)
         </pre></code>
+        <p>Works for axes too</p>
         </section>
         <section>
             <iframe data-src="http://localhost:8001" width="900" height="500" frameborder="0"></iframe>
@@ -631,8 +626,15 @@ class WashmapApp(VBox):
                     <a href="https://groups.google.com/a/continuum.io/forum/#!forum/bokeh">groups.google.com/a/continuum.io/forum/#!forum/bokeh</a>
                 </li>
             </ul>
-            All the code for this talk available at: <a href="https://github.com/birdsarah/pycon_2015_bokeh_talk">github.com/birdsarah/pycon_2015_bokeh_talk</a>
+            Talk repo: <a href="https://github.com/birdsarah/pycon_2015_bokeh_talk">github.com/birdsarah/pycon_2015_bokeh_talk</a>
             </p>
+    </section>
+    <section>
+        <img class="stretch" data-src="images/bokeh_alot.png">
+        <div class="attribution">
+            <img data-src="images/copyright_hyperbole_half.png">
+            <p><a href="http://hyperboleandahalf.blogspot.ca/2010/04/alot-is-better-than-you-at-everything.html">hyperbole and a half - the alot</a></p>
+        </div>
     </section>
 </div>
 <!--
