@@ -18,7 +18,7 @@
 		<link rel="stylesheet" href="css/theme/pycon.css" id="theme">
 
 		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/github.css">
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -209,12 +209,12 @@ stats_df = pd.DataFrame.from_records(stats, coerce_float=True)
 
             <h4>Raw SQL</h4>
             <pre><code class="python" data-trim>
-    import pandas as pd
+import pandas as pd
 
-    from sqlalchemy import create_engine
-    engine = create_engine('sqlite:///:memory:')
-    data_from_table = pd.read_sql_table('data', engine)
-    data_from_query = pd.read_sql_query('SELECT * FROM data', engine)
+from sqlalchemy import create_engine
+engine = create_engine('sqlite:///:memory:')
+data_from_table = pd.read_sql_table('data', engine)
+data_from_query = pd.read_sql_query('SELECT * FROM data', engine)
             </code></pre>
             <div class="attribution">
                 <p><a href="http://pandas.pydata.org/pandas-docs/stable/io.html#io-sql">http://pandas.pydata.org/pandas-docs/stable/io.html#io-sql</a>
@@ -234,7 +234,7 @@ stats_df = pd.DataFrame.from_records(stats, coerce_float=True)
             <div class="attribution fragment">
                 <p><a href="https://en.wikipedia.org/wiki/Grumpy_Cat#/media/File:Grumpy_Cat_by_Gage_Skidmore.jpg">Gage Skidmore</a>
             </div>
-            <h2 class="fragment highlight">NOT PRETTY</h2>
+            <h2 class="fragment highlight">STYLE GUIDE</h2>
             <aside class="notes">
             <p>We had out DataFrame and our charts function. Bokeh turns that 
             into JSON and bokehjs turns it into javascript. So we're feeling pretty good.
@@ -265,7 +265,7 @@ chart = Line(
  bokeh.models.axes.LinearAxis at 0x10a22d190,
  bokeh.models.renderers.GlyphRenderer at 0x10a04df50]
             </code></pre>
-            <pre><code class="python fragment" data-trim>
+            <pre class="fragment"><code class="python" data-trim>
 # Specify ranges
 chart.x_range = Range1d(1990, 2012)
 chart.y_range = Range1d(0, 100)
@@ -402,13 +402,13 @@ from bokeh.models import HoverTool
 plot.add_tools(HoverTool(tooltips="@active_year"))
         </pre></code>
         <p>Use @ to reference your column name. You can attach a hover tool to a specific source if necessary.</p>
-        <pre><code class="fragment python" data-trim>
+        <pre class="fragment"><code class="python" data-trim>
 tooltips = '<span class="tooltip-text year">@active_year</span>'
 tooltips += '<span class="tooltip-text country">@name</span>'
 tooltips += '<span class="tooltip-text value">@active_year_value %</span>'
 plot.add_tools(HoverTool(tooltips=tooltips))
         </code></pre>
-        <pre><code class="fragment css" data-trim>
+        <pre class="fragment"><code class="css" data-trim>
 .bk-tooltip.bk-tooltip-custom {
     background-color: black;
     opacity: 0.8;
@@ -625,13 +625,13 @@ class WashmapApp(VBox):
             bokeh community:
             <ul>
                 <li>
-                    <a href="https://groups.google.com/a/continuum.io/forum/#!forum/bokeh">https://groups.google.com/a/continuum.io/forum/#!forum/bokeh</a>
+                    <a href="http://github.com/bokeh/bokeh">github.com/bokeh/bokeh</a>
                 </li>
                 <li>
-                    <a href="http://github.com/bokeh/bokeh">https://github.com/bokeh/bokeh</a>
+                    <a href="https://groups.google.com/a/continuum.io/forum/#!forum/bokeh">groups.google.com/a/continuum.io/forum/#!forum/bokeh</a>
                 </li>
             </ul>
-            All the code for this talk available at: 
+            All the code for this talk available at: <a href="https://github.com/birdsarah/pycon_2015_bokeh_talk">github.com/birdsarah/pycon_2015_bokeh_talk</a>
             </p>
     </section>
 </div>

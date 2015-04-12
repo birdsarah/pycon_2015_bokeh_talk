@@ -31,7 +31,7 @@ $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: normal;
 $headingFontWeight: 400;
-$linkColor: #2a76dd;
+$linkColor: #458;
 $linkColorHover: lighten( $linkColor, 15% );
 $selectionBackgroundColor: lighten( $linkColor, 25% );
 
@@ -97,9 +97,15 @@ i.bokeh {
     }
     pre {
         width: 100%;
-        box-shadow: none;
         code {
+            display: block;
+            padding: 5px;
             padding-left: 1em;
+            overflow: auto;
+            max-height: 600px;
+            word-wrap: normal;
+            background: #FCFCFC;
+            color: #000000;
         }
     }
     .highlight {
@@ -139,7 +145,8 @@ i.bokeh {
             list-style-image: none;
             list-style-type: none;
             pre {
-                margin-top: 0.3em;
+                box-shadow: none;
+                margin-top: 0.5em;
                 font-size: 1.0em;
             }
         }
@@ -154,7 +161,5 @@ i.bokeh {
         &.right {
             float: right;
         }
-    }
-    pre {
     }
 }
