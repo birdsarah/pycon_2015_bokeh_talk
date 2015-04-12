@@ -2,15 +2,15 @@ from bokeh.models import (
     ColumnDataSource,
 )
 from bokeh.models.widgets import Tabs, Panel
-from bokeh.plotting import vplot
+from bokeh.plotting import vplot, hplot
 
 
-from .map_data import (
-    get_water_data_with_countries,
-    get_sanitation_data_with_countries,
-)
+from .map_data import get_data_with_countries
 from .water_map import (
-    construct_map,
+    construct_water_map,
+    construct_water_map_tools,
+    construct_san_map,
+    construct_san_map_tools,
     construct_line,
     construct_text_box,
     construct_key,
@@ -28,14 +28,42 @@ def get_frame_for_country(frame, country):
     return frame[frame.name == country]
 
 
-def make_washmap():
-    wat_data = get_water_data_with_countries()
-    san_data = get_sanitation_data_with_countries()
+def make_washmap_map():
+    data = get_data_with_countries()
+    source = ColumnDataSource(data)
+    wat_map = construct_water_map(source)
+    wat_key = construct_key(WATER_COLOR_RANGE)
+    return hplot(vplot(wat_map), vplot(wat_key))
+
+
+def make_washmap_map_tools():
+    wat_data = get_data_with_countries()
+    wat_source = ColumnDataSource(wat_data)
+    wat_map = construct_water_map_tools(wat_source)
+    wat_key = construct_key(WATER_COLOR_RANGE)
+    return hplot(vplot(wat_map), vplot(wat_key))
+
+
+def make_washmap_map_tools_linked():
+    wat_data = get_data_with_countries()
+    wat_source = ColumnDataSource(wat_data)
+    wat_map = construct_water_map_tools(wat_source)
+    wat_text = construct_text(wat_source)
+    wat_key = construct_key(WATER_COLOR_RANGE)
+    return hplot(vplot(wat_map), vplot(wat_key))
+
+
+def make_washmap_map_tools_linked_tabbed():
+    pass
+
+
+def make_washmap_all():
+    data = get_data_with_countries()
     country = 'South Africa'
 
-    wat_source = ColumnDataSource(wat_data)
+    source = ColumnDataSource(data)
 
-    wat_data_text = get_frame_for_country(wat_data, country)
+    wat_data_text = get_frame_for_country(data, country)
     wat_source_text = ColumnDataSource(wat_data_text)
 
     year_range = [str(x) for x in range(1990, 2013)]

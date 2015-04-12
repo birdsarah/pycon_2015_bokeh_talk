@@ -48,7 +48,7 @@
         <img class="home_image" data-src="images/sanitation screenshot.png">
         <br />
         <br />
-        <br />
+        <p><span class="highlight">we're going to make this <i class="fa fa-long-arrow-right"></i></a></p>
         <br />
         <p><a href="https://github.com/birdsarah/pycon_2015_bokeh_talk">github.com/birdsarah/pycon_2015_bokeh_talk</a></p>
     </section>
@@ -102,7 +102,7 @@
                 <li>real-time data updates</li>
                 <li>server-side processing</li>
             </ul>
-            <p>My new default</p>
+            <p><span class="highlight">new default</span></p>
         </section>
         <section>
             <img class="stretch" data-src="images/bokeh_basic.svg">
@@ -313,7 +313,7 @@ plot.add_tools()
         <pre><code class="python" data-trim>
 from bokeh.embed import components, Resources
 
-embed_script, embed_div = components(chart/plot, resources=Resources())
+embed_script, embed_div = components(plot, resources=Resources())
 
         </code></pre>
         <pre><code class="django" data-trim>
@@ -659,6 +659,7 @@ class WashmapApp(VBox):
 				center: false,
 
 				transition: 'none', // none/fade/slide/convex/concave/zoom
+				transitionSpeed: 'fast', // none/fade/slide/convex/concave/zoom
 
 				// Optional reveal.js plugins
 				dependencies: [

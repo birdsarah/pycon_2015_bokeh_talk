@@ -21,7 +21,7 @@ from .chart_constants import (
 )
 
 
-def construct_map(source, selected_color=ORANGE):
+def construct_map(source, fill_string='water_color', selected_color=ORANGE):
     assert isinstance(source, ColumnDataSource), "Require ColumnDataSource"
 
     # Plot and axes
@@ -45,19 +45,42 @@ def construct_map(source, selected_color=ORANGE):
 
     borders = Patches(
         xs='xs', ys='ys',
-        fill_color='color_for_active_year', fill_alpha=1,
+        fill_color=fill_string, fill_alpha=1,
         line_color="#FFFFFF", line_width=1,
     )
     selected_borders = Patches(
         xs='xs', ys='ys',
-        fill_color='color_for_active_year', fill_alpha=1,
+        fill_color=fill_string, fill_alpha=1,
         line_color=selected_color, line_width=3,
     )
 
     plot.add_glyph(source, borders, selection_glyph=selected_borders, nonselection_glyph=borders)  # nopep8
-    tooltips = "<span class='tooltip-text year'>@active_year</span>"
+    return plot
+
+
+def construct_water_map(source):
+    return construct_map(source, fill_string='wat_color')
+
+
+def construct_san_map(source):
+    return construct_map(source, fill_string='san_color')
+
+
+def construct_water_map_tools(source):
+    plot = construct_water_map(source)
+    tooltips = "<span class='tooltip-text year'>@year</span>"
     tooltips += "<span class='tooltip-text country'>@name</span>"
-    tooltips += "<span class='tooltip-text value'>@active_year_value %</span>"
+    tooltips += "<span class='tooltip-text value'>@wat_value %</span>"
+    plot.add_tools(HoverTool(tooltips=tooltips))
+    plot.add_tools(TapTool())
+    return plot
+
+
+def construct_san_map_tools(source):
+    plot = construct_san_map(source)
+    tooltips = "<span class='tooltip-text year'>@year</span>"
+    tooltips += "<span class='tooltip-text country'>@name</span>"
+    tooltips += "<span class='tooltip-text value'>@san_value %</span>"
     plot.add_tools(HoverTool(tooltips=tooltips))
     plot.add_tools(TapTool())
     return plot

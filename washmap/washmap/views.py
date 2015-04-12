@@ -7,7 +7,13 @@ from django.views.generic import TemplateView
 from main.utils import BokehScriptComponents, app_document_no_tag
 
 
-from .washmap_static import make_washmap
+from .washmap_static import (
+    make_washmap_map,
+    make_washmap_map_tools,
+    make_washmap_map_tools_linked,
+    make_washmap_map_tools_linked_tabbed,
+    make_washmap_all
+)
 from .washmap_app import WashmapApp
 from .charts_demos import make_line_chart
 
@@ -18,17 +24,45 @@ class WashMapStaticView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(WashMapStaticView, self).get_context_data(*args, **kwargs)  # nopep8
         water_map_static = BokehScriptComponents(
-            plot_object=make_washmap(),
+            plot_object=self.make_plot(),
             elementid='water_map_static',
-            min_width=600
+            min_width=200
         )
         context.update(
-            figures=[
-                water_map_static
-            ],
+            figures=[water_map_static],
             title="Washmap"
         )
         return context
+
+
+class WashMapStaticMapView(WashMapStaticView):
+    def make_plot(self):
+        plot = make_washmap_map()
+        return plot
+
+
+class WashMapStaticMapToolsView(WashMapStaticView):
+    def make_plot(self):
+        plot = make_washmap_map_tools()
+        return plot
+
+
+class WashMapStaticMapToolsLinkedView(WashMapStaticView):
+    def make_plot(self):
+        plot = make_washmap_map_tools_linked()
+        return plot
+
+
+class WashMapStaticMapToolsLinkedTabbedView(WashMapStaticView):
+    def make_plot(self):
+        plot = make_washmap_map_tools_linked_tabbed()
+        return plot
+
+
+class WashMapStaticAllView(WashMapStaticView):
+    def make_plot(self):
+        plot = make_washmap_all()
+        return plot
 
 
 class WashMapServerView(TemplateView):
