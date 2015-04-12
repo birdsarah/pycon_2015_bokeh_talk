@@ -139,7 +139,7 @@ def construct_san_text(source):
     plot = construct_text_box(source, 'san_value', 'san_color', GREEN)
     return plot
 
-def construct_line(source, line_color=BLUE):
+def construct_line(source, value_string, line_color=BLUE):
     xdr = Range1d(1990, 2013)
     ydr = Range1d(0, 100)
     line_plot = Plot(
@@ -158,13 +158,23 @@ def construct_line(source, line_color=BLUE):
     line_plot.add_layout(yaxis, 'below')
 
     line = Line(
-        x='index', y='value',
+        x='year', y=value_string,
         line_width=5, line_cap="round",
         line_color=line_color,
     )
     line_plot.add_glyph(source, line)
 
     return line_plot
+
+
+def construct_water_line(source):
+    plot = construct_line(source, 'wat_value', BLUE)
+    return plot
+
+
+def construct_san_line(source):
+    plot = construct_line(source, 'san_value', GREEN)
+    return plot
 
 
 def construct_key(palette):
