@@ -314,9 +314,9 @@ body {
     color: white; }
   .reveal .footer {
     position: absolute;
-    top: -0.5em;
+    top: 0.5em;
     right: 1em;
-    font-size: 0.5em; }
+    font-size: 0.8em; }
   .reveal section img {
     border: none;
     box-shadow: none; }

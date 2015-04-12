@@ -57,7 +57,7 @@
         <section>
             <h2>Bokeh</h2>
             <ul>
-                <li>data visualization libary
+                <li>data visualization library
                     <ul>
                     <li>d3.js & many more</li>
                     <li>matplotlib / seaborn</li>
@@ -353,10 +353,50 @@ for i, color in enumerate(palette):
         </section>
         <section>
             <h3>Map - glyphs and data</h3>
-            <img style="margin-bottom: 0em; margin-top: 0em;" data-src="images/water_map_only.png">
+            <pre class="fragment"><code class="python" data-trim>
+from bokeh.models import ColumnDataSource
+
+source = ColumnDataSource(data)
+plot.add_glyph(source, glyph)
+            </code></pre>
         </section>
         <section>
-            <iframe src="http://localhost:8888/notebooks/_2_building_up.ipynb" width=1024 height=600></iframe>
+            <iframe data-src="http://localhost:8001/static_map" width=950 height=1000></iframe>
+        </section>
+        <section>
+            <h4>Tap</h4>
+        <pre><code class="python" data-trim>
+from bokeh.models import TapTool
+plot.add_tools(TapTool())
+        </code></pre>
+            <h4>Hover</h4>
+        <pre><code class="python" data-trim>
+from bokeh.models import HoverTool
+plot.add_tools(HoverTool(tooltips="@active_year"))
+        </pre></code>
+        <p>Use @ to reference your column name. You can attach a hover tool to a specific source if necessary.</p>
+        <pre><code class="python" data-trim>
+tooltips = '<span class="tooltip-text year">@active_year</span>'
+tooltips += '<span class="tooltip-text country">@name</span>'
+tooltips += '<span class="tooltip-text value">@active_year_value %</span>'
+plot.add_tools(HoverTool(tooltips=tooltips))
+        </code></pre>
+        </section>
+        <section>
+            <iframe data-src="http://localhost:8001/static_map_tools" width=950 height=1000></iframe>
+        </section>
+        <section>
+            <h2>Linked selection</h2>
+            <p>Everything's a python object</p>
+            <pre><code class="python" data-trim>
+source = ColumnDataSource(data)
+map_plot.add_glyph(source, countries)
+text_plot.add_glyph(source, country_name)
+            </pre></code>
+            <p>(works for axes too)</p>
+        </section>
+        <section>
+            <iframe data-src="http://localhost:8001/static_map_tools_linked" width=950 height=1000></iframe>
         </section>
         <section>
             <h2>Widgets</h2>
@@ -378,55 +418,7 @@ tabs = Tabs(
         </code></pre>
         </section>
         <section>
-            <iframe data-src="http://localhost:8001/static" width="900" height="1000" frameborder="0"></iframe>
-        </section>
-        <section>
-            <h3>Tools (interactions)</h3>
-            <pre><code class="python" data-trim>
-from bokeh.models import (
-    TapTool, HoverTool, 
-    BoxSelectTool, BoxZoomTool, WheelZoomTool, PanTool,
-    ResetTool, ResizeTool, ....
-)
-            </code></pre>
-            <h4>Hover</h4>
-        <pre><code class="python" data-trim>
-from bokeh.models import HoverTool
-plot.add_tools(HoverTool(tooltips="@active_year"))
-        </pre></code>
-        <p>Use @ to reference your column name. You can attach a hover tool to a specific source if necessary.</p>
-        <pre class="fragment"><code class="python" data-trim>
-tooltips = '<span class="tooltip-text year">@active_year</span>'
-tooltips += '<span class="tooltip-text country">@name</span>'
-tooltips += '<span class="tooltip-text value">@active_year_value %</span>'
-plot.add_tools(HoverTool(tooltips=tooltips))
-        </code></pre>
-        <pre class="fragment"><code class="css" data-trim>
-.bk-tooltip.bk-tooltip-custom {
-    background-color: black;
-    opacity: 0.8;
-}
-.tooltip-text {
-    clear: both;
-    float: left;
-}
-        </code></pre>
-        </section>
-        <section>
-            <iframe data-src="http://localhost:8001/static" width="900" height="1000" frameborder="0"></iframe>
-        </section>
-        <section>
-            <h2>Linked selection</h2>
-        <p>Everything's a python objects</p>
-        <pre><code class="python" data-trim>
-source = ColumnDataSource(data)
-map_plot.add_glyph(source, countries)
-text_plot.add_glyph(source, country_name)
-        </pre></code>
-        <p>Works for axes too</p>
-        </section>
-        <section>
-            <iframe data-src="http://localhost:8001" width="900" height="500" frameborder="0"></iframe>
+            <iframe data-src="http://localhost:8001/static_map_tools_linked_tabbed" width="900" height="1000" frameborder="0"></iframe>
         </section>
         <!-- END SECTION 4 -->
     </section>
