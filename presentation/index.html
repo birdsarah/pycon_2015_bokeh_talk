@@ -448,15 +448,15 @@ tabs = Tabs(
         </section>
         <section>
             <h2>Server app</h2>
-            <p>Define app <span class="highlight">Instance</span>s</p>
-            <pre class="fragment"><code class="python" data-trim>
+            <p>Define Instance attributes that are update or change</p>
+            <pre><code class="python" data-trim>
 from bokeh.properties import Instance
 
 class WashmapApp(VBox):
     year = Instance(Slider)
     source = Instance(ColumnDataSource)
             </pre></code>
-            <p class="fragment">Need this "blueprint" on the bokeh server and 
+            <p>Need this "blueprint" on the bokeh server and 
             your webapp server (if they're different).</p>
         </section>
         <section>
@@ -485,10 +485,6 @@ class WashmapApp(VBox):
             </pre></code>
         </section>
         <section>
-        <iframe data-src="http://localhost:8001" width="900" height="1000" 
-            style="margin-top:-50px; margin-left:150px;" frameborder="0"></iframe>
-        </section>
-        <section>
             <h2>Serve plot (bokeh server)</h2>
             <pre><code style="max-height:800px" class="python" data-trim>
 class WashmapApp(VBox):
@@ -504,27 +500,6 @@ class WashmapApp(VBox):
         new_data = manipulate_data(data, year)
         new_source = ColumnDataSource(new_data)
         self.source.data = new_source.data
-            </pre></code>
-        </section>
-        <section>
-            <iframe data-src="http://localhost:8001" width="900" height="1000" 
-                style="margin-top:-50px; margin-left:150px;" frameborder="0"></iframe>
-        </section>
-        <section>
-            <p>The line plot updates by subscribing to the selection event.</p>
-            <pre><code style="max-height:800px" class="python" data-trim>
-class WashmapApp(VBox):
-    year = Instance(Slider)
-    source = Instance(ColumnDataSource)
-    line_source = Instance(ColumnDataSource)
-
-    def setup_events(self):
-        self.year.on_change('value', self, 'change_year')
-        self.source.on_change('selected', self, 'change_country')
-
-    def change_country(self, obj, attrname, old, new):
-        ...
-        self.line_source.data = new_source.data
             </pre></code>
         </section>
         <section>
@@ -557,6 +532,11 @@ class WashmapApp(VBox):
                 <li>Complex data manipulation</li>
                 <li>Downsampling</li>
                 <li>Stream your data</li>
+            </ul>
+            <br />
+            <h3>There's always bokehjs</h3>
+            <ul>
+                <li>See repo for how to use bokehjs to make your plots responsive (resize when browser resizes)</li>
             </ul>
         </section>
         <!-- END SECTION 5 -->
