@@ -287,15 +287,15 @@ show(chart)
                 <img data-src="images/reductive_2.png" class="fragment side_by_side right">
             </p>
         </section>
-        <section>
-            <img class="stretch" data-src="images/bokeh_with_high_low.svg">
-        </section>
         <!-- END SECTION 3 -->
     </section>
     <section>
         <!-- START SECTION 4 -->
         <section>
             <img data-src="images/water_screenshot.png" class="stretch">
+        </section>
+        <section>
+            <img class="stretch" data-src="images/bokeh_with_high_low_low_emphasis.svg">
         </section>
         <section>
             <h3>Plot</h3>
@@ -307,67 +307,63 @@ plot.add_glyph()
 plot.add_layout()
 plot.add_tools()
             </code></pre>
-            <h3>Glyph (shape)</h3>
-            <pre><code class="python" data-trim>
-from bokeh.models import Rect, Circle, Line, Triangle, ...
-            </code></pre>
-            <h3>Tools (interactions)</h3>
-            <pre><code class="python" data-trim>
-from bokeh.models import (
-    TapTool, HoverTool, 
-    BoxSelectTool, BoxZoomTool, WheelZoomTool, PanTool,
-    ResetTool, ResizeTool, ....
-)
-            </code></pre>
         </section>
         <section>
-            <img data-src="images/burtin.png" class="stretch">
-        </section>
-        <section>
-            <iframe src="http://localhost:8888/notebooks/_2_building_up.ipynb" width=1024 height=600></iframe>
-        </section>
-        <section>
-            <h2>CSS Intermission</h2>
-            <ul>
-                <li>Canvas - no css required</li>
-                <li>Bokeh needs some css - tools, hover styling, slider styling</li>
-                <li>Bokeh's built-in css is large</li>
-                <li>I prefer to roll my own
-                    <ul>
-                        <li><pre>bokeh/bokehjs/build/css/bokeh.css</pre></li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-        <section>
-            <h2>Embedding</h2>
+            <h3>Embedding</h3>
         <pre><code class="python" data-trim>
-..views.py
+from bokeh.embed import components, Resources
 
-    from bokeh.embed import components, Resources
-    embed_script, embed_div = components(chart, resources=Resources())
+embed_script, embed_div = components(chart/plot, resources=Resources())
 
         </code></pre>
         <pre><code class="django" data-trim>
+<script src="js/bokeh.min.js"></script>
+<link rel="stylesheet" href="css/bokeh.min.css" /> 
 
-..template.html
-
-    <script src="js/bokeh.min.js"></script>
-    <link rel="stylesheet" href="css/bokeh.min.css" /> 
-
-    {{ embed_div|safe }}
-    {{ embed_script|safe }}
+{{ embed_div|safe }}
+{{ embed_script|safe }}
         </code></pre>
         <ul>
-            <li>Want to load bokehjs async or ...</li>
-            <li>Copy bokeh's templates to make your own
+            <li>Good start, but if you want to load bokehjs async or make your plots responsive (resize with browser size) or something. Copy bokeh's templates to make your own
                 <ul>
                     <li><pre>bokeh/bokeh/_templates/*</pre></li>
                 </ul>
             </li>
-            <li>Useful for making responsive plots</li>
+            <li>Beware of using bokeh.min.css (more later)</li>
         </ul>
-        <p>See the talk repo</p>
+        </section>
+        <section>
+            <h3>Glyph (shape)</h3>
+            <img style="margin-bottom: 0em; margin-top: 0em;" data-src="images/water_key.png">
+            <pre style="margin-top:0em;"><code class="python" data-trim>
+from bokeh.models import Circle, Line, Triangle, Rect, Text, ...
+            </code></pre>
+            <pre><code class="python" data-trim>
+plot = Plot(**plot_options)
+zero = Text(x=30, y=15, text=['0 %'], **FONT_PROPS_SM)
+plot.add_glyph(zero)
+
+hundred = Text(x=190, y=15, text=['100 %'], **FONT_PROPS_SM)
+plot.add_glyph(hundred)
+            </code></pre>
+            <pre><code class="python" data-trim>
+palette = ["#8c9494", "#8398a2", "#7c9baa", "#73a1b4", "#6aa6bd", "#62abc7", "#5aafd0", "#52b4d9", "#49bae4", "#3fc0f0"]
+width = 20
+for i, color in enumerate(palette):
+    rect = Rect(
+        x=(width * index), y=40,
+        width=width, height=10,
+        fill_color=color, line_color='white'
+    )
+    plot.add_glyph(rect)
+            </code></pre>
+        </section>
+        <section>
+            <h3>Map - glyphs and data</h3>
+            <img style="margin-bottom: 0em; margin-top: 0em;" data-src="images/water_map_only.png">
+        </section>
+        <section>
+            <iframe src="http://localhost:8888/notebooks/_2_building_up.ipynb" width=1024 height=600></iframe>
         </section>
         <section>
             <h2>Widgets</h2>
@@ -392,7 +388,15 @@ tabs = Tabs(
             <iframe data-src="http://localhost:8001/static" width="900" height="1000" frameborder="0"></iframe>
         </section>
         <section>
-            <h2>Hover</h2>
+            <h3>Tools (interactions)</h3>
+            <pre><code class="python" data-trim>
+from bokeh.models import (
+    TapTool, HoverTool, 
+    BoxSelectTool, BoxZoomTool, WheelZoomTool, PanTool,
+    ResetTool, ResizeTool, ....
+)
+            </code></pre>
+            <h4>Hover</h4>
         <pre><code class="python" data-trim>
 from bokeh.models import HoverTool
 plot.add_tools(HoverTool(tooltips="@active_year"))
@@ -582,6 +586,18 @@ class WashmapApp(VBox):
                 </li>
             </ul>
         </p>
+        <p>CSS
+            <ul>
+                <li>Canvas - no css required</li>
+                <li>Bokeh needs some css - tools, hover styling, slider styling</li>
+                <li>Bokeh's built-in css is 1MB</li>
+                <li>I prefer to roll my own
+                    <ul>
+                        <li><pre>bokeh/bokehjs/build/css/bokeh.css</pre></li>
+                    </ul>
+                </li>
+            </ul>
+        </p>
             <aside class="notes">
             <p>I have a pull request that I'm going to finish in the 
             during the sprints where I show an example of making a sparkline
@@ -619,7 +635,10 @@ class WashmapApp(VBox):
             </p>
     </section>
 </div>
-
+<!--
+        <section>
+        </section>
+        -->
             <div class="footer">
                 <p><i class="fa fa-twitter"></i> birdsarah</p>
             </div>
