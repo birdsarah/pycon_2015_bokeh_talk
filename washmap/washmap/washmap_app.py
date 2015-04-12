@@ -2,11 +2,12 @@ from bokeh.models import ColumnDataSource
 from bokeh.properties import Instance
 from bokeh.models.widgets import Slider, VBox, Tabs, Panel, TextInput
 
-from washmap.map_data import (
-    get_data_with_countries,
+from washmap.map_data_server import (
+    get_water_data_with_countries,
+    get_sanitation_data_with_countries,
     get_frame_for_country,
 )
-from washmap.water_map import (
+from washmap.water_map_server import (
     construct_map,
     construct_line,
     construct_text_box,
