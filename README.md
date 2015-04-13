@@ -1,3 +1,7 @@
+## Fixes for some issues in this repo coming tomorrow!
+
+Thanks for all the interest in my talk - I will fix up the issues in this repo so you can run it locally if you want tomorrow.
+
 ## Interactive data for the web - Bokeh for web developers
 
 [https://us.pycon.org/2015/schedule/presentation/369/](https://us.pycon.org/2015/schedule/presentation/369/)
