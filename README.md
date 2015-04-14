@@ -1,25 +1,97 @@
-## Fixes for some issues in this repo coming tomorrow!
+# Interactive data for the web - Bokeh for web developers
 
-Thanks for all the interest in my talk - I will fix up the issues in this repo so you can run it locally if you want tomorrow.
+This repo supports the [talk I gave at PyCon 2015](https://us.pycon.org/2015/schedule/presentation/369/).
 
-## Interactive data for the web - Bokeh for web developers
+The video for the talk is available [on YouTube](https://www.youtube.com/watch?v=O5OvOLK-xqQ).
 
-[https://us.pycon.org/2015/schedule/presentation/369/](https://us.pycon.org/2015/schedule/presentation/369/)
+This repo contains:
 
-### Description
+* presentation - the presentation slides 
+* washmap - the django application that displays the visualizations
+* server - the bokeh server configuration
+* notebooks - the notebooks I used to prototype the visualization & experiment with different things
+
+This is not production code, it doesn't have tests, it's not optimized, its designed to explain some features of boekh. Feel free to take snippets and use them wisely if they're 
+useful, but don't expect miracles.  Feel free to ask questions via the github issues. But don't forget to checkout the following great bokeh resources:
+
+* [bokeh.pydata.org](http://bokeh.pydata.org/en/latest/)
+* [mailing list](https://groups.google.com/a/continuum.io/forum/#!forum/bokeh)
+* [bokeh github repo](https://github.com/bokeh/bokeh)
+
+I highly reccomend downloading and running the bokeh examples (they are much more extensive than the [gallery](http://bokeh.pydata.org/en/latest/docs/gallery.html)). The examples
+are at [https://github.com/bokeh/bokeh/tree/master/examples](https://github.com/bokeh/bokeh/tree/master/examples).
+
+## Talk Description
 
 Interactive data visualization libraries are mostly a JavaScript stronghold. The new Python library, Bokeh, provides a simple, clean way to make more shiny things. Although it comes from the data science community, it has a lot to offer web developers. For a visualization you might have built in d3.js, I'll show how to build it in Bokeh, how to test it, and how to hook it into your web app.
 
-### Abstract
+## Installation
 
-As a web developer, I find myself being asked to make increasing numbers of data visualizations, interactive infographics, and more. d3.js is great, as are many other js toolkits that are out there. But if I can write more Python and less JavaScript... well, that makes me happy!
+### Install and run the django app, the ipython notebooks, and the server.
 
-Bokeh is a new Python library for interactive visualization. Its origins are in the data science community, but it has a lot to offer web developers.
+#### Install 
 
-In this talk I'll discuss using Bokeh with a web framework (in this case, Django):
+Using conda and pip for dependencies (because conda doesn't have them all)
 
-* I will walk through building an interactive visualizations in Bokeh to display your data
-* How to unit test your visualization
-* How to display your plot on the web and within your templates, including a number of pitfalls I have encountered.
+```bash
+$ conda create -n washmap_bokeh python=2.7
+$ source activate washmap_bokeh
+$ conda install --file conda-requirements.txt
+$ pip install -r requirements.txt
+```
 
-I will not be covering real-time or high-volume analytics, or any statistical processing. This is an introduction to Bokeh's core, focused on the needs of an average web developer.
+Often it's necessary to re-activate your env so that the bins are available.
+
+```bash
+$ source deactive
+$ source activate washmap_bokeh
+```
+
+#### Run server
+
+```bash
+$ cd server
+$ source .env
+$ foreman start
+```
+
+#### Run django app
+
+```bash
+$ cd washmap
+$ ./manage.py runserver 0.0.0.0:8001
+```
+
+#### Run notebooks
+
+```bash
+$ cd notebooks
+$ ipython notebook
+```
+
+
+### For the revealjs presentation
+
+1. Install [Node.js](http://nodejs.org/)
+
+2. Install [Grunt](http://gruntjs.com/getting-started#installing-the-cli)
+
+3. Enter presentation directory
+```sh
+$ cd presentation
+```
+
+4. Install dependencies
+```sh
+$ npm install
+```
+
+5. Get other servers running (the presentation links to views on the django app, this needs to be running)
+
+* plot server at 4444 (see "Run server" above)
+* washmap django app at 8001 (See "Run django app" above)
+
+6. Serve the presentation and monitor source files for changes
+```sh
+$ grunt serve
+```

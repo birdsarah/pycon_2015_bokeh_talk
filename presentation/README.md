@@ -1,15 +1,15 @@
-## Running the presentation
+Reveal Shortcuts Help
 
-1. Install [Node.js](http://nodejs.org/)
+    alt + r: Enter/Exit RISE
+    w: Toogle overview mode
+    home: First slide
+    end: Last slide
+    space bar: Next
+    shift + space bar: Previous
+    pgup: Up
+    pgdn: Down
+    left arrow: Left
+    right arrow: Right
+    black screen: Period (or forward slash)
 
-1. Install [Grunt](http://gruntjs.com/getting-started#installing-the-cli)
-
-1. Install dependencies
-```sh
-$ npm install
-```
-
-1. Serve the presentation and monitor source files for changes
-```sh
-$ grunt serve
-```
+To setup revealjs see the README.md at the top level or the revealjs docs.
