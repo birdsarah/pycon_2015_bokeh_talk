@@ -72,26 +72,14 @@ $ ipython notebook
 
 ### For the revealjs presentation
 
-1. Install [Node.js](http://nodejs.org/)
-
-2. Install [Grunt](http://gruntjs.com/getting-started#installing-the-cli)
-
-3. Enter presentation directory
-```sh
-$ cd presentation
-```
-
-4. Install dependencies
-```sh
-$ npm install
-```
-
-5. Get other servers running (the presentation links to views on the django app, this needs to be running)
-
-* plot server at 4444 (see "Run server" above)
-* washmap django app at 8001 (See "Run django app" above)
-
-6. Serve the presentation and monitor source files for changes
-```sh
-$ grunt serve
-```
+* Install [Node.js](http://nodejs.org/)
+* Install [Grunt](http://gruntjs.com/getting-started#installing-the-cli)
+* Enter presentation directory
+ * ```$ cd presentation```
+* Install dependencies
+ * ```$ npm install ```
+* Get other servers running (the presentation links to views on the django app, this needs to be running)
+ * plot server at 4444 (see "Run server" above)
+ * washmap django app at 8001 (See "Run django app" above)
+* Serve the presentation and monitor source files for changes
+ * ```$ grunt serve ```
