@@ -6,6 +6,11 @@ private_settings.py
 node_modules
 .DS_Store
 
+# Ignore the shelve artifacts
+*.dat
+*.bak
+*.dir
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
