@@ -16,7 +16,7 @@ from bokeh.models import (
 from bokeh.plotting import vplot, hplot
 
 from .chart_constants import (
-    PLOT_FORMATS, ORANGE, BLUE, DARK_GRAY, FONT, AXIS_FORMATS, ORANGE_SHADOW,
+    PLOT_FORMATS, ORANGE, BLUE, DARK_GRAY, AXIS_FORMATS, ORANGE_SHADOW,
     FONT_PROPS_SM, FONT_PROPS_MD, FONT_PROPS_LG, GREEN
 )
 
@@ -63,7 +63,7 @@ def construct_water_map(source):
 
 
 def construct_san_map(source):
-    return construct_map(source, fill_string='san_color')
+    return construct_map(source, fill_string='san_color', selected_color=DARK_GRAY)  # nopep8
 
 
 def construct_water_map_tools(source):
@@ -102,8 +102,8 @@ def construct_text_box(source, value_string, color_string, bar_color):
     )
     # Add the writing
     country = Text(x=5, y=50, text='name', **FONT_PROPS_MD)
-    percent = Text(x=15, y=10, text=value_string, text_color=color_string, **FONT_PROPS_LG)
-    percent_sign = Text(x=69, y=10, text=['%'], text_color=color_string, **FONT_PROPS_LG)
+    percent = Text(x=15, y=10, text=value_string, text_color=color_string, **FONT_PROPS_LG)  # nopep8
+    percent_sign = Text(x=69, y=10, text=['%'], text_color=color_string, **FONT_PROPS_LG)  # nopep8
     line_one = Text(x=90, y=28, text=['of people had'], **FONT_PROPS_SM)
     line_two_p1 = Text(x=90, y=14, text=['access in'], **FONT_PROPS_SM)
     line_two_p2 = Text(x=136, y=14, text='year', **FONT_PROPS_SM)
@@ -113,7 +113,6 @@ def construct_text_box(source, value_string, color_string, bar_color):
     plot.add_glyph(line_one)
     plot.add_glyph(line_two_p1)
     plot.add_glyph(source, Text(), selection_glyph=line_two_p2)
-
 
     # Add the orange box with year
     shadow = Triangle(x=150, y=109, size=25, fill_color=ORANGE_SHADOW, line_color=None)  # nopep8
@@ -126,7 +125,6 @@ def construct_text_box(source, value_string, color_string, bar_color):
     year = Text(x=160, y=85, text='year', text_font_size='18pt', text_color="#FFFFF", text_font_style="bold")  # nopep8
     plot.add_glyph(source, Text(), selection_glyph=year)
 
-
     return plot
 
 
@@ -138,6 +136,7 @@ def construct_water_text(source):
 def construct_san_text(source):
     plot = construct_text_box(source, 'san_value', 'san_color', GREEN)
     return plot
+
 
 def construct_line(source, value_string, line_color=BLUE):
     xdr = Range1d(1990, 2013)
