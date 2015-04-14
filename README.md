@@ -27,6 +27,15 @@ Interactive data visualization libraries are mostly a JavaScript stronghold. The
 
 ## Installation
 
+### Pre-reqs
+
+I have run this repo on Ubuntu 14.04 and OSX. Things I already had:
+
+* [heroku toolbelt](https://toolbelt.heroku.com/) - which gives you foreman
+* mysql
+* git
+* anaconda or miniconda - [http://continuum.io/downloads](http://continuum.io/downloads)
+
 ### Install and run the django app, the ipython notebooks, and the server.
 
 #### Install 
