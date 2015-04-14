@@ -11,7 +11,7 @@ This repo contains:
 * server - the bokeh server configuration
 * notebooks - the notebooks I used to prototype the visualization & experiment with different things
 
-This is not production code, it doesn't have tests, it's not optimized, its designed to explain some features of boekh. Feel free to take snippets and use them wisely if they're 
+This is not production code, it doesn't have tests, it's not optimized, its designed to explain some features of [bokeh](http://bokeh.pydata.org). Feel free to take snippets and use them wisely if they're 
 useful, but don't expect miracles.  Feel free to ask questions via the github issues. But don't forget to checkout the following great bokeh resources:
 
 * [bokeh.pydata.org](http://bokeh.pydata.org/en/latest/)
