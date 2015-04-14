@@ -66,6 +66,20 @@ $ foreman start
 
 #### Run django app
 
+* Set up your database
+ * Create a MySQL db called `washmap`
+ * Create a user called `washmap` with a password
+ * Load washmap.sql into your new database
+
+* Create private_settings.py and edit
+ * copy private_settings.py.example to private_settings.py
+ * edit private_settings.py with your `washmap` user's password and with a secret key
+
+(Note you can call the database whatever you want, the main settings file is
+in main/settings.py)
+
+Run washmap
+
 ```bash
 $ cd washmap
 $ ./manage.py runserver 0.0.0.0:8001

@@ -20,6 +20,7 @@ from .charts_demos import make_line_chart
 
 class WashMapStaticView(TemplateView):
     template_name = 'washmap/chart.html'
+    name = 'base'
 
     def get_context_data(self, *args, **kwargs):
         context = super(WashMapStaticView, self).get_context_data(*args, **kwargs)  # nopep8
@@ -30,18 +31,22 @@ class WashMapStaticView(TemplateView):
         )
         context.update(
             figures=[water_map_static],
-            title="Washmap"
+            title="Washmap",
+            name=self.name
         )
         return context
 
 
 class WashMapStaticMapView(WashMapStaticView):
+    name = 'map'
+
     def make_plot(self):
         plot = make_washmap_map()
         return plot
 
 
 class WashMapStaticMapToolsView(WashMapStaticView):
+
     def make_plot(self):
         plot = make_washmap_map_tools()
         return plot

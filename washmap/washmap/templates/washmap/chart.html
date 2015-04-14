@@ -6,7 +6,10 @@
 {% block title %}Washmap{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static "css/bokeh-0.8.1.min.css" %}" />
+    {# Demonstrate that css is not necessary #}
+    {% if name != 'map' %}
+        <link rel="stylesheet" href="{% static "css/bokeh-0.8.2.min.css" %}" />
+    {% endif %}
 {% endblock head %}
 
 {% block content %}
