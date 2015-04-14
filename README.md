@@ -106,3 +106,7 @@ $ ipython notebook
  * washmap django app at 8001 (See "Run django app" above)
 * Serve the presentation and monitor source files for changes
  * ```$ grunt serve ```
+
+## Notes
+This repo contains a small patch to the 0.8.2 bokehjs. This issue has now been [fixed](https://github.com/bokeh/bokeh/issues/2116) 
+and will be in 0.9.
