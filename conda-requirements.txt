@@ -3,6 +3,7 @@
 # platform: linux-64
 bokeh=0.8.2=np19py27_0
 colorama=0.3.3=py27_0
+django=1.7.3=py27_0
 flask=0.10.1=py27_1
 gevent=1.0.1=py27_0
 gevent-websocket=0.9.3=py27_0
@@ -16,6 +17,7 @@ jsonschema=2.4.0=py27_0
 libsodium=0.4.5=0
 markupsafe=0.23=py27_0
 mistune=0.5.1=py27_0
+mysql-python=1.2.3=py27_0
 numpy=1.9.2=py27_0
 openssl=1.0.1k=1
 pandas=0.16.0=np19py27_1

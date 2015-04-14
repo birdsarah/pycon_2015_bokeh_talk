@@ -4,6 +4,7 @@ django-crispy-forms==1.4.0
 django-vanilla-views==1.0.2
 django-adminplus==0.3
 geojson==1.0.9
+django-extensions==1.5.2
 git+https://github.com/kennethreitz/tablib.git
 git+https://github.com/aptivate/django-import-export.git
 git+https://github.com/aptivate/django-admin-sortable.git
