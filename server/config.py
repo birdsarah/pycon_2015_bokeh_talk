@@ -9,4 +9,5 @@ multi_user = False
 scripts = [
     'blueprints/sliders_app_hbox.py',
     'blueprints/washmap_app.py',
+    'blueprints/washmap_app_2.py',
 ]

@@ -5,6 +5,8 @@ from bokeh.models.widgets import Slider, VBox, Tabs, Panel, TextInput
 from washmap.map_data import (
     get_data_with_countries,
     get_frame_for_country,
+    get_wat_stats_all_years,
+    get_san_stats_all_years,
 )
 from washmap.water_map import (
     construct_water_map,
@@ -26,20 +28,14 @@ from washmap.chart_constants import (
 
 class WashmapApp2(VBox):
     parent_model = "VBox"
-    js_model = "WashmapApp"
+    js_model = "WashmapApp2"
 
     year = Instance(Slider)
 
     source = Instance(ColumnDataSource)
+    wat_all = Instance(ColumnDataSource)
+    san_all = Instance(ColumnDataSource)
     line_source = Instance(ColumnDataSource)
-    #wat_source = Instance(ColumnDataSource)
-    #san_source = Instance(ColumnDataSource)
-
-    def __init__(self):
-        self.dfs = {
-            'wat_df': get_wat_df(),
-            'san_df': get_san_df()
-        }
 
     @classmethod
     def create(cls):
@@ -49,7 +45,9 @@ class WashmapApp2(VBox):
             title="Year", name='year',
             value=1990, start=1990, end=2012, step=1
         )
-        data = get_data_with_countries()
+        wat_all_df = get_wat_stats_all_years()
+        san_all_df = get_san_stats_all_years()
+        data = get_data_with_countries(wat_all_df, san_all_df)
         source = ColumnDataSource(data)
         source.selected = [30]
         line_data = get_line_data('Morocco')
@@ -66,6 +64,8 @@ class WashmapApp2(VBox):
 
         obj.source = source
         obj.line_source = line_source
+        obj.wat_all = ColumnDataSource(wat_all_df)
+        obj.san_all = ColumnDataSource(san_all_df)
 
         tabs = Tabs(
             tabs=[

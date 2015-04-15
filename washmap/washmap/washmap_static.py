@@ -5,7 +5,12 @@ from bokeh.models.widgets import Tabs, Panel, Slider
 from bokeh.plotting import vplot, hplot
 
 
-from .map_data import get_data_with_countries
+from .map_data import (
+    get_data_with_countries,
+    get_wat_stats_all_years,
+    get_san_stats_all_years
+)
+
 from .charts_demos import get_line_data
 from .water_map import (
     construct_water_map,
@@ -26,13 +31,16 @@ from .chart_constants import (
     SANITATION_COLOR_RANGE,
 )
 
+wat_stats = get_wat_stats_all_years()
+san_stats = get_san_stats_all_years()
+
 
 def get_frame_for_country(frame, country):
     return frame[frame.name == country]
 
 
 def make_washmap_map():
-    data = get_data_with_countries()
+    data = get_data_with_countries(wat_stats, san_stats)
     source = ColumnDataSource(data)
     wat_map = construct_water_map(source)
     wat_key = construct_key(WATER_COLOR_RANGE)
@@ -40,7 +48,7 @@ def make_washmap_map():
 
 
 def make_washmap_map_tools():
-    data = get_data_with_countries()
+    data = get_data_with_countries(wat_stats, san_stats)
     source = ColumnDataSource(data)
     wat_map = construct_water_map_tools(source)
     wat_key = construct_key(WATER_COLOR_RANGE)
@@ -48,7 +56,7 @@ def make_washmap_map_tools():
 
 
 def make_washmap_map_tools_linked():
-    data = get_data_with_countries()
+    data = get_data_with_countries(wat_stats, san_stats)
     source = ColumnDataSource(data)
     wat_map = construct_water_map_tools(source)
     wat_text = construct_water_text(source)
@@ -57,7 +65,7 @@ def make_washmap_map_tools_linked():
 
 
 def make_washmap_map_tools_linked_tabbed():
-    data = get_data_with_countries()
+    data = get_data_with_countries(wat_stats, san_stats)
     source = ColumnDataSource(data)
     source.selected = [30]
     wat_map = construct_water_map_tools(source)
@@ -83,7 +91,7 @@ def make_washmap_map_tools_linked_tabbed():
 
 
 def make_washmap_all():
-    data = get_data_with_countries()
+    data = get_data_with_countries(wat_stats, san_stats)
 
     source = ColumnDataSource(data)
     source.selected = [30]

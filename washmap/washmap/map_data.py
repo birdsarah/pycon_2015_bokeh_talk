@@ -32,8 +32,7 @@ def get_frame_for_country(frame, country):
     return frame[frame.name == country]
 
 
-def get_data_with_countries(year_of_color=1990):
-
+def get_countries():
     # Get the countries data frame
     countries = Country.objects.exclude(boundary='')
     countries = countries.filter(region__in=[1, 2, 3, 6, 7])  # Africa only
@@ -42,24 +41,34 @@ def get_data_with_countries(year_of_color=1990):
     countries_df['xs'], countries_df['ys'] = build_coords_lists(countries_df['boundary'])  # nopep8
     countries_df['country_id'] = countries_df['id']
     countries_df = countries_df.drop(['id', 'boundary'], axis=1)
+    return countries_df
 
+
+def get_stats_from_model(stat_code, column_name):
     # Get the stats for access to water
-    wat_stats = StatValue.objects.filter(description__code='WNTI_%')
-    wat_stats = wat_stats.filter(year=year_of_color)
-    wat_stats = wat_stats.values('value', 'country_id')
-    wat_stats_df = DataFrame.from_records(wat_stats, coerce_float=True)
-    wat_stats_df['wat_value'] = wat_stats_df['value']
-    wat_stats_df = wat_stats_df.drop('value', axis=1)
+    stats = StatValue.objects.filter(description__code=stat_code)
+    stats = stats.values('value', 'country_id', 'year')
+    stats_df = DataFrame.from_records(stats, coerce_float=True)
+    stats_df[column_name] = stats_df['value']
+    stats_df = stats_df.drop('value', axis=1)
+    return stats_df
 
-    # Get the stats for access to sanitation
-    san_stats = StatValue.objects.filter(description__code='SNTI_%')
-    san_stats = san_stats.filter(year=year_of_color)
-    san_stats = san_stats.values('value', 'country_id')
-    san_stats_df = DataFrame.from_records(san_stats, coerce_float=True)
-    san_stats_df['san_value'] = san_stats_df['value']
-    san_stats_df = san_stats_df.drop('value', axis=1)
+def get_wat_stats_all_years():
+    wat_stats_df = get_stats_from_model('WNTI_%', 'wat_value')
+    return wat_stats_df
 
-    # Merge water & sanitation
+
+def get_san_stats_all_years():
+    san_stats_df = get_stats_from_model('SNTI_%', 'san_value')
+    return san_stats_df
+
+
+def get_data_with_countries(wat_stats_df, san_stats_df, year=1990):
+    countries_df = get_countries()
+
+    # Get data for year, Merge water & sanitation
+    wat_stats_df = wat_stats_df[wat_stats_df.year == year]
+    san_stats_df = san_stats_df[san_stats_df.year == year]
     wat_san_df = wat_stats_df.merge(san_stats_df)
 
     # Merge the countries and stats together
@@ -68,13 +77,15 @@ def get_data_with_countries(year_of_color=1990):
 
     # Color it
     colored_df = color_data(merged_df)
+    colored_df['year'] = year
 
     # Otherwise things are sad!
-    colored_df['year'] = year_of_color
     colored_df.columns = colored_df.columns.astype('str')
     return colored_df
 
 
 def get_water_data_for_one_country(year=1990, country="South Africa"):
-    data = get_data_with_countries(year, 'WNTI_%', 'water')
+    water_data = get_wat_stats_all_years()
+    san_data = get_san_stats_all_years()
+    data = get_data_with_countries(wat_data, san_data, year)
     return data[data.name == 'South Africa']
