@@ -39,7 +39,6 @@ def get_countries():
     countries = countries.values('name', 'boundary', 'id')
     countries_df = DataFrame.from_records(countries)
     countries_df['xs'], countries_df['ys'] = build_coords_lists(countries_df['boundary'])  # nopep8
-    countries_df['country_id'] = countries_df['id']
     countries_df = countries_df.drop(['id', 'boundary'], axis=1)
     return countries_df
 
@@ -47,10 +46,11 @@ def get_countries():
 def get_stats_from_model(stat_code, column_name):
     # Get the stats for access to water
     stats = StatValue.objects.filter(description__code=stat_code)
-    stats = stats.values('value', 'country_id', 'year')
+    stats = stats.values('value', 'country__name', 'year')
     stats_df = DataFrame.from_records(stats, coerce_float=True)
     stats_df[column_name] = stats_df['value']
-    stats_df = stats_df.drop('value', axis=1)
+    stats_df['name'] = stats_df['country__name']
+    stats_df = stats_df.drop(['value', 'country__name'], axis=1)
     return stats_df
 
 def get_wat_stats_all_years():

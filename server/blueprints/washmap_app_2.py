@@ -15,29 +15,6 @@ SANITATION_COLOR_RANGE = ["#d45500", "#da670f", "#eb7e1f", "#eb941f", "#ebb01f",
 GRAY = "#CCCCCC"
 
 
-def update_active_data(data, active_year, palette_name=None):
-    # Default to water
-    palette = WATER_COLOR_RANGE
-    if palette_name == 'sanitation':
-        palette = SANITATION_COLOR_RANGE
-
-    def _get_color(value):
-        if value < 0:
-            return GRAY
-        index = int(value / 10)
-        return palette[index]
-
-    data['active_year'] = active_year
-    data['active_year_value'] = data[active_year]
-    data['color_for_active_year'] = data[active_year].apply(_get_color)
-    data['active_year_value'] = where(data['active_year_value'] < 0, '-', data['active_year_value'])  # nopep8
-    return data
-
-
-def get_frame_for_country(frame, country_name):
-    return frame[frame.name == country_name]
-
-
 class WashmapApp2(VBox):
     year = Instance(Slider)
 
@@ -55,7 +32,7 @@ class WashmapApp2(VBox):
         year = str(self.year.value)
         data = DataFrame(self.source.data)
         new_data = self._update_data_for_new_year(data, year)
-        self.source.data = new_data
+        self.source.data = ColumnDataSource(new_data).data
 
     def _update_data_for_new_year(self, data, year):
         data = data.drop(
@@ -63,7 +40,9 @@ class WashmapApp2(VBox):
         )
         data.year = year
         wat_all_df = DataFrame(self.wat_all.data)
+        wat_all_df = wat_all_df.drop('index', axis=1)
         san_all_df = DataFrame(self.san_all.data)
+        san_all_df = san_all_df.drop('index', axis=1)
         data = data.merge(wat_all_df, how='left')
         data = data.merge(san_all_df, how='left')
         data = data.fillna(-99)

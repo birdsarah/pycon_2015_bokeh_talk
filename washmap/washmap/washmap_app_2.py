@@ -64,6 +64,8 @@ class WashmapApp2(VBox):
 
         obj.source = source
         obj.line_source = line_source
+        wat_all_df.year = wat_all_df.year.astype(str)
+        san_all_df.year = san_all_df.year.astype(str)
         obj.wat_all = ColumnDataSource(wat_all_df)
         obj.san_all = ColumnDataSource(san_all_df)
 
