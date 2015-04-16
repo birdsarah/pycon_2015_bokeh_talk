@@ -12,23 +12,30 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-import private_settings
+import dj_database_url
+try:
+    import private_settings
+except ImportError:
+    pass
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = private_settings.SECRET_KEY
+SECRET_KEY = os.environ.get('SECRET_KEY', private_settings.SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if 'DEBUG' in os.environ:
+    DEBUG = os.environ['DEBUG']
+else:
+    DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['washmap-bokeh.herokuapp.com']
 
-BOKEH_URL = "http://localhost:4444"
+BOKEH_URL = os.environ.get('BOKEH_SERVER_URL', 'http://localhost:4444')
 
 
 # Application definition
@@ -73,19 +80,21 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'washmap',
-        'USER': 'washmap',
-        'PASSWORD': private_settings.DB_PASSWORD,
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'OPTIONS': {
-            "init_command": "SET storage_engine=INNODB",
+DATABASES = {}
+if 'DATABASE_URL' in os.environ:
+    DATABASES['default'] = dj_database_url.config()
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ.get('DATABASE_NAME', 'washmap'),
+            'USER': os.environ.get('DATABASE_USER', 'washmap'),
+            'PASSWORD': os.environ.get('DATABASE_PASSWORD',
+                                       private_settings.DB_PASSWORD),
+            'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
+            'PORT': '',
         }
     }
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
