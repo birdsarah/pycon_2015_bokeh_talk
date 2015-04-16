@@ -2,18 +2,25 @@ from bokeh.models import ColumnDataSource
 from bokeh.properties import Instance
 from bokeh.models.widgets import Slider, VBox, Tabs, Panel, TextInput
 
-from washmap.map_data_server import (
-    get_water_data_with_countries,
-    get_sanitation_data_with_countries,
+from washmap.map_data import (
+    get_data_with_countries,
     get_frame_for_country,
+    get_wat_stats_all_years,
+    get_san_stats_all_years,
 )
-from washmap.water_map_server import (
-    construct_map,
-    construct_line,
-    construct_text_box,
+from washmap.water_map import (
+    construct_water_map,
+    construct_water_map_tools,
+    construct_san_map,
+    construct_san_map_tools,
+    construct_water_line,
+    construct_san_line,
+    construct_water_text,
+    construct_san_text,
     construct_key,
     layout_components,
 )
+from .charts_demos import get_line_data
 from washmap.chart_constants import (
     BLUE, GREEN, DARK_GRAY, WATER_COLOR_RANGE, SANITATION_COLOR_RANGE
 )
@@ -25,14 +32,10 @@ class WashmapApp(VBox):
 
     year = Instance(Slider)
 
-    current_country = Instance(TextInput)
-
-    wat_source_map = Instance(ColumnDataSource)
-    san_source_map = Instance(ColumnDataSource)
-    wat_source_line = Instance(ColumnDataSource)
-    san_source_line = Instance(ColumnDataSource)
-    wat_source_text = Instance(ColumnDataSource)
-    san_source_text = Instance(ColumnDataSource)
+    source = Instance(ColumnDataSource)
+    wat_all = Instance(ColumnDataSource)
+    san_all = Instance(ColumnDataSource)
+    line_source = Instance(ColumnDataSource)
 
     @classmethod
     def create(cls):
@@ -42,52 +45,39 @@ class WashmapApp(VBox):
             title="Year", name='year',
             value=1990, start=1990, end=2012, step=1
         )
-        country = 'Morocco'
-        obj.current_country = TextInput(
-            title="Country", name="country", value=country
-        )
+        wat_all_df = get_wat_stats_all_years()
+        san_all_df = get_san_stats_all_years()
+        data = get_data_with_countries(wat_all_df, san_all_df)
+        source = ColumnDataSource(data)
+        source.selected = [30]
+        line_data = get_line_data('Morocco')
+        line_source = ColumnDataSource(line_data)
 
-        year_range = [str(x) for x in range(1990, 2013)]
-        wat_data = get_water_data_with_countries()
-        san_data = get_sanitation_data_with_countries()
-        wat_data_text = get_frame_for_country(wat_data, country)
-        san_data_text = get_frame_for_country(san_data, country)
-        wat_data_line = wat_data_text[year_range].transpose()
-        wat_data_line.columns = ['value']
-        wat_data_line = wat_data_line[wat_data_line['value'] > 0]
-
-        san_data_line = san_data_text[year_range].transpose()
-        san_data_line.columns = ['value']
-        san_data_line = san_data_line[san_data_line['value'] > 0]
-
-        obj.wat_source_map = ColumnDataSource(wat_data)
-        obj.wat_source_map.selected = [30]
-        obj.san_source_map = ColumnDataSource(san_data)
-        obj.san_source_map.selected = [30]
-        obj.wat_source_line = ColumnDataSource(wat_data_line)
-        obj.san_source_line = ColumnDataSource(san_data_line)
-        obj.wat_source_text = ColumnDataSource(wat_data_text)
-        obj.san_source_text = ColumnDataSource(san_data_text)
-
-        wat_plot = construct_map(obj.wat_source_map)
-        wat_line = construct_line(obj.wat_source_line, line_color=BLUE)
-        wat_text = construct_text_box(obj.wat_source_text, bar_color=BLUE)
+        wat_map = construct_water_map_tools(source)
+        wat_line = construct_water_line(line_source)
+        wat_text = construct_water_text(source)
         wat_key = construct_key(WATER_COLOR_RANGE)
-
-        san_plot = construct_map(obj.san_source_map, selected_color=DARK_GRAY)
-        san_line = construct_line(obj.san_source_line, line_color=GREEN)
-        san_text = construct_text_box(obj.san_source_text, bar_color=GREEN)
+        san_map = construct_san_map_tools(source)
+        san_line = construct_san_line(line_source)
+        san_text = construct_san_text(source)
         san_key = construct_key(SANITATION_COLOR_RANGE)
+
+        obj.source = source
+        obj.line_source = line_source
+        wat_all_df.year = wat_all_df.year.astype(str)
+        san_all_df.year = san_all_df.year.astype(str)
+        obj.wat_all = ColumnDataSource(wat_all_df)
+        obj.san_all = ColumnDataSource(san_all_df)
 
         tabs = Tabs(
             tabs=[
                 Panel(
                     title="Water",
-                    child=layout_components(wat_plot, wat_line, wat_text, wat_key)  # nopep8
+                    child=layout_components(wat_map, wat_line, wat_text, wat_key)
                 ),
                 Panel(
                     title="Sanitation",
-                    child=layout_components(san_plot, san_line, san_text, san_key)  # nopep8
+                    child=layout_components(san_map, san_line, san_text, san_key)
                 )
             ]
         )

@@ -15,7 +15,6 @@ from .washmap_static import (
     make_washmap_all
 )
 from .washmap_app import WashmapApp
-from .washmap_app_2 import WashmapApp2
 from .charts_demos import make_line_chart
 
 
@@ -96,13 +95,6 @@ class WashMapServerView(TemplateView):
             applet=applet_dict
         )
         return context
-
-
-class WashMapServer2View(WashMapServerView):
-    @app_document_no_tag('washmap', settings.BOKEH_URL)
-    def make_app(self):
-        app = WashmapApp2.create()
-        return app
 
 
 class LineStaticView(TemplateView):

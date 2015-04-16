@@ -4,7 +4,6 @@ from django.conf.urls import patterns, url
 
 from .views import (
     WashMapServerView,
-    WashMapServer2View,
     LineStaticView,
     WashMapStaticMapView,
     WashMapStaticMapToolsView,
@@ -15,7 +14,6 @@ from .views import (
 
 urlpatterns = patterns('',
     url(r'^$', WashMapServerView.as_view()),
-    url(r'^server2$', WashMapServer2View.as_view()),
     url(r'^line$', LineStaticView.as_view()),
     url(r'^static_map$', WashMapStaticMapView.as_view()),
     url(r'^static_map_tools$', WashMapStaticMapToolsView.as_view()),
