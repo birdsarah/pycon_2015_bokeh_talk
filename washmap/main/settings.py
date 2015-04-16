@@ -13,17 +13,12 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 import dj_database_url
-try:
-    import private_settings
-except ImportError:
-    pass
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY', private_settings.SECRET_KEY)
+SECRET_KEY = os.environ.get('SECRET_KEY', 'a secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if 'DEBUG' in os.environ:
@@ -89,8 +84,7 @@ else:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': os.environ.get('DATABASE_NAME', 'washmap'),
             'USER': os.environ.get('DATABASE_USER', 'washmap'),
-            'PASSWORD': os.environ.get('DATABASE_PASSWORD',
-                                       private_settings.DB_PASSWORD),
+            'PASSWORD': os.environ.get('DATABASE_PASSWORD', 'password'),
             'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
             'PORT': '',
         }
