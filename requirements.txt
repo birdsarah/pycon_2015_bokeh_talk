@@ -3,6 +3,7 @@ django-hvad==1.2.0
 django-crispy-forms==1.4.0
 django-vanilla-views==1.0.2
 django-adminplus==0.3
+dj-database-url==0.3.0
 geojson==1.0.9
 django-extensions==1.5.2
 git+https://github.com/kennethreitz/tablib.git
