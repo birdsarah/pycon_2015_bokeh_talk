@@ -35,6 +35,7 @@ I have run this repo on Ubuntu 14.04 and OSX. Things I already had:
 * mysql
 * git
 * anaconda or miniconda - [http://continuum.io/downloads](http://continuum.io/downloads)
+* (Optional) News Cycle font - [http://www.fontsquirrel.com/fonts/news-cycle](http://www.fontsquirrel.com/fonts/news-cycle)
 
 ### Install and run the django app, the ipython notebooks, and the server.
 
