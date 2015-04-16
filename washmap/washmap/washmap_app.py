@@ -1,17 +1,15 @@
 from bokeh.models import ColumnDataSource
 from bokeh.properties import Instance
-from bokeh.models.widgets import Slider, VBox, Tabs, Panel, TextInput
+from bokeh.models.widgets import Slider, VBox, Tabs, Panel
 
 from washmap.map_data import (
     get_data_with_countries,
-    get_frame_for_country,
     get_wat_stats_all_years,
     get_san_stats_all_years,
+    get_line_data,
 )
 from washmap.water_map import (
-    construct_water_map,
     construct_water_map_tools,
-    construct_san_map,
     construct_san_map_tools,
     construct_water_line,
     construct_san_line,
@@ -20,9 +18,8 @@ from washmap.water_map import (
     construct_key,
     layout_components,
 )
-from .charts_demos import get_line_data
 from washmap.chart_constants import (
-    BLUE, GREEN, DARK_GRAY, WATER_COLOR_RANGE, SANITATION_COLOR_RANGE
+    WATER_COLOR_RANGE, SANITATION_COLOR_RANGE
 )
 
 

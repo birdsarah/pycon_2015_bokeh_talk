@@ -28,10 +28,6 @@ def color_data(data):
     return data
 
 
-def get_frame_for_country(frame, country):
-    return frame[frame.name == country]
-
-
 def get_countries():
     # Get the countries data frame
     countries = Country.objects.exclude(boundary='')
@@ -48,10 +44,15 @@ def get_stats_from_model(stat_code, column_name):
     stats = StatValue.objects.filter(description__code=stat_code)
     stats = stats.values('value', 'country__name', 'year')
     stats_df = DataFrame.from_records(stats, coerce_float=True)
-    stats_df[column_name] = stats_df['value']
-    stats_df['name'] = stats_df['country__name']
-    stats_df = stats_df.drop(['value', 'country__name'], axis=1)
+    stats_df.rename(
+        columns={
+            'country__name': 'name',
+            'value': column_name,
+        },
+        inplace=True
+    )
     return stats_df
+
 
 def get_wat_stats_all_years():
     wat_stats_df = get_stats_from_model('WNTI_%', 'wat_value')
@@ -84,8 +85,18 @@ def get_data_with_countries(wat_stats_df, san_stats_df, year=1990):
     return colored_df
 
 
-def get_water_data_for_one_country(year=1990, country="South Africa"):
-    water_data = get_wat_stats_all_years()
-    san_data = get_san_stats_all_years()
-    data = get_data_with_countries(wat_data, san_data, year)
-    return data[data.name == 'South Africa']
+def get_line_stats_from_model(stat_code, country_name, column_name):
+    # Get the stats for access to water
+    stats = StatValue.objects.filter(description__code=stat_code)
+    stats = stats.filter(country__name=country_name)
+    stats_values = stats.values('value', 'year')
+    stats_df = DataFrame.from_records(stats_values, coerce_float=True)
+    stats_df.rename(columns={ 'value': column_name, }, inplace=True)
+    return stats_df
+
+
+def get_line_data(country_name):
+    wat_stats = get_line_stats_from_model('WNTI_%', country_name, 'wat_value')
+    san_stats = get_line_stats_from_model('SNTI_%', country_name, 'san_value')
+    wat_san = wat_stats.merge(san_stats, on='year')
+    return wat_san

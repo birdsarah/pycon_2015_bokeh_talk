@@ -8,10 +8,10 @@ from bokeh.plotting import vplot, hplot
 from .map_data import (
     get_data_with_countries,
     get_wat_stats_all_years,
-    get_san_stats_all_years
+    get_san_stats_all_years,
+    get_line_data,
 )
 
-from .charts_demos import get_line_data
 from .water_map import (
     construct_water_map,
     construct_water_map_tools,
@@ -33,10 +33,6 @@ from .chart_constants import (
 
 wat_stats = get_wat_stats_all_years()
 san_stats = get_san_stats_all_years()
-
-
-def get_frame_for_country(frame, country):
-    return frame[frame.name == country]
 
 
 def make_washmap_map():
