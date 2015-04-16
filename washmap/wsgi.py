@@ -1,4 +1,10 @@
 import os
+import sys
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+WASHMAP_DIR = os.path.abspath(os.path.join(PROJECT_ROOT, os.pardir, 'washmap'))
+sys.path.append(WASHMAP_DIR)
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'main.settings'
 
 from dj_static import Cling

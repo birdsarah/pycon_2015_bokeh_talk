@@ -60,7 +60,7 @@ INSTALLED_APPS = (
 
     # Local
     'main',
-    'washmap',
+    'washmap.washmap',
     'country',
     'stats',
 )
