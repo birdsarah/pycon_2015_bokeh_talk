@@ -32,6 +32,13 @@ ALLOWED_HOSTS = ['washmap-bokeh.herokuapp.com']
 
 BOKEH_URL = os.environ.get('BOKEH_SERVER_URL', 'http://localhost:4444')
 
+ADMINS = (
+    ('Sarah Bird', 'sarah@bonvaya.com'),
+)
+
+MANAGERS = ADMINS
+
+
 
 # Application definition
 
@@ -111,3 +118,50 @@ LANGUAGES = [
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'filters': ['require_debug_false']
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'testlogger': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+    }
+}
+
+# Email
+if DEBUG is True:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    try:
+        EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+        EMAIL_HOST = 'smtp.sendgrid.net'
+        EMAIL_HOST_PASSWORD = os.environ.get('SENDGRID_PASSWORD', 'pass')
+        EMAIL_HOST_USER = os.environ.get('SENDGRID_USERNAME', 'user')
+        EMAIL_PORT = 587
+        SERVER_EMAIL = os.environ.get('SENDGRID_EMAIL', 'mail@example.com')
+        EMAIL_USE_TLS = True
+    except Exception as e:
+        EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
