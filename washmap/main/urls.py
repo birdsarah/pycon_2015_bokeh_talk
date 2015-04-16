@@ -6,6 +6,6 @@ admin.site = AdminSitePlus()
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'', include('washmap.washmap.urls')),
+    url(r'', include('washmap.map.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
