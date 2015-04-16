@@ -1,2 +1,1 @@
-web: gunicorn washmap.wsgi --log-file -
-
+web: gunicorn washmap.wsgi --log-level=DEBUG --log-file -
