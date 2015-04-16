@@ -15,7 +15,7 @@ SANITATION_COLOR_RANGE = ["#d45500", "#da670f", "#eb7e1f", "#eb941f", "#ebb01f",
 GRAY = "#CCCCCC"
 
 
-class WashmapApp2(VBox):
+class WashmapApp(VBox):
     year = Instance(Slider)
 
     current_country = Instance(TextInput)
