@@ -71,7 +71,7 @@ class WashMapStaticAllView(WashMapStaticView):
 
 
 class WashMapServerView(TemplateView):
-    template_name = 'washmap/chart_from_server.html'
+    template_name = 'washmap/chart_from_server_noasync.html'
 
     @app_document_no_tag('washmap', settings.BOKEH_URL)
     def make_app(self):

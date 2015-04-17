@@ -1,0 +1,29 @@
+{% load i18n %}
+{% load static from staticfiles %}
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <title>Washmap - server - no async</title>
+    <script src="{% static "js/bokeh-0.8.2.js" %}"></script>
+    <link rel="stylesheet" href="{% static "css/bokeh-0.8.2.min.css" %}" />
+    <link rel="stylesheet" href="{% static "css/styles.css" %}" />
+</head>
+<body>
+    <div class="container-fluid">
+    
+        <div class="row">
+            <div class="figure-bar">
+                <div class="figure-wrapper">
+                    {% include 'main/snippets/bokeh_server_embed_tag.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    {% include 'main/snippets/bokeh_server_embed_js.js' %}
+    </script>
+</body>
+</html>
